@@ -1,0 +1,291 @@
+\chapter{Optimización}
+\label{chap3}
+\ifpdf
+    \graphicspath{{Chapter3/Chapter3Figs/PNG/}{Chapter3/Chapter3Figs/PDF/}{Chapter3/Chapter3Figs/}}
+\else
+    \graphicspath{{Chapter3/Chapter3Figs/EPS/}{Chapter3/Chapter3Figs/}}
+\fi
+
+\markboth{\hfill \thechapter. Optimización}{\hfill \thechapter. Optimización}
+
+\section{Proceso de Optimización.}
+\label{sec:procOpt}
+
+Consiste en encontrar la mejor solución candidata de entre un conjunto de alternativas. Esta tarea se plantea como un problema estructurado con funciones de variables de decisión, que deben o no satisfacer un conjunto de restricciones.
+Un problema de optimización se conforma por una o varias funciones objetivo y (posiblemente) una o varias restricciones.
+ \begin{itemize}
+     \item \textbf{Variables de decisión:} contienen los valores que se modifican para resolver el problema.
+     \item \textbf{Función o funciones objetivo:} Estas funciones se expresan en términos de las variables de decisión, y el resultado de su evaluación es el que se desea optimizar (maximizar o minimizar). Si solo una función es considerada se habla de un problema de optimización mono-objetivo. Si varias funciones son consideradas, el problema se denomina optimización multi-objetivo.
+     \item \textbf{Restricciones:} expresadas en forma de ecuaciones de igualdad o desigualdad, se deben cumplir o satisfacer para que la solución sea considerada factible, es decir, válida. Si el problema no presenta restricciones, todas las soluciones son válidas.
+ \end{itemize}
+
+
+\section{Optimización Multiobjetivo.}
+\label{sec:multiobj}
+
+% La mayoría de los problemas y situaciones en la vida real son reconocidos como 
+Problemas multiobjetivo implican la optimización simultánea de dos o más objetivos, y no poseen un único criterio medible por el cual pueda decirse que una solución sea completamente satisfactoria. En otras palabras, este tipo de problemas contiene múltiples objetivos que han de satisfacerse o que han de ser tenidos en cuenta. A menudo dichos objetivos entran en conflicto unos con otros y no existe una única solución que simultáneamente satisfaga a todos.  Por eso, la solución que se pretenda obtener queda exclusivamente a cargo del tomador de decisiones. Las soluciones de este tipo de problemas se consideran óptimas porque ninguna otra solución es superior a ellas cuando se tiene en cuenta todos los objetivos a la vez \cite{nesmachnow2004version}.
+
+El conjunto de soluciones donde una función objetivo no puede ser mejorada sin empeorar alguno de los otros objetivos se llama \textit{Conjunto Pareto Óptimo}. El Conjunto Pareto Óptimo se define como \cite{nesmachnow2004version}:
+
+\begin{equation}\label{pareto_optimo}
+    P^* = \left\{{{x}\in{ \Omega} | \urcorner \exists{{x^{\prime}}}\in{ \Omega}, {f}({x^{\prime}}) \preceq {f}({x})}\right\}
+\end{equation}
+
+Donde:\\
+$\Omega = \left \{ \vec{x} \in  \mathbb{R}^n \right \}$: es la región de soluciones factibles, y cualquier punto en ${x}\in{\Omega}$ es una solución factible.
+% $\Omega$ El espacio de búsqueda o conjunto de todas las soluciones posibles.
+% $x_i \in \Omega$ un elemento del conjunto de posibles soluciones
+
+
+El conjunto de soluciones que se encuentran en la región de soluciones factibles son soluciones no dominadas o también llamados conjunto no-dominado o \textit{Frontera Pareto}, que se define como:
+
+\begin{equation}\label{frente_pareto}
+     FP^* = \left\{ {f_1({x}), f_2({x}),  f_3({x}), \ldots,  f_N({x}) | {x}\in{P^*} }\right\}
+\end{equation}
+
+mientras que las soluciones que se encuentran dentro de la región factible son las llamadas soluciones dominadas, porque siempre hay otra solución en la región que tiene cuando menos un objetivo mejor.
+
+Los métodos para encontrar la mejor solución (óptima) varían de acuerdo con la complejidad del problema enfrentado. Para problemas triviales, el cerebro humano posee la capacidad de resolverlos (encontrar la mejor solución) directamente, pero a medida que el problema es más complejo, es necesario buscar herramientas adicionales.
+
+Existen métodos que vienen del área de Inteligencia Artificial que consisten en sistematizar ideas para desarrollar algoritmos eficientes que encuentran \textbf {buenas soluciones} a problemas de optimización; estas soluciones, en muchos casos son aproximadas a la solución óptima. Las técnicas metaheurísticas son útiles cuando se desean resolver problemas cuyo modelo matemático no puede ser formulado fácilmente o cuando tienen espacios de búsqueda muy grandes. Las mismas combinan la simplicidad de sus ideas con su gran eficiencia para obtener muy buenas soluciones para este tipo de problemas \cite{cuartasmetodologia}. 
+
+Las más conocidas son los algoritmos evolutivos, colonia de hormigas, enjambre de partículas y enfriamiento simulado \cite{lima2007}. 
+
+El objetivo de los métodos de optimización multiobjetivo es encontrar el conjunto de soluciones no dominadas y no una solución única.
+
+\section{Optimización Robusta.}
+\label{sec:robusta}
+
+Para los problemas de optimización del mundo real, el \textbf{entorno de decisión} a menudo se caracteriza por los siguientes hechos \cite{BenTal2002RobustO}:
+\begin{itemize}
+    \item \textbf{F.1.} Los datos son inciertos/inexactos;
+    \item \textbf{F.2.} La solución óptima, incluso si se calcula con mucha precisión, puede ser difícil de implementar con precisión;
+    \item \textbf{F.3.} Las restricciones deben seguir siendo factibles para todas las realizaciones significativas de los datos;
+    \item \textbf{F.4.} Los problemas son a gran escala;
+    \item \textbf{F.5.} Las soluciones óptimas \textbf{malas} (aquellas inviables incluso con cambios relativamente pequeños en los datos nominales) no son infrecuentes.
+ \end{itemize}
+ 
+\textit{La Optimización Robusta} ($RO$, por sus siglas en inglés, Robust Optimization) es una metodología de modelado, combinada con un conjunto de herramientas computacionales, que tiene como objetivo cumplir con los hechos anteriores. La urgencia de contar con tal metodología proviene del hecho \textbf{F.5} \cite{BenTal2002RobustO}.
+
+En la metodología de Optimización robusta, uno se asocia con un problema incierto, su contraparte robusta, que es un programa de optimización usual (semi-infinito) \cite{BenTal2002RobustO}.
+
+% La Optimización Robusta es un enfoque relativamente nuevo para modelar la incertidumbre en los problemas de optimización. Mientras que la programación estocástica asume que hay una descripción probabilística de la incertidumbre, la optimización robusta funciona con una descripción determinista basada en conjuntos de la incertidumbre. El enfoque de optimización robusto construye una solución que es factible para cualquier realización de la incertidumbre en un conjunto dado.
+
+% La Optimización Robusta es un subcampo importante de la optimización que se ocupa de la incertidumbre en los datos de los problemas de optimización. Bajo este contexto, se supone que las funciones objetivo y de restricción solo pertenecen a ciertos conjuntos en el espacio funcional (los denominados \textit{conjuntos de incertidumbre}). El objetivo es tomar una decisión que sea factible sin importar cuáles sean las restricciones, y el óptimo para la función objetivo del peor de los casos.
+
+La formula general de la Optimización Robusta es:
+\begin{equation} \label{ro}
+\begin{split}
+& \textrm{ minimizar} \quad f_{0}(x) \\
+& \textrm{sujeto} \quad \textrm{a} \quad f_{i}(x,u_{i}) \leq 0 \quad \forall u_{i} \in U_{i}, \quad \textrm{i=1...m}
+\end{split}
+\end{equation}
+
+% objetivo a optimizar f0(x)
+% restricción fi(x,ui) ≤ 0 
+% parametros inciertos {ui}, los datos que son parte de las entradas del problema de optimización.
+
+Donde:
+\begin{itemize}
+     \item $x \in \mathbb{R}^{n}$, es un vector de variables de decisión.
+     \item $f_{0}$, $f_{i}$: \quad$\mathbb{R}^{n} \rightarrow \mathbb{R}$, son funciones.
+     \item $u_{i} \in \mathbb{R}^{k}$, son parametros de incertidumbre, toman valores arbitrarios en los conjuntos de incertidumbre $U_{i} \subseteq \mathbb{R}^{k}$.
+ \end{itemize}
+ 
+%  El objetivo de {ro} (ecuación), es calcular soluciones de costo minimo x, entre todas las soluciones que son factibles para todas las realizaciones de las perturbaciones ui dentro de Ui. 
+
+
+
+\section{Optimización Multiobjetivo Robusta.}
+\label{sec:multiRo}
+
+Para una optimización de un solo objetivo, una solución robusta se define como la que es insensible (hasta un límite) a la perturbación en las variables de decisión en su vecindad \cite{Deb2006IntroducingRI}.
+
+Varios investigadores han sugerido diferentes procedimientos para definir y encontrar soluciones robustas en un contexto de optimización de un solo objetivo. Una de las principales ideas retratadas en la literatura es utilizar una función objetivo efectiva media para la optimización, en lugar de la función objetivo en sí misma \cite{Deb2006IntroducingRI}.
+
+Un problema de optimización multiobjetivo tiene varios objetivos en conflicto:
+
+\begin{equation} \label{ro_multi}
+\begin{split}
+& \textrm{ minimizar} \quad \bigl(\begin{smallmatrix}
+ f_{1}(x), & f_{2}(x), & ..., & f_{m}(x)
+\end{smallmatrix}\bigr) \\
+& \textrm{sujeto} \quad \textrm{a} \quad  x \in S
+\end{split}
+\end{equation}
+
+El objetivo en una optimización evolutiva multiobjetivo es encontrar un número finito de soluciones óptimas de Pareto, en lugar de un único óptimo. Dado que las soluciones óptimas de Pareto dominan colectivamente cualquier otra solución factible en el espacio de búsqueda, todas se consideran mejores que cualquier otra solución. Se dice que una solución domina a otra solución si no es peor en ninguno de los objetivos y es estrictamente mejor en al menos uno de los objetivos. Para calificar como una solución robusta, cada solución óptima de Pareto ahora tiene que demostrar su insensibilidad frente a pequeñas perturbaciones en sus valores de variables de decisión \cite{Deb2006IntroducingRI}.
+
+Las principales diferencias con una solución robusta de un solo objetivo son las siguientes \cite{Deb2006IntroducingRI}:
+\begin{enumerate}
+     \item La sensibilidad ahora tiene que establecerse con respecto a todos los objetivos (o a los preferidos por el tomador de decisiones). Es decir, se debe usar un efecto combinado de variaciones en todos los objetivos como una medida de sensibilidad a la perturbación variable.
+     \item Hay muchas soluciones para verificar la robustez, en lugar de una o dos soluciones como en el caso de la optimización de un solo objetivo.
+\end{enumerate}
+
+\subsection{Optimización de Enjambre de Partículas.}
+\label{sec:pso}
+% porque pso y no otro algoritmo (porq pso ayuda a representar mejor el problema, más asociado a la naturaleza)
+
+La \textit{Optimización por Enjambres de Partículas} (conocida como $PSO$, por sus siglas en inglés, Particle Swarm Optimization) es una metaheurística basada en poblaciones e inspirada en el comportamiento social del vuelo de las bandadas de aves o el movimiento de los bancos de peces, desarrollado por Jammes Kennedy y Russell Eberhart \cite{swarmintelligence}.
+
+% Cada solución (partícula) es un \textbf{ave} en el espacio de búsqueda que está siempre en continuo movimiento y que nunca muere. El cúmulo de partículas (swarm) es un sistema multiagente, es decir, las partículas son agentes simples que se mueven por el espacio de búsqueda y guardan la mejor solución que han encontrado. Cada partícula tiene un $fitness$ (función de aptitud), una $posición$ y un \textit{vector velocidad} que dirige su \textbf{movimiento}. El movimiento de las partículas por el espacio está guiado por las partículas óptimas en el momento actual.
+
+Los algoritmos basados en cúmulos de partículas se han aplicado con éxito en diferentes campos de investigación; entrenamiento de redes neuronales \cite{neuralnetworks}, aprendizaje de sistemas difusos \cite{fuzzyswarmoptimization}, registrado de imágenes \cite{imageswarmoptimization}.
+
+El algoritmo $PSO$ consiste en un proceso iterativo y estocástico que opera sobre un cúmulo de partículas. La posición de cada partícula representa una solución potencial al problema que se está resolviendo. Generalmente, una partícula $\rho_i$ está compuesta de tres vectores y dos valores de fitness:
+\begin{itemize}
+    \item \textbf{El vector $\chi_i$} = ($\chi_{i1}, \chi_{i2}, ..., \chi_{in})$ almacena la posición actual (localización) de la partícula en el espacio de búsqueda.
+    \item \textbf{El vector $\rho{Best_i}$} = ($\rho{Best}_{i1}, \rho{Best}_{i2}, ..., \rho{Best}_{in})$ almacena la posición de la mejor solución encontrada por la partícula hasta el momento.
+    \item \textbf{El vector de velocidad $v_i$} = ($v_{i1}, v_{i2}, ..., v_{in})$ almacena el gradiente (dirección) según el cual se moverá la partícula.
+    \item \textbf{El valor de $fitness_{\chi_i}$} almacena el valor de adecuación de la solución actual (vector $\chi_i$).
+    \item \textbf{El valor de $fitness_{\rho{Best_i}}$} almacena el valor de adecuación de la mejor solución local encontrada hasta el momento (vector $\rho{Best_i}$).
+\end{itemize}
+
+El cúmulo se inicializa generando las posiciones y las velocidades iniciales de las partículas. Las posiciones se pueden generar aleatoriamente en el espacio de búsqueda. Una vez generadas las posiciones, se calcula la aptitud de cada partícula y se actualizan los valores de $fitness_{\chi_i}$ y $fitness_{\rho{Best_i}}$.
+
+Las velocidades se generan aleatoriamente, con cada componente en el intervalo $[-v_{max}, v_{max}]$, donde $v_{max}$ será la velocidad máxima que pueda tomar una partícula en cada movimiento. No es conveniente dejarlas a cero pues no se obtienen buenos resultados \cite{swarmintelligence}.
+
+El vector velocidad de cada partícula $\rho_i$ se actualiza en cada iteración y se calcula según la siguiente formula:
+
+\begin{equation}\label{velocidad}
+    v^{t+1}_i = \omega \times v^{t}_i + \varphi_1 \times rand_1 \times (\rho{Best_i} - \chi^{t}_i) + \varphi_2 \times rand_2 \times (g_i - \chi^{t}_i)
+\end{equation}
+
+Donde:
+\begin{itemize} 
+    \item $t$: iteración, donde $t$ = 1,2,3..,n
+    \item $v^{t}_i$: velocidad de la partícula $\rho_i$ en la iteración $t$;
+    \item $\omega$ :  coeficiente de inercia;
+    %specific parameters which control the effect of the personal and global best particles.
+    \item $\varphi_1, \varphi_2$ : parámetros que controlan los componentes cognitivo y social de las partículas;
+    %\item $\varphi_1, \varphi_2$ : factores de aprendizaje (pesos) que controlan los componentes cognitivo y social;
+    \item $rand_1, rand_2$ : números aleatorios entre 0 y 1.;
+    \item $\chi^{t}_i$: posición actual de la partícula $\rho_i$ en la iteración $t$;
+    \item $\rho{Best_i}$: mejor posición (solución) encontrada por la partícula $i$ hasta el momento;
+    \item $g_i$: representa la posición de la partícula con el mejor $fitness_{\rho{Best_i}}$ del entorno de $\rho_i$ ($lBest$ o $localbest$) o de todo el cúmulo ($gBest$ o $globalbest$);
+    \item $\varphi_1 \times rand_1 \times (\rho{Best_i} - \chi^{t}_i)$: componente cognitivo, representa la distancia entre la posición actual y la mejor conocida por esa partícula, la decisión que tomará la partícula influenciada por su propia experiencia a lo largo de su vida;
+    \item $\varphi_2 \times rand_2 \times (g_i - \chi^{t}_i)$: componente social, representa la distancia entre la posición actual y la mejor posición del vecindario, es decir, la decisión que tomará la partícula según la influencia que el resto del cúmulo ejerce sobre ella.
+\end{itemize}
+
+La particula $\rho_i$ actualiza su posición $\chi$ de acuerdo a la siguiente ecuación:
+\begin{equation}\label{posicion}
+    \chi^{t+1}_i = \chi^{t}_i + v^{t+1}_i
+\end{equation}
+
+El pseudocódigo del $PSO$ básico se presenta en el Algoritmo \ref{pso_basico}.
+
+\begin{algorithm}[hbpt]
+    \begin{algorithmic}[1]
+    \REQUIRE número de partículas $\Omega$, número de iteraciones $t$: Se recibe como parámetros el número de partículas $\Omega$, y el número de iteraciones $t$.
+    \STATE Inicializar la posición $\chi_i$ y velocidad $v$ de cada partícula aleatoriamente en cada dimensión $D$
+    \STATE Inicializar los mejores individuales $\rho{Best_i}$ de cada partícula con su posición inicial $\chi_i$.
+    \STATE Inicializar el mejor global $g_i$
+    \STATE Inicializar el parámetro $\omega$
+    \WHILE {no se cumpla criterio de parada o no se llegue al máximo de iteraciones $t$}
+        \FOR {cada $i$-ésima partícula del enjambre}
+            \STATE Evaluar la función de aptitud (fitness) de la partícula $\rho_i$ en la iteración $t$
+            \IF {el fitness de la partícula es mejor que el fitness del mejor individual $\rho{Best_i}$}
+                \STATE reemplazar $\rho_i$ por el nuevo valor de $\chi^t_i$
+            \ENDIF
+             \IF {el fitness de la partícula es mejor que el fitness del mejor global $g_i$}
+                \STATE reemplazar $g_i$ por el nuevo valor de $\chi^t_i$
+            \ENDIF
+            \STATE Calcular la nueva velocidad de la partícula $v^{t+1}_i$
+            \STATE Calcular la nueva posición de la partícula $\chi^{t+1}_i$
+        \ENDFOR
+    \ENDWHILE
+    \RETURN mejor global $g_i$: retorna mejor solución encontrada.
+    \end{algorithmic}
+    \caption{Algoritmo básico del \textit{PSO}.}
+    \label{pso_basico}
+\end{algorithm} \break
+
+\subsection{Speed-constrained Multi-objective PSO (SMPSO)}
+\label{sec:smpso}
+
+El \textit{SMPSO} es una metaheurística basada en el algoritmo \textit{OMOPSO}, un optimizador de enjambre de partículas multiobjetivo (\textit{MOPSO}) (por sus siglas en inglés, Multi Objective Particle Swarm Optimizer) que fue diseñado para tratar con problemas de optimización multiobjetivo \cite{RC05}. 
+
+Se basa en un conjunto de partículas, llamado población y contiene un repositorio global en el que cada partícula deposita su experiencia por cada iteración, generando un archivo con posiciones dominantes, actualizado en cada iteración para generar el conjunto Pareto. El enfoque \textit{SMPSO} aplica un esquema de limitación de velocidad para expandir la capacidad de exploración, así como mejorar la rapidez de convergencia. La velocidad de las partículas es limitada, en lugar de utilizar los parámetros máximo y mínimo para limitar el tamaño del cambio de la velocidad.  \cite{daumasjara}
+
+El \textit{SMPSO} incorpora un mecanismo de restricción (ecuación \ref{restriccion}) que se obtiene del factor de restricción $\kappa$ desarrollado por Clerk y Kennedy sobre la (ecuación \ref{velocidad}) para limitar la velocidad máxima de las partículas y mejorar la capacidad de búsqueda del algoritmo \cite{smpso}.
+
+\begin{equation}\label{restriccion}
+    \kappa   = \frac{2}{2 - \sigma - \sqrt[]{ \sigma^2 - 4 \sigma}}
+\end{equation}
+
+Donde:
+\begin{equation}\label{phi}
+ \sigma = \left\{{\begin{tabular}{cc}
+  $\varphi_1 +  \varphi_2$ & si $\varphi_1 +  \varphi_2 > 4$ \\
+  $0$         & si $\varphi_1 +  \varphi_2 \leq 4$
+  \end{tabular}}\right\}
+\end{equation}
+
+Además, se introduce un mecanismo de tal manera que la velocidad acumulada de cada variable $j$ (en cada partícula $\rho_i$) esté limitada por medio de la siguiente ecuación de restricción de velocidad:
+
+\begin{equation}\label{velocidad_limitada}
+ v^{t+1}_{i,j} = \left\{{\begin{tabular}{cc}
+  $\delta_j$ & si $ v^{t+1}_{i,j} > \delta_j$ \\
+  $-\delta_j$ & si $ v^{t+1}_{i,j} \leq - \delta_j$ \\
+  $ v^{t+1}_{i,j}$ & para otros casos
+  \end{tabular}}\right\}
+\end{equation}
+
+Donde:
+
+\begin{equation}\label{delta}
+\delta_j = \frac{maximo_j - minimo_j}{2}
+\end{equation}
+
+para:\\
+$maximo_j$ = máximo valor para la variable $j$ a optimizar.\\
+$minimo_j$ = mínimo valor que puede tomar la variable  $j$.
+
+Con el enfoque \textit{SMPSO}, la velocidad de las partículas $\rho_i$ se calcula de acuerdo con la (ecuación \ref{velocidad}); la velocidad resultante se multiplica por el factor de restricción de la (ecuación \ref{restriccion}) y el valor resultante se limita usando la (ecuación \ref{velocidad_limitada}).
+
+El archivo de líderes es actualizado insertando las partículas no dominadas que existen, eliminando las dominadas en el proceso. El tamaño del archivo de líderes es limitado, debido a esto, cuando se llena, \textit{SMPSO} aplica el criterio de distancia de hacinamiento (crowding), especificado en el algoritmo NSGA-II \cite{NSGA} y es empleada como operador para mantener la diversidad en las partículas. Esta es calculada para cada partícula sumando las distancias entre los individuos inmediatamente mayor y menor considerando cada objetivo a evaluar. Así, los individuos con mayor distancia de hacinamiento (amontonamiento) son asignados al archivo de líderes a diferencia de aquellos con menor distancia de hacinamiento \cite{daumasjara}.
+El operador de turbulencia utilizado por \textit{SMPSO} es la mutación polinomial \cite{polinomial}.
+
+El pseudocódigo del $SMPSO$ se presenta en el Algoritmo  \ref{smpso_algorithmic}.
+
+%\begin{algorithm}
+%    \begin{algorithmic}[1]
+%    \STATE initializeSwarm()
+%    \STATE initializeLeadersArchive()
+%    \STATE generation = 0
+%    \WHILE {generation < maxGenerations}
+%        \STATE computeSpeed(),  \ref{velocidad}, \ref{restriccion}, \ref{velocidad_limitada}
+%        \STATE updatePosition(), \ref{posicion}
+%        \STATE mutation() // Turbulence
+%        \STATE evaluation()
+%        \STATE updateLeadersArchive()
+%        \STATE updateParticlesMemory()
+%        \STATE generation ++
+%    \ENDWHILE
+%    \RETURN LeadersArchive
+%    \end{algorithmic}
+%    \caption{Algoritmo del $SMPSO$.}
+%    \label{smpso_algorithmic}
+%\end{algorithm} 
+%\break 
+
+\begin{algorithm}[hbpt]
+    \begin{algorithmic}[1]
+    \STATE inicializarEnjambre(): Se inicializa el enjambre, que incluye la posición, la velocidad y la mejor posición individual de las partículas.
+    \STATE inicializarArchivoLideres(): Se inicializa el archivo de líderes con las soluciones no dominadas en el enjambre.
+    \STATE generacion = 0
+    \WHILE {generacion $<$ maxGeneraciones}
+        \STATE calcularVelocidad(): Se calcula la velocidad de cada partícula
+        \STATE actualizarPosicion() : Se calcula y actualiza la posición de cada partícula
+        \STATE mutacion(): Se aplica un operador de mutación con una probabilidad dada.
+        \STATE evaluacion(): Se evalúan las partículas resultantes.
+        \STATE actualizarArchivoLideres()
+        \STATE actualizarParticulas()
+        \STATE generacion ++
+    \ENDWHILE
+    \RETURN ArchivoLideres: El algoritmo devuelve el archivo de líderes como el conjunto de aproximación encontrado.
+    \end{algorithmic}
+    \caption{Algoritmo del \textit{SMPSO}.}
+    \label{smpso_algorithmic}
+\end{algorithm} 

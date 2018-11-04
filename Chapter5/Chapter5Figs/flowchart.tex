@@ -1,0 +1,55 @@
+\documentclass{standalone}
+\usepackage{tikz}
+%\usetikzlibrary{...}
+\begin{document}
+    \begin{tikzpicture}[
+      >=latex',
+      auto,
+      scale=1, 
+      transform shape
+    ]
+      \node [intg] (ini)  {Inicializar Enjambre (Asignar valores aleatorios a las soluciones potenciales)};
+      \node [intg] (ini2)  [node distance=0.7cm,below=of ini]{Inicializar archivo de líderes()};
+      \node [intg] (ini3)  [node distance=0.7cm,below=of ini2]{Iteración actual=0};
+      \node [decision] (des1) [node distance=0.7cm,below=of ini3] {Iteración actual $<$ t ?};
+      \node [int]  (inner1) [node distance=0.7cm,below=of des1] {Calcular Velocidad (Calcular variación de cada solución potencial de manera a buscar mejorar las métricas en la iteración siguiente)};
+      \node [int]  (inner2) [node distance=0.7cm,below=of inner1] {Actualizar Posición(Actualizar $\mathcal{R}_i,\mathcal{R}_j,\mathscr{C}$) de cada partícula de acuerdo a la variación calculada};
+      \node [int]  (inner3) [node distance=0.7cm,below=of inner2] {Mutación (Aplicar variaciones aleatorias a las partículas de manera a expandir el espacio de búsqueda, con probabilidad dada)};
+      \node [int]  (inner4) [node distance=0.7cm,below=of inner3] {Evaluación (Calcular $\left\{\overline{\mathscr{E}},\overline{SSIM}\right\}$ para cada partícula del enjambre)};
+      \node [int]  (inner5) [node distance=0.7cm,below=of inner4] {Actualizar Archivo de Líderes (Obtener nuevas soluciones Conjunto Pareto de acuerdo a la evaluación realizada)};
+      %\node [int]  (inner6) [node distance=0.7cm,below=of inner5] {Actualizar Partículas};
+      \node [int]  (inner7) [node distance=0.7cm,below=of inner5] {iteracion++};
+      \node [int]  (fin1) [node distance=0.7cm,right=of inner1] {Retornar Archivo de Líderes};
+      \node [coordinate, left=of inner7]  (camino1) {};
+      \node [coordinate]  (camino2)[node distance=1.2cm, left=of des1] {};
+      \node [coordinate]  (camino3)[node distance=2.9cm, right=of des1] {};
+
+      % \node [int]  (ki2) [node distance=1.5cm and -1cm,below right=of ini] {Use Conjugate Prior, Eq yy};
+      % \node [intg] (ki3) [node distance=5cm,below of=ini] {Find Posterior Parameters for population of concrete cover};
+      % \node [intg] (ki4) [node distance=2cm,below of=ki3] {Plot the posterior density function to help practitioner pick value of cc};
+
+      % \draw[->] (ini) -- ($(ini.south)+(0,-0.75)$) -| (ki1) node[above,pos=0.25] {Yes} ;
+      % \draw[->] (ini) -- ($(ini.south)+(0,-0.75)$) -| (ki2) node[above,pos=0.25] {No};
+      \draw[->] (ini) -- (ini2);
+      \draw[->] (ini2) -- (ini3);
+      \draw[->] (ini3) -- (des1);
+      \draw[->] (des1) -- (inner1);
+      \draw[->] (inner1) -- (inner2);
+      \draw[->] (inner2) -- (inner3);
+      \draw[->] (inner3) -- (inner4);
+      \draw[->] (inner4) -- (inner5);
+      %\draw[->] (inner5) -- (inner6);
+      \draw[->] (inner5) -- (inner7);
+      % \draw[->] ($(inner7.west)+(-0.5,0.5)$) |- (des1) node[above,pos=0.25] {No};
+      % \draw[->] ($(inner7.west)$) -- node[left,pos=0.25]{} |- (des1) node[above,pos=0.25] {No};
+
+      % \draw[->] (ki1) |- (ki3);
+      % \draw[->] (ki2) |- (ki3);
+      % \draw[->] (ki3) -- (ki4);
+      \draw[-] (inner7) -- (camino1);
+      \draw[-] (camino1) -- (camino2);
+      \draw[->] (camino2) -- (des1) node[above,pos=0.25] {No};
+      \draw[-] (des1) -- (camino3) node[above,pos=0.5] {Si};
+      \draw[->] (camino3) -- (fin1);
+    \end{tikzpicture}
+\end{document}getValue

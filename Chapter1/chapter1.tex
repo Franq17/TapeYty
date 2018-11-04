@@ -1,0 +1,59 @@
+\chapter{Introducción}
+
+Las imágenes digitales están expuestas a sufrir una variedad de distorsiones durante su procesamiento, compresión, almacenamiento, transmisión y reproducción, cualquiera de estas puede resultar en la degradación de la calidad visual \cite{digitalimganalysis}.
+
+Aunque el campo de procesamiento digital de imágenes está construido sobre una base de formulaciones matemáticas y probabilísticas, la intuición y el análisis humano juegan un papel central en la elección de una técnica frente a otra. Esta elección se hace a menudo sobre la base de juicios subjetivos visuales, por lo tanto, se necesitan conseguir medidas cuantitativas que puedan valorar de forma objetiva la calidad de la imagen percibida.
+
+El proceso digital de imágenes se puede dividir en las siguientes áreas \cite{digitalimageprocessing}:
+\begin{itemize}
+\item \textbf{Adquisición o captura} que se ocupa de los diferentes caminos para la obtención de imágenes; por ejemplo, utilizando cámaras digitales o digitalizando imágenes impresas (fotografías).
+\item \textbf{Realce y mejora} son las técnicas que se usan para mejorar condiciones de bajo contraste, baja luminosidad o demasiada oscuridad. Ejemplo: ecualización de histograma.
+\item \textbf{Segmentación} que se ocupa de la división de las imágenes en regiones o áreas significativas.
+\item \textbf{Extracción de características} que se ocupa de la detección y localización de entidades geométricas simples y complejas. Desde entidades simples como líneas y puntos hasta geometrías complejas como curvas y cuádricas.
+\end{itemize}
+
+El objetivo principal de las técnicas de realce y mejora de imagen es procesar una imagen, ya sea en contraste, ruido, escala de grises, distorsiones, luminosidad, falta de nitidez, etc., o bien convertir o mapear la imagen de forma que resulte más adecuada que la original para una aplicación específica.
+
+Existen diversas técnicas para llevar a cabo el mejoramiento de contraste en una imagen. Estas técnicas pueden ser divididas en 2 grandes clases. La primera clase implica la descomposición de la imagen en altas y bajas frecuencias y en la combinación de éstas dos señales independientes \cite{kober2002unsharp}. El filtrado homomórfico y el “unsharp masking” son ejemplos de esta clase. La segunda clase consiste en la modificación del histograma de la imagen como la técnica de ecualización del histograma.
+
+La ecualización del histograma de una imagen \textit{HE} \cite{PTS+13} es ampliamente utilizado como herramienta tanto cualitativa como cuantitativa, es una buena herramienta para la mejora de contraste. Sin embargo, este método de mejora de contraste puede producir imágenes de aspecto no natural, lo que ocasiona que las imágenes obtenidas no sean las más adecuadas. Existen enfoques de mejora global y local \cite{morebrizuela2014}. Si se usa sólo información global, no se alcanza un buen realce de contraste debido a que las técnicas globales podrían causar un efecto de saturación de intensidades. Los enfoques locales consideran una ventana local para cada píxel y calculan el valor de la nueva intensidad basados en el histograma local definido. Todos los pixeles de una ventana local contribuyen igualmente a la determinación del nuevo valor del píxel central que está siendo considerado, solucionando el problema que podrían presentar los enfoques globales \cite{yu2004fast}. 
+
+Entre las técnicas de mejoras de contraste basadas en \textit{HE}, encontramos técnicas de optimización con el uso de Algoritmos Genéticos \cite{hashemi2010image}, la Lógica Difusa \cite{jenifer2016contrast}, Optimización por Enjambres de Partículas con parámetros del Contrast Limited Adaptive Histogram Equalization \textit{PSO-CLAHE} \cite{morebrizuela2014}.
+
+El objetivo de la optimización es encontrar una solución que represente el valor óptimo para una función objetivo. La optimización multi-objetivo no se restringe a la búsqueda de una única solución, sino de un conjunto de soluciones que representan los mejores compromisos entre los distintos criterios, llamados \textbf{soluciones no-dominadas} o \textbf{conjunto Pareto Óptimo} con el fin de ofrecer al tomador de decisiones (Decision Maker - DM) las mejores alternativas entre las disponibles, para que este último seleccione una de ellas \cite{coello2001short}.
+
+La principal finalidad de la optimización multi-objetivo robusta es la obtención del \textbf{Frente de Pareto} de un conjunto de imágenes, tomados como una sola entrada, cuyos resultados se aproximen a los \textbf{Frentes de Pareto} de cualquier imagen de manera individual del tipo estudiado, sin comprometer severamente la calidad de los resultados \cite{Deb2006IntroducingRI}.
+
+En la literatura, los enfoques de mejora local demuestran ser sumamente útiles al momento de resaltar detalles en imágenes con gran cantidad de detalles finos. Debido a ello en esta propuesta se analizan pares de métricas de calidad, junto a una metaheurística de optimización de objetivos \textit{SMPSO} \cite{RC05}, de manera a sintonizar los parámetros de entrada del algoritmo de mejora del contraste \textit{CLAHE}. Obteniendo como resultado un grupo de imágenes contrastadas, las cuales serán evaluadas en cuanto a la ganancia de información proveída y distorsión introducida por la ecualización, así también se realiza una comparación de la correlación entre las métricas seleccionadas para identificar las más adecuadas para la optimización multi-objetivo de la mejora de contraste.
+
+
+\section{Objetivo General}
+El objetivo general de este trabajo de investigación es el estudio de distintas métricas disponibles, para la evaluación de la calidad de las imágenes, de forma a definir en base a un estudio de correlación, cuáles de ellas serán utilizadas en un proceso de optimización multiobjetivo.
+% El objetivo general de este trabajo de investigación es el estudio de distintas métricas de evaluación de calidad de imágenes disponibles, de forma a definir en base a un estudio de correlación, cuáles de ellas serán utilizadas en un proceso de optimización multiobjetivo.
+
+
+\section{Objetivos Específicos}
+
+Los objetivos específicos que se han trazado en este trabajo para lograr el objetivo general son:
+\begin{itemize}
+  %  \item \textbf{Reportar} los principales trabajos de la literatura que abordan el problema estudiado.
+    \item \textbf{Seleccionar un conjunto de métricas} para evaluar la ganancia o pérdida de información y distorsión en una imagen.
+    \item \textbf{Aplicar una metaheurística} para sintonizar los parámetros del algoritmo \textit{CLAHE}.
+    \item \textbf{Aplicar al conjunto de soluciones la correlación de Pearson} para medir el grado de relación o covariación entre las métricas.
+    \item \textbf{Comparar los resultados obtenidos de la correlación de Pearson} y de esta forma obtener las métricas más apropiadas para el proceso de optimización.
+    \item \textbf{Proponer} un algoritmo multiobjetivo, tal que opere en conjunto con el \textit{CLAHE} y las métricas de evaluación de calidad seleccionadas, sobre un conjunto de imágenes para obtener las imágenes mejoradas.
+\end{itemize}
+
+
+\section{Organización del Trabajo}
+
+El resto del trabajo se organiza de la siguiente manera:
+
+\begin{itemize}
+    \item En el \textbf{capítulo 2} se presentan los conceptos básicos que describen a la mejora de imagen y la mejora de contraste como también el algoritmo \textit{CLAHE}.
+    \item En el \textbf{capítulo 3} se presenta la metaheurística de optimización de enjambre de partículas escogida para encontrar los parámetros óptimos del algoritmo \textit{CLAHE}.
+    \item En el \textbf{capítulo 4} se presentan las métricas de evaluación de soluciones utilizadas para el analisis de investigación de este trabajo.    
+    \item En el \textbf{capítulo 5} se plantea de manera formal el problema que se intenta resolver. Cómo se utilizan las métricas seleccionadas para la evaluación de los resultados obtenidos del algoritmo de optimización de enjambre de partículas junto al \textit{CLAHE} y la aplicación de la correlación entre las métricas seleccionadas.    
+    \item En el \textbf{capítulo 6} se visualizan y se discuten los resultados de la propuesta.
+    \item En el \textbf{capítulo 7}, se finaliza el trabajo de investigación presentando las conclusiones generales.    
+\end{itemize}

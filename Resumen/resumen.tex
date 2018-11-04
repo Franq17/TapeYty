@@ -1,0 +1,11 @@
+\begin{resumen}
+La mejora de contraste en imágenes a escala de grises es una técnica que busca resaltar la información útil de la imagen. Una de las técnicas utilizadas es el Contrast Limited Adaptive Histogram Equalization ($CLAHE$). Esta sin embargo, presenta un desafío en la selección de parámetros óptimos para realizar la mejora de contraste, los cuales pueden variar para cada instancia o imagen, además de la selección adecuada de las métricas para evaluar los resultados obtenidos.
+
+En este trabajo se propone un estudio de distintas métricas disponibles en la literatura, de forma a definir en base a un estudio de correlación, cuáles de ellas serán utilizadas en un proceso de optimización multiobjetivo. Se aplica una  optimización Robusta basada en la metaheurística de enjambre de partículas ($SMPSO$), el cuál sintoniza los parámetros del algoritmo $CLAHE$, con el que se realiza la mejora de la imagen de manera a determinar las variables de decisión adecuadas para ciertos tipos de imágenes, y cuyos resultados se aproximen a los Frentes de Pareto de cualquier imagen del tipo estudiado, sin comprometer severamente la calidad de resultados con respecto a las optimizaciones de la mejora del contraste tomando como base imágenes individuales.
+
+Se realizaron comparaciones de a pares entre métricas de mejora local y global, para medir la correlación entre ellas. Los resultados de la correlación obtenidos durante proceso de optimización muestran que las métricas \textit{Entropía Local} y el \textit{Índice de Similitud Estructural} ($SSIM$) tienen una alta correlación negativa por lo que el problema debe ser planteado en un contexto multiobjetivo.
+
+% Además se observa que el $SMPSO$ es una herramienta factible para el cálculo de soluciones no dominadas sobre las cuales el algoritmo que toma las decisiones seleccionará la imagen más adecuada en base al contexto de trabajo.
+
+Las pruebas experimentales realizadas muestran que es factible obtener Frentes de Pareto Robusto, para un grupo de imágenes del mismo tipo. Finalmente se compara el frente de Pareto robusto del grupo de imágenes analizado con cada uno de los frentes de Pareto de las imágenes individuales, de manera a demostrar experimentalmente la factibilidad de la propuesta.
+\end{resumen}

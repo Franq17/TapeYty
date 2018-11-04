@@ -1,0 +1,259 @@
+\chapter{Propuesta}
+\label{chap5}
+\ifpdf
+  \graphicspath{{Chapter5/Chapter5Figs/PNG/}{Chapter5/Chapter5Figs/PDF/}{Chapter5/Chapter5Figs/}}
+\else
+  \graphicspath{{Chapter5/Chapter5Figs/EPS/}{Chapter5/Chapter5Figs/}}
+\fi
+
+\markboth{\hfill \thechapter. Propuesta}{\hfill \thechapter. Propuesta}
+
+\section{Planteamiento del problema}
+\label{sec:planteamiento}
+
+En el tratamiento de imágenes, frecuentemente es necesario detectar características de interés que pueden ser utilizadas para un análisis posterior, por ello es necesario ajustar la apariencia de la imagen. Por ejemplo, con la mejora de contraste se resaltan ciertas características para aplicaciones posteriores o el ojo humano.
+
+La selección correcta de las métricas para la evaluación de la calidad de la imagen, que permita evaluar la ganancia o pérdida de información, así como la distorsión en la misma, en el contexto de mejora de contraste, y que esto nos posibilite establecer un criterio objetivo de calidad, es el ideal buscado.
+
+Así como también obtener una solución que sea útil para varias imágenes del mismo tipo a través de la optimización multiobjetivo utilizando las métricas seleccionadas con anterioridad.
+
+Para ello se realizaron 2 experimentos para la resolución del problema de mejora de contraste que se detallan a continuación.
+
+% correlación: analizar la relación entre, al menos, dos variables
+% Si r = -1, existe una correlación negativa perfecta. El índice indica una dependencia total entre las dos variables llamada relación inversa: cuando una de ellas aumenta, la otra disminuye en proporción constante.
+
+
+\section{Selección de métricas.}
+\label{sec:sele_metricas}
+
+Se buscan métricas cuyos valores sean los más adecuados, de manera a obtener un resultado satisfactorio en referencia a la caracterización de la naturaleza contradictoria existente entre mejora del contraste y distorsión de la imagen en escala de grises.
+
+Para la propuesta de este trabajo, se implementaron 4 métricas de calidad disponibles en la literatura, descritas en el capítulo \ref{chap4} de manera a seleccionar dos de ellas para la evaluación de las imágenes resultantes en un proceso de Optimización Robusto. El \textit{SSIM} (\ref{sec:ssim}) junto al $LTG$ (\ref{sec:ltg}) se utilizaran para el análisis de distorsiones de las imágenes resultantes y las métricas \textit{Entropía Local} (\ref{sec:entropialocal}) y \textit{Entropía} de Shannon (\ref{sec:entropia}) para el análisis de la cantidad de información en las imágenes resultantes.
+
+
+A continuación, se explica el proceso de selección de las métricas que demuestran ser eficientes para medir la calidad de una imagen en un proceso multiobjetivo. 
+
+% Tener en cuenta estas preguntas para mejor entendimiento
+% 1- ¿Cuáles son las variables de decisión? => las imágenes procesadas con los valores {Rx,Ry,C}.
+% 2- ¿Cuál es la función objetivo? => min (correlación entre métricas).
+% 3- ¿De qué manera se relaciona el objetivo con las variables de decisión? => el objetivo nos ayuda a seleccionar las métricas de calidad para las imágenes de entrada.
+
+% El problema: se desea encontrar las métricas más contradictorias para la evaluación de calidad de las imágenes procesadas.
+% Por qué deben ser contradictorias? esto nos asegura que ambas métricas garanticen un mejor contraste y una mínima de distorsión en las imágenes de entrada.
+
+Dados la imagen de entrada $f$, en escala de grises de tamaño $M \times N$ y el algoritmo \textit{CLAHE}, se desea encontrar el par de métricas $I_f$ y $S_f$ de correlación minima; ésto es:
+
+% función de evaluación es la función objetivo, es decir, es lo que se quiere llegar a optimizar.
+\begin{equation}\label{eq:fitness}
+ min (\text{\Large{$\gamma$}}_{{I_f}{S_f}})
+\end{equation}
+
+Donde:
+\begin{itemize}
+\item \text{\Large{$\gamma$}} es la correlación entre ${I_f}$ y ${S_f}$.
+\item ${I_f}$ y ${S_f}$ : son métricas de calidad.
+\item $ I_f \in [\mathscr{H}, \mathscr{E}]$. 
+\item $ S_f \in [{SSIM}, {LTG}]$.
+\end{itemize}
+
+El algoritmo \textit{CLAHE} recibe como parámetros la imagen original $f$, los valores para las dimensiones de la región contextual,  $(\mathcal{R}_i,\mathcal{R}_j)$ y el valor del Clip Limit $\mathscr{C}$. 
+La imagen mejorada $f'$ por el algoritmo \textit{CLAHE} y la imagen de entrada $f$, son analizadas por las métricas de calidad (\textit{Entropía}, \textit{Entropía Local}, \textit{SSIM} y $LTG$), de esta manera se obtiene un conjunto de soluciones por cada métrica de calidad para cada imagen de entrada.
+
+Para el análisis del conjunto solución obtenido por cada métrica, se hace uso de la correlación de Pearson \cite{correlacion}; cuyo índice se utiliza para medir el grado de relación o covariación de dos métricas distintas relacionadas linealmente, siempre y cuando ambas sean cuantitativas. El valor del índice de correlación varía en el intervalo [-1,1], entonces:
+
+
+\begin{equation}\label{eq:correlacion}
+-1 < \text{\Large{$\gamma$}}_{xy} < 1
+\end{equation}
+
+Donde:
+\begin{itemize}
+\item Si \text{\Large{$\gamma$}}$= 1$, existe una correlación positiva perfecta. Significa que existe relación directa entre las dos variables, cuando una de ellas aumenta, la otra también lo hace en proporción constante.
+\item Si $0<\text{\Large{$\gamma$}}<1$, existe una correlación positiva.
+\item Si $\text{\Large{$\gamma$}}= 0$, no existe relación lineal.
+\item Si $-1<\text{\Large{$\gamma$}}<0$, existe una correlación negativa.
+\item Si $\text{\Large{$\gamma$}} = -1$, existe una correlación negativa perfecta. El índice indica que existe una relación inversa entre las dos variables: cuando una de ellas aumenta, la otra disminuye en proporción constante.
+\end{itemize}
+
+El par de métricas que resulte ser más contradictoria será la seleccionada como métricas de evaluación para el algoritmo \textit{SMPSO-CLAHE}.
+
+\section{Mejora del contraste basada en Metaheurísticas de Optimización.}
+\label{sec:mejora_opti}
+% Tener en cuenta estas preguntas para mejor entendimiento
+% 1- ¿Cuáles son las variables de decisión? => las imágenes procesadas con los valores {Rx,Ry,C}.
+% 2- ¿Cuál es la función objetivo? => max(entropia/entropiaLocal) y max(ssim/ltg).
+% 3- ¿De qué manera se relaciona el objetivo con las variables de decisión? => el objetivo mejora la visualización de las imágenes de entrada
+
+Dada una imagen $f$, se buscan imágenes mejoradas $f'$ tal que la perdida de información y estructura de esta sea mínima, y se obtenga una mejora del contraste de la imagen de entrada, es decir:
+
+\begin{equation}\label{eq:funcionObj}
+    \top = max( I_f (\overrightarrow{x}), S_f (\overrightarrow{x}))
+\end{equation}
+
+Donde:
+\begin{itemize}
+\item $\top$ representa el vector de objetivos, para esta propuesta tenemos 2. Maximizar la cantidad de información (distribución de los niveles de grises de la imagen), representado por $I_f (\overrightarrow{x})$ y maximizar la información estructural de la imagen, representado por $S_f (\overrightarrow{x})$.
+% de esta forma obtener una mejora en el contraste
+\item $\overrightarrow{x}$ = ($\mathcal{R}_i, \mathcal{R}_j, \mathscr{C}$): valores utilizados para generar la mejora de la imagen de entrada $f$.
+\end{itemize}
+
+A continuación, se explica el funcionamiento de las métricas seleccionadas dentro de un proceso multiobjetivo.
+
+Se hace uso de la metaheurística \textit{SMPSO}, el cual recibe como entrada una imagen $f$ en escala de grises; a partir de la imagen de entrada, el algoritmo \textit{SMPSO} se encarga de generar los valores para las dimensiones de la región contextual,  $(\mathcal{R}_i,\mathcal{R}_j)$ y el valor del Clip Limit $\mathscr{C}$, que serán utilizados por el algoritmo \textit{CLAHE}.
+
+El algoritmo \textit{CLAHE} es utilizado para realizar la mejora del contraste, con los parámetros provistos por el algoritmo \textit{SMPSO}, aplicados a la imagen de entrada $f$. La imagen mejorada $f'$ resultante del algoritmo \textit{CLAHE} es evaluada por las métricas de calidad utilizando la imagen de entrada $f$ como referencia. Las métricas de calidad utilizadas son las seleccionadas en la sección anterior, obtenidas como resultado de la Correlación  de Pearson, representadas en $I_f$ y $S_f$. De esta forma se obtiene un conjunto de soluciones no dominadas, que conformaran el Conjunto Pareto de cada imagen de entrada $f$.
+
+% una solución robusta se define como la que es insensible (hasta un límite) a la perturbación en las variables de decisión en su vecindad.
+
+Teniendo las soluciones no dominadas (Conjuntos Pareto), se realizará un análisis sobre todas las soluciones obtenidas, para asegurar soluciones robustas. 
+Se analizará el comportamiento del Conjunto Pareto de cada imagen, al variar los parámetros utilizados para mejorar las imágenes de entrada (las variables de decisión), si no se altera el Conjunto Pareto inicial (si la variación no es mucha), se podría decir que la solución obtenida es Robusta.
+
+Primero se hallarán el Conjunto Pareto de la totalidad de las imágenes analizadas, como entrada se tomarán un número N de imágenes, y las evaluaciones de calidad se realizarán respecto a la totalidad de las imágenes de entrada. Se utilizarán las métricas obtenidas como resultado de la Correlación de Pearson, representadas en $I_f$ y $S_f$, obteniendo como resultado valores promediados de las métricas de calidad que formarán el Conjunto de soluciones no dominadas o Conjunto Pareto Robusto.
+
+\begin{equation}\label{eq:optRobustaI}
+     \overline{I_{fi}}=\sum_{k=1}^{m}I_f(f'_{ki});
+\end{equation}
+
+\begin{equation}\label{eq:optRobustaS}
+     \overline{S_{fi}}=\sum_{k=1}^{m} S_f(f'_{ki});
+\end{equation}
+
+Donde:
+\begin{itemize}
+\item ${x_i}=(\mathcal{R}_x, \mathcal{R}_y$, $\mathscr{C})$, es la i-ésima partícula.
+\item $f'_{ki} = \text{CLAHE}(f_k,x_i) \quad \forall k,i$
+\item $\overline{I_{fi}}$ y $\overline{S_{fi}}$, son métricas de calidad promediadas.
+\end{itemize}
+% Sujeto a:
+% \begin{eqnarray}
+% \mathcal{R}_x \in [2, M] \quad \forall \mathcal{R}_x \in \mathbb{N} \\
+% \mathcal{R}_y \in [2,N]  \quad \forall \mathcal{R}_y \in \mathbb{N} \\
+% \mathscr{C} \in (0,1]   \quad \forall  \mathscr{C} \in \mathbb{R}
+% \end{eqnarray}
+
+Luego se tomarán los valores del Conjunto Pareto de las imágenes $f_2$, $f_3$, ..., $f_n$ y se utilizarán para obtener imágenes mejoradas de la imagen $f_1$ y así analizar la variación del Conjunto Pareto obtenido inicialmente (variables de decisión) para la imagen $f_1$. Esto se realizará con todas las imágenes utilizadas en las pruebas y se comparará con el Conjunto Pareto Robusto calculado.
+
+% una pequeña perturbación de las variables de decisión no altera el valor de la función objetivo de la solución en una cantidad significativa.
+% una de las principales ideas retratadas en la literatura para encontrar soluciones sólidas es utilizar una función objetiva efectiva media para la optimización, en lugar de la función objetivo en sí misma.
+
+
+\subsection{Algoritmo \textit{SMPSO-CLAHE}}
+
+El algoritmo \textit{SMPSO} debe ser adaptado para funcionar junto al algoritmo \textit{CLAHE} y las métricas de evaluación de calidad \textit{SSIM} y \textit{Entropía Local}.
+
+% Para este trabajo se utiliza el algoritmo \textit{SMPSO}, en conjunto con una herramienta que implementan y ejecutan los algoritmos \textit{SSIM}, \textit{LTG}, \textit{Entropía} y \textit{Entropía Local}.
+
+% En el algoritmo \textit{SMPSO-CLAHE} cuando se inicializan los paramétros, se realiza una evaluación inicial a las partículas. De esta manera, la velocidad y la posición son calculadas al principio de cada iteración antes de la evaluación del Fitness de la partícula.
+
+% La Función de Aptitud es la función objetivo en los problemas de optimización. El valor de la Función de Aptitud representa la calidad de la solución o el fitness de cada individuo.
+
+El pseudocódigo del \textit{SMPSO-CLAHE} se presenta en el Algoritmo \ref{smpso_clahe}.
+
+\begin{algorithm}[hbpt]
+    \begin{algorithmic}[1]
+    \REQUIRE conjunto de imágenes $F$, número de partículas, \\
+    cantidad de líderes, número de iteraciones $t$. 
+    \STATE inicializarEnjambre().
+    \STATE inicializarConjuntoPareto().
+    \STATE iteracionActual=0
+    \WHILE{iteracionActual $<$ $t$}
+        \STATE calcularVelocidad().
+        \STATE actualizarPosicion().
+        \STATE mutacion().
+        \STATE evaluacion().
+        \STATE actualizarConjuntoPareto()
+        \STATE actualizarParticulas()
+        \STATE generacion ++
+    \ENDWHILE
+    \RETURN Conjunto Pareto $X$
+    \end{algorithmic}
+    \caption{Algoritmo \textit{SMPSO-CLAHE}.}
+    \label{smpso_clahe}
+\end{algorithm} %\break
+
+A continuación, se describe el funcionamiento del algoritmo \ref{smpso_clahe} \textit{SMPSO-CLAHE}.
+\begin{itemize}
+\item Entrada: se reciben los datos para inicializar los parámetros necesarios para el funcionamiento del algotimo \textit{SMPSO}.
+\item Línea 1: Se inicializa el enjambre, que incluye la posición, la velocidad y la mejor posición individual de las partículas.
+\item Línea 2: Se inicializa el Conjunto Pareto con los valores de cantidad de líderes y cantidad de objetivos.
+\item Línea 3: Se inicializa la iteración (generación inicial).
+\item Línea 4: Se ejecuta el bucle principal del algoritmo hasta que se cumpla el criterio de parada que en este caso es una cantidad máxima de iteraciones ($t$).
+\item Línea 5: Se calcula la velocidad de cada partícula.
+\item Línea 6: Se calcula y actualiza la posición de cada partícula.
+\item Línea 7: Se aplica un operador de mutación con una probabilidad dada.
+\item Línea 8: Se evalúan las partículas resultantes utilizando las métricas de calidad (obtenidas como resultado de la Correlación  de Pearson, representadas en $I_f$ y $S_f$) con el algoritmo $CLAHE$.
+\item Línea 9 y 10 : Se actualizan tanto las partículas como el Conjunto Pareto.
+\item Línea 13: El algoritmo devuelve el Conjunto Pareto como el conjunto de aproximación encontrado.
+\end{itemize}
+
+
+En la Figura \ref{fig:flowchartsmpso} se describe gráficamente el algoritmo detallado en el Algoritmo \ref{smpso_clahe}. 
+
+\begin{figure}[H]
+    \centering
+   \begin{tikzpicture}[
+      >=latex',
+      auto,
+      scale=0.8, 
+      transform shape
+    ]
+      \node [intg] (ini)  {Inicializar Enjambre (Asignar valores aleatorios a las soluciones potenciales)};
+      \node [intg] (ini2)  [node distance=0.7cm,below=of ini]{Inicializar archivo de líderes()};
+      \node [intg] (ini3)  [node distance=0.7cm,below=of ini2]{Iteración actual=0};
+      \node [decision] (des1) [node distance=0.7cm,below=of ini3] {Iteración actual $<$ t ?};
+      \node [intg]  (inner1) [node distance=0.7cm,below=of des1] {Calcular Velocidad (Calcular variación de cada solución potencial de manera a buscar mejorar las métricas en la iteración siguiente)};
+      \node [intg]  (inner2) [node distance=0.7cm,below=of inner1] {Actualizar Posición(Actualizar $\mathcal{R}_i,\mathcal{R}_j,\mathscr{C}$) de cada partícula de acuerdo a la variación calculada};
+      \node [intg]  (inner3) [node distance=0.7cm,below=of inner2] {Mutación (Aplicar variaciones aleatorias a las partículas de manera a expandir el espacio de búsqueda, con probabilidad dada)};
+      \node [intg]  (inner4) [node distance=0.7cm,below=of inner3] {Evaluación (Calcular $\left\{\overline{\mathscr{E}},\overline{SSIM}\right\}$ para cada partícula del enjambre) con el algoritmo $CLAHE$};
+      \node [intg]  (inner5) [node distance=0.7cm,below=of inner4] {Actualizar Archivo de Líderes (Obtener nuevas soluciones Conjunto Pareto de acuerdo a la evaluación realizada)};
+      %\node [int]  (inner6) [node distance=0.7cm,below=of inner5] {Actualizar Partículas};
+      \node [intg]  (inner7) [node distance=0.7cm,below=of inner5] {iteracion++};
+      \node [intg]  (fin1) [node distance=0.7cm,right=of inner1] {Retornar Archivo de Líderes};
+      \node [coordinate, left=of inner7]  (camino1) {};
+      \node [coordinate]  (camino2)[node distance=2.4cm, left=of des1] {};
+      \node [coordinate]  (camino3)[node distance=5.2cm, right=of des1] {};
+
+      % \node [int]  (ki2) [node distance=1.5cm and -1cm,below right=of ini] {Use Conjugate Prior, Eq yy};
+      % \node [intg] (ki3) [node distance=5cm,below of=ini] {Find Posterior Parameters for population of concrete cover};
+      % \node [intg] (ki4) [node distance=2cm,below of=ki3] {Plot the posterior density function to help practitioner pick value of cc};
+
+      % \draw[->] (ini) -- ($(ini.south)+(0,-0.75)$) -| (ki1) node[above,pos=0.25] {Yes} ;
+      % \draw[->] (ini) -- ($(ini.south)+(0,-0.75)$) -| (ki2) node[above,pos=0.25] {No};
+      \draw[->] (ini) -- (ini2);
+      \draw[->] (ini2) -- (ini3);
+      \draw[->] (ini3) -- (des1);
+      \draw[->] (des1) -- (inner1);
+      \draw[->] (inner1) -- (inner2);
+      \draw[->] (inner2) -- (inner3);
+      \draw[->] (inner3) -- (inner4);
+      \draw[->] (inner4) -- (inner5);
+      %\draw[->] (inner5) -- (inner6);
+      \draw[->] (inner5) -- (inner7);
+      % \draw[->] ($(inner7.west)+(-0.5,0.5)$) |- (des1) node[above,pos=0.25] {No};
+      % \draw[->] ($(inner7.west)$) -- node[left,pos=0.25]{} |- (des1) node[above,pos=0.25] {No};
+
+      % \draw[->] (ki1) |- (ki3);
+      % \draw[->] (ki2) |- (ki3);
+      % \draw[->] (ki3) -- (ki4);
+      \draw[-] (inner7) -- (camino1);
+      \draw[-] (camino1) -- (camino2);
+      \draw[->] (camino2) -- (des1) node[above,pos=0.5] {No};
+      \draw[-] (des1) -- (camino3) node[above,pos=0.5] {Si};
+      \draw[->] (camino3) -- (fin1);
+    \end{tikzpicture}
+    \caption{Diagrama de Flujo que muestra el desarrollo del algoritmo SMPSO-CLAHE robusta}
+    \label{fig:flowchartsmpso}
+\end{figure}
+
+
+
+
+
+
+
+
+
+
+
+
+
