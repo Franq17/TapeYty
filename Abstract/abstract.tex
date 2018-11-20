@@ -1,14 +1,4 @@
 \abstract{
 \addtocontents{toc}{\vspace{1em}} 
 
-Contrast enhancement in grayscale images is a technique that seeks to highlight useful information from the image. One technique often used is the Contrast Limited Adaptive Histogram Equalization ($CLAHE$). However, it presents a challenge in the selection of optimal parameters to perform contrast enhancement, which may vary for each instance or image, in addition to the appropriate selection of metrics to evaluate the results obtained.
-
-In this work we propose a study of different metrics available in the literature, in order to define, based on a correlation study, which will be selected in a multiobjective optimization process. A robust optimization based on the Particle Swarm Meta heuristics ($SMPSO$) is applied, which tunes the parameters of the $CLAHE$ algorithm, that in turn improves the image in order to determine the decision variables suitable for certain types of images, and whose results approximate to the Pareto Fronts of any image of the type studied, without severely compromising the quality of the results with respect to optimizations of the improvement of the contrast based on individual images.
-
-Peer comparisons were made between local and global improvement metrics to measure the correlation between them. 
-The results of the correlation obtained from the optimization process show that the techniques \textit{Local Entropy} and \textit {Structural Similarity Index} ($SSIM$) have a high negative correlation, so the problem must be posed in a multiobjective context.% based on non-domination.
-% The results show that \textit{Local Entropy} and the \textit{Structural Similarity Index} ($SSIM$) metrics have a high negative correlation so the problem must be raised in a multiobjective context based on non-dominance. 
-% In addition it is observed that $SMPSO$ is a feasible tool for the calculation of non-dominated solutions on which the decision maker will select the most appropriate image based on the work context.
-
-Experimental tests show that it is feasible to obtain Robust Pareto Fronts for a group of images of the same type. Finally, the Robust Pareto Front of the group of images analyzed with each of the Pareto Fronts of the individual images is compared, in order to experimentally demonstrate the feasibility of the proposal.
 }

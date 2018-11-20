@@ -5,24 +5,3 @@
 
 \section {Conclusiones del trabajo}
 
-Se analizaron varias métricas para determinar la calidad de la imagen, basados en un enfoque de referencia completa \textbf{full reference} (FR), se seleccionaron 4 métricas, las cuales se trabajaron de a pares {\it Entropía/SSIM}, {\it Entropía local/SSIM}, {\it Entropía/LTG} y {\it Entropía local/LTG}, junto al algoritmo $SMPSO-CLAHE$, con el objetivo de obtener las métricas que maximicen el contraste y minimicen la distorsión de la imagen de manera simultánea.
-
-A partir de las pruebas realizadas y de los resultados obtenidos, se pueden considerar las siguientes conclusiones:
-
-\begin{itemize}
-\item Los resultados experimentales obtenidos en la \textbf{Tabla \ref{tabla:promcorrelacion}} muestran que los pares de métricas {\it Entropía local/SSIM} demuestran ser los más contradictorios según la correlación obtenida, por tanto son más adecuados para incorporar a un proceso de optimización. \newline
-\item Los resultados de las imágenes para SMPSO-CLAHE muestran una mejora en el contraste, manteniendo la apariencia natural de las mismas. Este algoritmo se muestra aplicable tanto en imágenes médicas o biométricas, mostrando resultados satisfactorios.\newline
-\item Los parámetros que se obtuvieron en la Optimización Robusta son aplicables a cualquier imagen del grupo estudiado, a diferencia de trabajos anteriores, donde los parámetros se utilizaban para una sola imagen.
-% \item Este trabajo es un caso general del trabajo de Moré y Brizuela \cite{morebrizuela2014}, cuyos resultados caen en el frente pareto de esta propuesta, y cuya solución corresponde a la mínima similaridad. No se consideraron pruebas experimentales debido a que son enfoques diferentes.
-\end{itemize}
-
-
-\section{Trabajos Futuros}
-Como trabajos futuros de manera a seguir con esta tesis de grado se propone: 
-
-\begin{itemize}
-\item Utilizar la implementación {\it SMPSO-CLAHE} con otras métricas de evaluación de calidad y hallar el índice de correlación.
-\item Utilizar otros índices de Correlación y realizar una comparación con la utilizada en este trabajo.
-\item Analizar el desempeño de esta propuesta en imágenes de otra naturaleza.
-\end{itemize}
-
