@@ -1,4 +1,4 @@
-\chapter{Sistemas de información Geográficas}
+\chapter{Sistemas de Información Geográfica}
 \label{chap3}
 \ifpdf
     \graphicspath{{Chapter3/Chapter3Figs/PNG/}{Chapter3/Chapter3Figs/PDF/}{Chapter3/Chapter3Figs/}}
@@ -6,8 +6,140 @@
     \graphicspath{{Chapter3/Chapter3Figs/EPS/}{Chapter3/Chapter3Figs/}}
 \fi
 
-\markboth{\hfill \thechapter. Sistemas de información Geográficas}{\hfill \thechapter. Sistemas de información Geográficas}
+\markboth{\hfill \thechapter. Sistemas de Información Geográfica}{\hfill \thechapter. Sistemas de Información Geográfica}
 
-\section{Sistemas de información Geográficas.}
-\label{sec:procOpt}
+Los sistemas de información geográfica (SIG, GIS en inglés, \textit{Geographical Information System}) han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con Burrough (citado en Heywood, Cornelius y Carver, 2006) un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. NCGIA (citado en Bravo) lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
 
+% Mejorar nombres con referencias a los trabajos del dia GIS en FIUNA
+El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y lo han sabido aprovechar. Se emplean por ejemplo para: la detección de zonas donde habitan animales en peligro de extinción de una región, la predicción de deforestación a partir de un histórico geográfico en el Chaco paraguayo, la detección de zonas con posibilidades futuras de afectación por inundaciones.
+
+El número de terminologías alrededor de estos sistemas es muy grande, es por ello que en este capítulo se explicarán los conceptos básicos que servirán de apoyo para una clara interpretación de los siguientes capítulos donde han sido aplicados.
+
+% ESTO PUEDE IR EN LA PARTE DE IMPLEMENTACIÓN.
+% En Paraguay, muchas instituciones públicas y privadas, organizaciones con y sin fines de lucro han visto la importancia de incorporar éstos sistemas para la toma de decisiones. Sin embargo, existen aún ámbitos donde no se han podido aplicar por razones de desconocimiento, falta de personal capacitado, menor prioridad u otros motivos.
+
+\section{Origen de los datos espaciales}
+
+Hoy en día, mayormente las informaciones que son recolectadas en censos, encuestas o sistemas informáticos requieren de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (Computer-Aided Design) u otros sistemas capacitados para ello.
+
+Resulta muy común que los dispositivos electrónicos actuales tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (en inglés, GPS; Global Positioning System) es un sistema que permite determinar la posición de un objeto en toda la Tierra. También existen otros mecanismos de geolocalización como por ejemplo las redes móviles, redes inalámbricas, entre otros.
+
+Otra fuente principal de extracción de datos geográficos dada la amplia disponibilidad de imágenes orto-rectificadas (fotografías tanto de satélite como aéreas), es la digitalización por esta vía. Esta fuente es una de las más utilizadas para generar nuevos datos geográficos.
+
+Toda la información en un SIG está vinculada a una referencia espacial, podemos hablar entonces de dos tipos de informaciones: de ubicación y de atributos. La información de ubicación describe la posición de las características geográficas particulares en la superficie de la Tierra. La información de atributos describe características de las entidades geográficas representadas, como el tipo de característica, su nombre o número e información cuantitativa, como su área o longitud.
+
+La forma más común para presentar los datos espaciales es el mapa. Según la Asociación Cartográfica Internacional, un mapa ``es una representación, normalmente a escala y en un medio plano, de una selección de características materiales o abstractas en, o en relación con, la superficie de la Tierra". La escala de un mapa indica la relación que existe entre él mismo y la realidad.
+
+Los mapas están organizados lógicamente en un conjunto de capas o temas de información. Un mapa base puede organizarse en capas tales como carreteras, suelos, límites de estados, ciudades.
+
+\subsection{Sistema de referencias de coordenadas}
+
+% Ref https://siglibreuruguay.wordpress.com/2015/12/23/sistemas-de-referencia-de-coordenadas/
+La Tierra tiene forma de geoide y las proyecciones cartográficas intentan representar su superficie o una parte de ella, en un plano (como el papel o la pantalla del computador).
+
+Con la ayuda de Sistemas de Referencia de Coordenadas (SRC) cualquier punto de la Tierra puede ser definido por tres números denominados coordenadas. En general, los SRC se pueden dividir en: proyectados (también denominados cartesianos o rectangulares) y geográficos.
+
+El uso de SRC geográficos es muy común. Utilizan los grados de latitud y longitud y en ocasiones un valor de altitud para definir la situación de un punto sobre la superficie terrestre. El sistema más popular se denomina WGS 84.
+
+\subsubsection{Proyecciones}
+Los SRC proyectados bidimensionales se definen normalmente mediante dos ejes perpendiculares XY y en el caso de sistemas tridimensionales se añade un eje Z perpendicular a ambos. Para Uruguay se utiliza comúnmente el sistema de referencia de coordenadas Universal TransverseMercator (UTM). Este SRC es de uso en todo el planeta y se divide en 60 zonas iguales de 6 grados de ancho en dirección Este-Oeste. Nuestro país se encuentra casi completamente comprendido en la zona 21 Sur.
+
+En los programas de SIG se pueden seleccionar mediante códigos, denominados EPSG, los diferentes sistemas de coordenadas, correspondiendo: EPSG4326 (WGS84) en coordenadas geográficas o EPSG 32721, para zona 21 y EPSG 32722, para zona 22 (WGS84) en coordenadas UTM.
+
+Las capas de servicios de imágenes de Google y demás que se pueden cargar en los diferentes software de SIG  están en SRC WGS84 PseudoMercator, EPSG 3857.
+
+Cuando se trabaja con capas geográficas con diferentes SRC deben reproyectarse todas al mismo, para poder utilizarlas correctamente superpuestas. Los software de GIS tienen disponible una herremienta de reproyección, incluso algunos como QGIS permiten reproyectar al vuelo.
+
+% Tipos de capas/mapas: Base y temáticos
+\subsection{Representación de los datos}
+
+Las características de un mapa digital requieren ser representadas. Para ello se utilizan unas simbologías denominadas entidades espaciales, cuyos tipos básicos son: puntos, líneas y áreas. Con éstos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa.
+
+Adicionalmente, hay otras entidades adicionales como las redes y superficies; que son extensiones de las líneas y áreas respectivamente como se muestra en la Figura.
+
+% SE PUEDE INSERTAR UNA IMAGEN Y PONER COMO PIE DE CADA IMAGEN LA Explicación, HACER REFERENCIA EN EL TEXTO DE ARRIBA
+% \begin{itemize}
+%     \item Puntos:
+%     Se pueden representar cestos de basura residenciales, semáforos, árboles, alumbrados públicos.
+%     \item Líneas:
+%     Se utilizan para representar calles, caminos, tendidos eléctricos.
+%     \item Áreas:
+%     Manzanas, lotes, lagunas, países pertenecen a entidades de área.20+
+% \end{itemize}
+
+Las características de un mapa a su vez pueden ser estructuradas mediante el uso de vectores y mediante el uso de matrices. En un sistema vectorial el territorio se representa a partir de vectores, ubicados en el espacio mediante pares de coordenadas coincidentes con su origen y destino. Un sistema ráster es aquel que realiza sus cálculos a través de una matriz, en la que cada celda o píxel tiene un valor y una localización determinadas. Ambos sistemas se diferencian fundamentalmente en la estructura de los datos espaciales, en las relaciones topológicas, en el volumen físico de la información y en los métodos de análisis. 
+
+% DEFINIR TOPOLOGÍA
+
+A continuación nos adentraremos un poco más en los diferentes tipos de representación de datos espaciales.
+
+\subsubsection{Vectorial}
+% No esta mal, pero cambiar a nuestras palabras, poner referencias en ciertas partes.
+En un sistema vectorial un punto se representa de forma única por su latitud y longitud o sus referencias de coordenada. En el mundo vectorial, el punto es el bloque de construcción básico a partir del cual se construyen todas las entidades espaciales. Las entidades de línea y área se construyen conectando una serie de puntos en cadenas y polígonos.
+
+% INSERTAR IMAGEN
+
+Está claro que solo hemos almacenado parte de la información del mapa; por ejemplo, dos de estos puntos son casas, mientras que el tercero es una iglesia. Esta información del atributo es normalmente almacenado por separado, en una base de datos, y vinculados a los datos de ubicación usando el identificador para cada punto. 
+
+% comentar sobre la decisión a la hora de dibujar una entidad según la escala y utilidad.
+
+En el modelo de datos vectoriales, la representación de redes y superficies es una extensión del enfoque utilizado para almacenar entidades de línea y área. Sin embargo, el método es más complejo y está estrechamente relacionado con la forma en que se estructuran los datos para la codificación por computadora.
+
+Las líneas de contorno y las redes irregulares de triángulos (TIN) se utilizan para representar la altitud u otros valores en continua evolución. Los TIN son registros de valores en un punto localizado, que están conectados por líneas para formar una malla irregular de triángulos. La cara de los triángulos representan, por ejemplo, la superficie del terreno.
+
+\subsubsection{Ráster}
+
+En un SIG ráster, se coloca una cuadrícula imaginaria sobre el mapa. Cada celda de la cuadrícula, conocida como elemento de imagen o píxel, se examina para ver qué característica cae dentro de ella. El resultado final de este proceso es una cuadrícula o una serie de cuadrículas de números que representan las características en el mapa: una cuadrícula a menudo se denomina capa. Por lo tanto, los números en los píxeles representan los datos del atributo, pero ¿cómo está la ubicación de las características almacenadas en este tipo de sistema? Dado que todos los píxeles son cuadrados, siempre que conozca la ubicación de un punto en la cuadrícula y el tamaño de los píxeles, la ubicación de cualquier otro píxel se puede calcular de manera bastante simple. Por lo tanto, la mayoría de los sistemas raster almacenan esta información para cada capa raster, a veces en un archivo especial que se mantiene separado de la capa en sí.
+El tamaño de la celda de la cuadrícula es muy importante ya que influye en cómo aparece una entidad. La Figura 3.10 muestra cómo cambia el carácter espacial de la red de carreteras de Happy Valley a medida que se modifica el tamaño de celda del ráster.
+cuanto mayores sean las dimensiones de las celdas menor es la precisión o detalle (resolución) de la representación del espacio geográfico
+
+% INSERTAR IMAGEN
+
+Hay varias variantes de la estructura de datos ráster de la cuadrícula regular, que incluyen: teselación irregular (por ejemplo, red irregular triangulada (TIN)), teselación jerárquica (por ejemplo, árbol cuádruple) y línea de escaneo (Peuquet, 1991)
+
+Un tipo de datos raster es, en esencia, cualquier tipo de imagen digital representada en mallas. El modelo de SIG raster o de retícula se centra en las propiedades del espacio más que en la precisión de la localización. Divide el espacio en celdas regulares donde cada una de ellas representa un único valor. Se trata de un modelo de datos muy adecuado para la representación de variables continuas en el espacio.
+
+Cualquiera que esté familiarizado con la fotografía digital reconoce el píxel como la unidad menor de información de una imagen. Una combinación de estos píxeles creará una imagen, a distinción del uso común de gráficos vectoriales escalables que son la base del modelo vectorial. 
+
+el tipo de datos raster reflejará una abstracción de la realidad. 
+% Las fotografías aéreas son una forma de datos raster utilizada comúnmente con un sólo propósito: mostrar una imagen detallada de un mapa base sobre la que se realizarán labores de digitalización. Otros conjuntos de datos raster podrán contener información referente a las elevaciones del terreno (un Modelo Digital del Terreno), o de la reflexión de la luz de una particular longitud de onda (por ejemplo las obtenidas por el satélite LandSat), entre otros.
+
+Si bien una trama de celdas almacena un valor único, estas pueden ampliarse mediante el uso de las bandas del raster para representar los colores RGB (rojo, verde, azul), o una tabla extendida de atributos con una fila para cada valor único de células. La resolución del conjunto de datos raster es el ancho de la celda en unidades sobre el terreno.
+
+\subsection{Almacenamiento espacial}
+
+Un conjunto de datos que reúnen las mismas características crean una capa. Una capa puede ser almacenada de distintas formas y en diferentes formatos. Tanto para modelos del tipo vectorial como ráster existe un listado extenso de formatos que almacenan datos espaciales.
+
+Los software GIS al actualizar sus versiones han ido incorporando soporte a los distintos formatos que surgían o que iban ganando popularidad, de lo contrario, repercutiría en el número de usuarios adeptos a cada sistema.
+
+Los formatos de archivos GIS ráster mas tradicionales vistos hasta la fecha son: Esri Grid, GeoTIFF, JPEG 2000, MrSID, ECW, ASCII, ERDAS IMAGINE (IMG), GeoPackage, MBTiles
+
+Entre los formatos GIS vectoriales mas tradicionales aparecen: Esri shapefile, CSV/GeoCSV, DWG/DXF/DGN, GML/XML, GPX, GeoPackage, GeoJSON/TopoJSON, GeoRSS, KML/KMZ, MapBox Vector Tiles (MVT).
+
+Fuente:https://mappinggis.com/2015/12/los-formatos-gis-raster-mas-populares/
+
+\begin{itemize}
+\item Shapefile o archivos shape
+Es una estructura de archivos que almacena la información necesaria para desplegar en un visor espacial una capa vectorial, guarda la localización de los elementos geográficos y los atributos asociados a ellos. No obstante carece de capacidad para almacenar información topológica. Esta estructura de archivos contiene una lista de archivos que tienen el mismo nombre, pero difieren en su extensión (ejemplo: .shp, .shx, .dbf). Cada archivo cumple con un función específica y almacena cierta información requerida para desplegarse correctamente en el visor.
+
+\end{itemize}
+
+\subsection{Base de datos espaciales}
+
+% Postgresql/PostGIS
+% Oracle.
+
+\subsection{Mapas y Servidores de mapas}
+
+Mapas del mundo
+% Geoserver: WMS, WFS.
+GeoServer - un servidor de código abierto escrito en Java - permite a los usuarios compartir y editar datos geospaciales. Diseñado para la interoperabilidad, publica datos de las principales fuentes de datos espaciales usando estándares abiertos. GeoServer ha evolucionado hasta llegar a ser un método sencillo de conectar información existente a globos virtuales tales como Google Earth y NASA World Wind (véase así como mapas basados en web como OpenLayers, Google Maps y Bing Maps). GeoServer sirve de implementación de referencia del estándar Open Geospatial Consortium Web Feature Service, y también implementa las especificaciones de Web Map Service y Web Coverage Service.
+
+% OpenStreetMap HABLAR SOBRE CREACION DE MAPAS LIBRES, tambien google maps
+OpenStreetMap (también conocido como OSM) es un proyecto colaborativo para crear mapas editables y libres. En lugar del mapa en sí, los datos generados por el proyecto se consideran su salida principal.
+
+Los mapas se crean utilizando información geográfica capturada con dispositivos GPS móviles, ortofotografías y otras fuentes libres. Esta cartografía, tanto las imágenes creadas como los datos vectoriales almacenados en su base de datos, se distribuye bajo licencia abierta Licencia Abierta de Bases de Datos (en inglés ODbL)
+
+Google Maps es un servidor de aplicaciones de mapas en la web que pertenece a Alphabet Inc. Ofrece imágenes de mapas desplazables, así como fotografías por satélite del mundo e incluso la ruta entre diferentes ubicaciones o imágenes a pie de calle con Google Street View, condiciones de tráfico en tiempo real (Google Traffic) y un calculador de rutas a pie, en coche, bicicleta (beta) y transporte público y un navegador GPS.
+
+Existe una variante a nivel entorno de escritorio llamada Google Earth que ofrece Alphabet Inc. también de forma gratuita. En 2014, los documentos filtrados por Edward Snowden revelaron que Google Maps es parte y víctima del entramado de vigilancia mundial operado por varias agencias de inteligencia occidentales y empresas tecnológicas.
