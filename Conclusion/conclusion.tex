@@ -5,3 +5,43 @@
 
 \section {Conclusiones del trabajo}
 
+% Los objetivos específicos que se han trazado en este trabajo son los siguientes:
+
+% \begin{enumerate}
+%     \item \textbf{Analizar} sobre técnicas de optimización para obtener el camino óptimo. 
+%     \item \textbf{Identificar} los factores que influyen en la recolección domiciliaria de la DSU.
+%     \item \textbf{Aplicar un modelo matemático} de optimización que mejor se ajuste a las reglas de negocio del caso de estudio.
+%     \item \textbf{Proponer y desarrollar una aplicación GIS} que permita configurar los parámetros de entrada del problema y despliegue la ruta óptima para cada zona de recolección.
+%     \item \textbf{Comparar} resultados de la aplicación desarrollada con los recorridos que actualmente son realizados, y de esta manera validar los resultados obtenidos.
+% \end{enumerate}
+
+% En ciudades en vías de desarrollo, como Asunción, el trayecto seguido por el conductor del vehículo de recolección de basura se basa en su propia intuición y experiencia debido a la falta de herramientas que ayuden a la toma de decisiones. Constantemente, las calles de Asunción sufren modificaciones como cambios de sentido e inhabilitación por diversos motivos; lo que requiere de un sistema flexible a estos cambios y pueda generar la ruta a seguir que contraste con la realidad del momento. Se propone un diseño de aplicación GIS cuyo principal objetivo es brindar el camino óptimo que debe seguirse para la recolección de residuos sólidos en las zonas.
+
+% Esta arquitectura propuesta tiene un factor muy relevante que es la escalabilidad al ofrecer componentes desacoplados, ya que se utilizan servicios REST, servicios web de mapas como \textit{TMS}, y \textit{fameworks} MVC. La metodología de trabajo en la DSU se ajusta al problema del cartero rural abierto, en este trabajo se utiliza la solución propuesta por \citet{Braier2017AnArgentina}, cuya salida representa los datos de entrada a la solución de secuenciación que finalmente se despliega en la aplicación GIS.
+
+% La Dirección de Servicios Urbanos podrá contar con una aplicación que garantice que todos los ciudadanos que residen e ingresan diariamente a la ciudad reciban el servicio de recolección de basura. Se evidencia que aunque se mantenga el procedimiento de recolección, la distancia del recorrido es mejorada y se observa que mediante el uso de la aplicación es posible reducir el número de veces que se pasa por los mismos segmentos de calles, además se garantiza que todos los segmentos serán cubiertos por la recolección.
+
+
+
+En este trabajo se analizaron varias propuestas de solución del estado del arte con respecto a la recolección de residuos sólidos domiciliarios, la metodología de trabajo en la DSU se ajusta al problema del cartero rural abierto, por lo que se utiliza la solución propuesta por \citet{Braier2017AnArgentina}, cuya salida representa los datos de entrada a la solución de secuenciación que finalmente se despliega en la aplicación GIS.
+
+Se encontró que entre los factores que más influyen en la selección del camino a seguir son las reglas de circulación de la red de rutas, que sufren constantes cambios con el fin de disminuir la congestión del tráfico actual, como por ejemplo: cambio de sentido, prohibición de giro a la izquierda, giro en U, contramano. Así como también si una calle es clausurada por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
+
+En este trabajo se presenta un sistema flexible a estos cambios y pueda generar la ruta a seguir que contraste con la realidad del momento. Se propone un diseño de aplicación GIS cuyo principal objetivo es brindar el camino óptimo que debe seguirse para la recolección de residuos sólidos en las zonas. La arquitectura propuesta tiene un factor muy relevante que es la escalabilidad al ofrecer componentes desacoplados, ya que se utilizan servicios REST, servicios web de mapas como \textit{TMS}, y \textit{fameworks} MVC.
+
+Por otra parte, se presenta una comparación entre las rutas resultantes de la aplicación \textit{TapeYty} y los recorridos trazados actualmente por los conductores en base a su experiencia, se puede observar una mejora de hasta 20 \% en algunas zonas (cuadro \ref{table:comparacionZona83}).
+
+Cabe resaltar que la DSU podrá contar con una aplicación que garantice que todos los ciudadanos que residen e ingresan diariamente a la ciudad reciban el servicio de recolección de basura. Se evidencia que aunque se mantenga el procedimiento de recolección, la distancia del recorrido es mejorada y se observa que mediante el uso de la aplicación es posible reducir el número de veces que se pasa por los mismos segmentos de calles, además se garantiza que todos los segmentos serán cubiertos por la recolección.
+
+
+\section {Trabajos Futuros}
+
+\begin{itemize}
+    \item Crear una mesa de trabajo con la DSU para obtener los datos relacionados a los kilogramos de residuos domiciliarios recolectados diariamente y estudiar la conveniencia de reorganizar las zonas y turnos de trabajo.
+    \item Aprovechar la escalabilidad de la arquitectura implementada para agregar la optimización de las rutas para recolección de los residuos de grandes generadores, los llamados residuos de manejo especial, generados en los procesos productivos e instalaciones industriales y comerciales.
+    \item Sincronizar la base de datos con los datos de OSM cuando fuese necesario.
+    \item Agregar fecha de inicio y fecha fin a las restricciones agregadas a la red de ruta, así también a las calles que son inhabilitadas.
+\end{itemize}
+
+
+

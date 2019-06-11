@@ -20,13 +20,13 @@ El decreto N\grad 7391, del 28 de junio de 2017, que reglamenta la Ley N\grad 39
 
 \section{Gestión de residuos sólidos}
 
-La gestión de residuos sólidos (SWM, \textit{Solid Waste Management}) implica varios procesos que pueden dar lugar a problemas relacionados con áreas como la organización, el control, la logística, la planificación y el reciclaje. Es una actividad multidisciplinaria que contiene decisiones de criterios múltiples en cada etapa de su ciclo de vida. 
+La gestión de residuos sólidos o SWM implica varios procesos que pueden dar lugar a problemas relacionados con áreas como la organización, el control, la logística, la planificación y el reciclaje. Es una actividad multidisciplinaria que contiene decisiones de criterios múltiples en cada etapa de su ciclo de vida. 
 
 La gestión integral de residuos sólidos es el conjunto de acciones que se aplican en el manejo de los desechos desde su generación hasta su disposición final, basándose en criterios sanitarios, ambientales y de viabilidad técnica y económica para la reducción en la fuente de aprovechamiento, tratamiento y disposición final.
 
 % Existen investigaciones en varios aspectos, como el área de pronóstico de generación de residuos, el monitoreo de los sistemas de recolección de contenedores, la gestión del transporte de contenedores y la predicción de la instalación de nuevas plantas de eliminación de residuos.
 
-En el trabajo de \citet{VitorinodeSouzaMelare2017TechnologiesReview} se agrupan los procesos de SWM en seis categorías 
+En el trabajo de \citet{VitorinodeSouzaMelare2017TechnologiesReview} se agrupan los procesos de SWM en seis categorías:
 \begin{itemize}
 \item Gestión de recogida, recorrido y transporte; 
 \item Gestión y seguimiento de contenedores; 
@@ -45,7 +45,7 @@ El transporte es la acción de trasladar los residuos sólidos de una fase de su
 
 \subsection{Gestión y seguimiento de contenedores}
 
-Se pueden detectar dos escenarios: (1) áreas críticas con contenedores que siempre están llenos, que deben ser reemplazados con contenedores de mayor capacidad; o (2) áreas cuyos contenedores están siempre vacíos. Los costos destinados en el mantenimiento de los vehículos de recolección y combustibles pueden ser reducidos mediante tecnologías que controlen el nivel del contenedor, desplazándose así el vehículo solo cuando los contenedores se encuentren en el nivel adecuado para la recolección \citep{VitorinodeSouzaMelare2017TechnologiesReview}.
+Se pueden detectar dos escenarios: (1) áreas críticas con contenedores que siempre están llenos, que deben ser reemplazados con contenedores de mayor capacidad; o (2) áreas cuyos contenedores están siempre vacíos. Los costos destinados en el mantenimiento de los vehículos de recolección y combustibles pueden ser reducidos mediante tecnologías que controlen el nivel del contenedor, desplazándose así el vehículo solo cuando los contenedores se encuentren en el nivel adecuado para la recolección \citep{VitorinodeSouzaMelare2017TechnologiesReview, Akhtar2017BacktrackingOptimization}.
 
 En la Figura \ref{fig:contenedoresMDA} se observan los contenedores móviles que se encuentran distribuidos en el microcentro de la ciudad de Asunción y en la zona de su costanera.
 
@@ -76,21 +76,25 @@ La selección de sitios para la disposición de residuos es un proceso complejo 
 
 \section{Gestión de residuos sólidos urbanos en la ciudad de Asunción}
 
-Asunción es la capital y la ciudad más poblada de la República del Paraguay. Es un municipio autónomo administrado como Distrito capital, cuenta con una superficie de 117 km$^{2}$, dividido actualmente en 68 barrios. Según las proyecciones de la \citet*{DireccionGeneraldeEstadistica2015Paraguay2000-2025} para el año 2019 se estima una población aproximada de 522.287 habitantes. Se debe agregar que el ingreso promedio de personas en ómnibus del transporte público y vehículos privados de los municipios aledaños, es alrededor de 1.320.000 a diario. Este análisis se hace en base a cálculos estimativos de la Unidad Coordinadora del Programa Metrobús del Ministerio de Obras Públicas y Comunicaciones (MOPC) \citep{DiarioABCColor2016PorColor}. La cantidad de personas que convergen diariamente en Asunción trae consigo una alta generación de residuos, esto hace que la complejidad en la gestión de los mismos sea cada vez mayor.
+El área de estudio es Asunción, capital y ciudad más poblada de la República del Paraguay (según las proyecciones de \citet*{DireccionGeneraldeEstadistica2015Paraguay2000-2025} para el año 2019 se estima una población aproximada de 522.287 habitantes). Es un municipio autónomo administrado como Distrito capital, cuenta con una superficie de 117 km$^{2}$. El ingreso promedio de personas en ómnibus del transporte público y vehículos privados de los municipios aledaños es alrededor de 1.320.000 diariamente. Este análisis se hace en base a cálculos estimativos de la Unidad Coordinadora del Programa Metrobús del Ministerio de Obras Públicas y Comunicaciones (MOPC) \citep{DiarioABCColor2016PorColor}. La cantidad de personas que convergen diariamente en Asunción trae consigo una alta generación de residuos, y esto hace que la complejidad en la gestión sea cada vez mayor.
 
-La DSU de la MDA es la encargada de la regulación y prestación de servicios de aseo, de recolección, disposición y tratamiento de los residuos del municipio, así como también del equipamiento, mantenimiento, limpieza y ornato de la infraestructura pública del municipio, incluyendo las calles, avenidas, parques, plazas, balnearios y demás lugares públicos. Según Rodrigo Velázquez, director de la DSU, el promedio diario normal de basura recogida suele ser entre 800.000 y 900.000 kilos \citep{LaNacion2016AsuncionBasura} [Dato obtenido en 9 de Enero de 2016]. 
-% El Dato obtenido tiene la fecha de la publicacion en el diario, no la fecha de acceso
-%Se tiene la cantidad exacta de zonas ahora
-Actualmente el Departamento de Recolección de la DSU es responsable de la recolección de residuos sólidos urbanos, para ello divide la ciudad en zonas, según datos brindados por la DSU la ciudad está dividida en 134 zonas. El municipio cuenta con contenedores distribuidos por el microcentro capitalino, estos son recogidos de la misma manera que los residuos domiciliarios. Mínimamente debe existir una calle empedrada para que los vehículos recolectores recojan los residuos, es por esto que lugares como los ``Bañados Norte y Sur" no son beneficiados con el servicio.
+Para el desarrollo de esta investigación se trabaja estrechamente con la Dirección de Servicios Urbanos (DSU) de la Municipalidad de Asunción, entidad encargada de la regulación y prestación de servicios de aseo, recolección, disposición y tratamiento de los residuos del municipio, así como también del equipamiento, mantenimiento, limpieza y ornato de la infraestructura pública del municipio, incluyendo las calles, avenidas, parques, plazas, balnearios y demás lugares públicos.
+
+% Según Rodrigo Velázquez, director de la DSU, el promedio diario normal de basura recogida suele ser entre 800.000 y 900.000 kilos \citep{LaNacion2016AsuncionBasura} [Dato obtenido en 9 de Enero de 2016]. 
+
+En la actualidad, el Departamento de Recolección de la DSU es responsable de la recolección de residuos sólidos urbanos y divide la ciudad en 134 zonas para realizar la labor. Como mínimo, debe existir una calle empedrada para que los vehículos recolectores recojan los residuos, éste es el motivo por el que lugares marginales como los barrios denominados ``Bañados Norte y Sur'' no son beneficiados con el servicio.
+
+% El municipio cuenta con contenedores distribuidos por el microcentro capitalino, estos son recogidos de la misma manera que los residuos domiciliarios.
 
 \subsection{Procedimiento de recolección de residuos urbanos en la Municipalidad de Asunción}
 
-A continuación se detalla el procedimiento llevado a cabo habitualmente para la recolección de los residuos domiciliarios:
+% A continuación se detalla el procedimiento llevado a cabo habitualmente para la recolección de los residuos domiciliarios:
+A continuación se detalla el procedimiento que se lleva a cabo habitualmente para la recolección de los residuos domiciliarios:
 
-\begin{itemize}
-\item Se establecen los días y frecuencias de recolección para cada zona.
-\item Un equipo de trabajo cuenta con un chofer y tres recolectores, que es asignado a un vehículo y una zona. El vehículo es identificado por su chapa o por el número de identificación del camión proveído por la DSU. Estos vehículos recolectores son de propiedad de la MDA, en caso de que uno de ellos quede fuera de servicio por algún desperfecto, por lo general, la solución radica en alquilar un recolector para que lo cubra.
-\item Se realiza una recogida no selectiva. En la Ordenanza Municipal N$^{\circ}$ 408/14 se establece que los usuarios del servicio ordinario de recolección deberán almacenar sus residuos en el interior de las viviendas o locales correspondientes, en  sitios adecuados, en bolsas perfectamente cerradas, las cuales serán sacadas y colocadas en la acera, solamente en los días señalados, momento antes del horario fijado para el servicio. No se permitirá el acopio o acumulación de los residuos en la vía pública, ya sea directamente sobre las aceras o en canastos elevados en días y horas distintos a los establecidos para el servicio de recolección.
+\begin{enumerate}
+% \item Se establecen los días y frecuencias de recolección para cada zona.
+\item Un equipo de trabajo que cuenta con un chofer y tres recolectores es asignado a un vehículo y una zona. El vehículo es identificado por su chapa o por el número de identificación del camión proveído por la DSU.
+\item Se realiza una recogida no selectiva.
 \item El vehículo recolector inicia su recorrido cuando parte de la DSU en dirección a su zona. Antes de partir se controla el nivel de combustible y de acuerdo a esto se procede a la carga del mismo, en caso de que fuese necesario. Se entrega al chofer una orden de trabajo del día con la hora de salida. En la Figura \ref{fig:vehiculoRecolectorMDA}, se muestra un vehículo recolector de la MDA.
 
 \begin{figure}[H]
@@ -100,23 +104,48 @@ A continuación se detalla el procedimiento llevado a cabo habitualmente para la
     \label{fig:vehiculoRecolectorMDA}
 \end{figure}
 
-\item Luego de haber recogido toda la basura domiciliaria de la zona, el vehículo se dirige al relleno sanitario Cateura para depositar los residuos y de allí vuelve a su punto de partida. Generalmente, el vehículo tiene capacidad suficiente para realizar un solo viaje de su zona a Cateura, pero si no es el caso, debe realizar la cantidad de viajes necesarios hasta recolectar todos los residuos domiciliarios de la zona en cuestión. La carga máxima admitida de un vehículo recolector en circulación por el Departamento de Recolección de la DSU es de 8500 Kg, en caso de que el equipo de trabajo estime, en base a su experiencia, que la cantidad total a recoger de la zona será mayor al permitido, entonces realiza más de un viaje a Cateura.
-\item Una vez que el chofer llega a Cateura, el camión pasa por un pesaje por ejes con báscula y el chofer entrega la orden de trabajo a un fiscalizador que se encuentra en el puesto de pesaje. Un grupo de personas de seguridad se encargan de coordinar la entrada y salida de vehículos, así como de guiar la descarga de lo recolectado. En el lugar se encuentran varios gancheros que ayudan a sacar los residuos del vehículo, los gancheros son personas dedicadas a recuperar, separar o reducir, de los residuos sólidos urbanos, aquellos que posean valor comercial para su reutilización o reciclaje. Una vez que se vacía el vehículo, uno de los encargados guía nuevamente al chofer hacia la salida, en donde el vehículo es pesado de vuelta, calculando así el peso de lo recolectado, que se detalla en la orden de trabajo la cual es devuelta al chofer. En la orden de trabajo también se especifican la hora de entrada y salida del vehículo al relleno sanitario.
-\item Una vez que el equipo de trabajo se encuentra de vuelta en la DSU, el chofer entrega la orden de trabajo al Departamento de Recolección.
-\end{itemize}
+\item Luego de haber recogido toda la basura domiciliaria de la zona, el vehículo se dirige al relleno sanitario Cateura para depositar los residuos. 
+\item Una vez que el chofer llega a Cateura, el camión pasa por un pesaje por ejes con báscula y el chofer entrega la orden de trabajo a un fiscalizador que se encuentra en el puesto de pesaje. Un grupo de personas de seguridad se encargan de coordinar la entrada y salida de vehículos, así como de guiar la descarga de lo recolectado. 
+\item Una vez que se vacía el vehículo, uno de los encargados guía nuevamente al chofer hacia la salida, en donde el vehículo es pesado de vuelta, calculando así el peso de lo recolectado, que se detalla en la orden de trabajo la cual es devuelta al chofer. En la orden de trabajo también se especifican la hora de entrada y salida del vehículo al relleno sanitario.
+\item El equipo vuelve al punto de partida una vez vaciado el vehículo recolector y el chofer entrega la orden de trabajo al Departamento de Recolección.  
+\end{enumerate}
 
-%TODO: cambiar por el shape que nos dieron%
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=6cm]{Recoleccion-ZONAS&CUADRANTES.png}
-    \caption{División de la ciudad en zonas. Un turno en el mapa está correspondido por un conjunto de zonas coloreadas del mismo color. [Fuente: Departamento de Recolección de la DSU]}
-    \label{fig:zonasRecoleccion}
-\end{figure}
+Generalmente, el vehículo tiene capacidad suficiente para realizar un solo viaje de su zona a Cateura, pero si no es el caso, debe realizar la cantidad de viajes necesarios hasta recolectar todos los residuos domiciliarios de la zona en cuestión. La carga máxima admitida de un vehículo recolector en circulación por el Departamento de Recolección de la DSU es de 8.500 kilogramos (kg). En caso de que el equipo de trabajo estime, en base a su experiencia, que la cantidad total a recoger de la zona será mayor a la permitida, entonces realizará más de un viaje a Cateura.
+
+La segregación de los residuos no forma parte del proceso llevado a cabo por la DSU, es por ello que en Cateura se encuentran trabajando los gancheros, personas dedicadas a recuperar, separar o reducir, de los residuos sólidos urbanos, aquellos que posean valor comercial para su reutilización o reciclaje.
 
 El servicio de recolección domiciliaria se realiza de lunes a sábados, y se divide en tres turnos: mañana, tarde y noche; donde cada turno tiene una duración máxima de 6 horas debido al carácter insalubre de las tareas realizadas por el personal encargado de brindar el servicio.
 
-En la figura \ref{fig:zonasRecoleccion} un turno se corresponde con un conjunto de zonas, las zonas pintadas en azul oscuro, correspondientes al microcentro de Asunción, tienen un tratamiento diferente a las demás zonas, ya que son las únicas que son atendidas de lunes a viernes, las demás zonas reciben el servicio cada dos días, tres veces por semana. Los residuos en estas zonas son recolectados en el turno noche debido al poco tráfico registrado en esas calles en comparación a cualquier otro turno, de igual manera, las avenidas más importantes de la ciudad también son recolectadas en el turno noche de lunes a viernes, los equipos de trabajo que recogen los residuos a lo largo de estas avenidas les corresponden dos avenidas por noche. Las zonas no pintadas no tienen número, y por ende no son cubiertas por el servicio, sin embargo representan una zona candidata a futuro para la recolección de la basura.
+En la ``Fig.~\ref{fig:zonasRecoleccion}'' se muestran las zonas de recolección de basura de Asunción. Las zonas pintadas en celeste corresponden al microcentro de Asunción y tienen un tratamiento diferente a las demás, ya que son las únicas que son atendidas de lunes a viernes y sus residuos son recolectados en el turno noche debido al poco tráfico registrado en esas calles en comparación a cualquier otro turno. De igual manera, las avenidas más importantes de la ciudad también son recolectadas en el turno noche de lunes a viernes. Las demás zonas reciben el servicio cada dos días, tres veces por semana.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{Recoleccion-ZONAS_CUADRANTES.png}
+    \caption{División de la ciudad en zonas.}
+    \label{fig:zonasRecoleccion}
+\end{figure}
 
 Los residuos sólidos de grandes generadores son todos aquellos residuos sólidos urbanos comerciales cuyas cantidades requieran una recolección diferenciada, esta recolección no forma parte del procedimiento descrito más arriba y tampoco se incluye en el alcance de este trabajo. Los residuos hospitalarios son recolectados por una empresa tercerizada por el municipio y no son depositados en Cateura.
+
+% En la actualidad, los choferes de los vehículos recolectores de basura de la ciudad de Asunción trazan los caminos a seguir en base a su experiencia, razón por la cual es necesario optimizar el recorrido realizado para la recolección de residuos, reduciendo el costo y el tiempo de cada recorrido. Se propone desarrollar una aplicación que permita gestionar de manera eficiente esos recorridos al poder actualizar el sentido de las calles, inhabilitar calles, agregar restricciones de giro o de continuar el sentido (contramano).
+
+% \begin{itemize}
+% \item Se establecen los días y frecuencias de recolección para cada zona.
+% \item Un equipo de trabajo cuenta con un chofer y tres recolectores, que es asignado a un vehículo y una zona. El vehículo es identificado por su chapa o por el número de identificación del camión proveído por la DSU. Estos vehículos recolectores son de propiedad de la MDA, en caso de que uno de ellos quede fuera de servicio por algún desperfecto, por lo general, la solución radica en alquilar un recolector para que lo cubra. TODO: la ultima oracion es la que se quito del paper
+% \item Se realiza una recogida no selectiva. En la Ordenanza Municipal N$^{\circ}$ 408/14 se establece que los usuarios del servicio ordinario de recolección deberán almacenar sus residuos en el interior de las viviendas o locales correspondientes, en  sitios adecuados, en bolsas perfectamente cerradas, las cuales serán sacadas y colocadas en la acera, solamente en los días señalados, momento antes del horario fijado para el servicio. No se permitirá el acopio o acumulación de los residuos en la vía pública, ya sea directamente sobre las aceras o en canastos elevados en días y horas distintos a los establecidos para el servicio de recolección. TODO: la parte de la ordenanza es la que se omitio en el paper
+% \item El vehículo recolector inicia su recorrido cuando parte de la DSU en dirección a su zona. Antes de partir se controla el nivel de combustible y de acuerdo a esto se procede a la carga del mismo, en caso de que fuese necesario. Se entrega al chofer una orden de trabajo del día con la hora de salida. En la Figura \ref{fig:vehiculoRecolectorMDA}, se muestra un vehículo recolector de la MDA.
+% \item Luego de haber recogido toda la basura domiciliaria de la zona, el vehículo se dirige al relleno sanitario Cateura para depositar los residuos y de allí vuelve a su punto de partida. Generalmente, el vehículo tiene capacidad suficiente para realizar un solo viaje de su zona a Cateura, pero si no es el caso, debe realizar la cantidad de viajes necesarios hasta recolectar todos los residuos domiciliarios de la zona en cuestión. La carga máxima admitida de un vehículo recolector en circulación por el Departamento de Recolección de la DSU es de 8500 Kg, en caso de que el equipo de trabajo estime, en base a su experiencia, que la cantidad total a recoger de la zona será mayor al permitido, entonces realiza más de un viaje a Cateura.
+% \item Una vez que el chofer llega a Cateura, el camión pasa por un pesaje por ejes con báscula y el chofer entrega la orden de trabajo a un fiscalizador que se encuentra en el puesto de pesaje. Un grupo de personas de seguridad se encargan de coordinar la entrada y salida de vehículos, así como de guiar la descarga de lo recolectado. En el lugar se encuentran varios gancheros que ayudan a sacar los residuos del vehículo, los gancheros son personas dedicadas a recuperar, separar o reducir, de los residuos sólidos urbanos, aquellos que posean valor comercial para su reutilización o reciclaje. Una vez que se vacía el vehículo, uno de los encargados guía nuevamente al chofer hacia la salida, en donde el vehículo es pesado de vuelta, calculando así el peso de lo recolectado, que se detalla en la orden de trabajo la cual es devuelta al chofer. En la orden de trabajo también se especifican la hora de entrada y salida del vehículo al relleno sanitario.
+% \item Una vez que el equipo de trabajo se encuentra de vuelta en la DSU, el chofer entrega la orden de trabajo al Departamento de Recolección.
+% \end{itemize}
+
+%TODO: cambiar por el shape que nos dieron%
+
+
+% El servicio de recolección domiciliaria se realiza de lunes a sábados, y se divide en tres turnos: mañana, tarde y noche; donde cada turno tiene una duración máxima de 6 horas debido al carácter insalubre de las tareas realizadas por el personal encargado de brindar el servicio.
+
+% En la figura \ref{fig:zonasRecoleccion} un turno se corresponde con un conjunto de zonas, las zonas pintadas en azul oscuro, correspondientes al microcentro de Asunción, tienen un tratamiento diferente a las demás zonas, ya que son las únicas que son atendidas de lunes a viernes, las demás zonas reciben el servicio cada dos días, tres veces por semana. Los residuos en estas zonas son recolectados en el turno noche debido al poco tráfico registrado en esas calles en comparación a cualquier otro turno, de igual manera, las avenidas más importantes de la ciudad también son recolectadas en el turno noche de lunes a viernes, los equipos de trabajo que recogen los residuos a lo largo de estas avenidas les corresponden dos avenidas por noche. Las zonas no pintadas no tienen número, y por ende no son cubiertas por el servicio, sin embargo representan una zona candidata a futuro para la recolección de la basura.
+
+% Los residuos sólidos de grandes generadores son todos aquellos residuos sólidos urbanos comerciales cuyas cantidades requieran una recolección diferenciada, esta recolección no forma parte del procedimiento descrito más arriba y tampoco se incluye en el alcance de este trabajo. Los residuos hospitalarios son recolectados por una empresa tercerizada por el municipio y no son depositados en Cateura.
 
 % La recolección de los residuos de manejo especial y peligrosos no forman parte lo descrito más arriba y tampoco forman parte del alcance de este trabajo.

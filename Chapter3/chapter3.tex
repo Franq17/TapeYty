@@ -10,13 +10,13 @@
 
 Los sistemas de información geográfica (SIG, GIS en inglés; \textit{Geographical Information System}) han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
 
-El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y lo han sabido aprovechar. \citet{OsorioDominguez2018AnalisisParaguay} realizaron un análisis multitemporal de la pérdida del hábitat y distribución espacial del mono capuchino (sapajus cay) en la ecorregión selva central, Paraguay. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
+El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y lo han sabido aprovechar. \citet{OsorioDominguez2018AnalisisParaguay} realizaron un análisis multitemporal de la pérdida del hábitat y distribución espacial del mono capuchino (sapajus cay) en la ecorregión selva central, Paraguay. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para el abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
 
 Ya que el número de terminologías entorno a estos sistemas es muy grande, en este capítulo se explicarán los conceptos básicos que servirán de apoyo para una clara interpretación de los siguientes capítulos donde han sido aplicados.
 
 \section{Origen de los datos espaciales}
 
-Hoy en día, las informaciones que son recolectadas en censos, encuestas o sistemas informáticos (SW, \textit{Software}) en su mayoría requieren de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
+Hoy en día, las informaciones que son recolectadas en censos, encuestas o sistemas informáticos (SW, \textit{Software}) van acompañadas de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
 
 Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS; \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra. Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia(RFID, \textit{Radio Frequency Identification}), entre otros (Ver Figura \ref{fig:interioresTech}).
 
@@ -62,29 +62,40 @@ Los tipos de Datums se clasifican en:
     Datums que describen los sistemas verticales y horizontales. Algunos, como el \textit{World Geodetic System 1984} (WGS84), también describen otros parámetros, como la velocidad de rotación de la Tierra y diversas constantes físicas, como la velocidad angular y la constante gravitacional de la Tierra.
 \end{itemize}
 
-Por otro lado, los sistemas o métodos de referencia espacial se agrupan por lo general en tres categorías: Sistemas de coordenadas geográficas, Sistemas de coordenadas rectangulares (también denominados como: proyectados, planos o cartesianos) y Sistemas no coordinados; los cuáles los detallaremos a continuación.
+Por otro lado, los sistemas de referencia espacial se agrupan por lo general en tres categorías: Sistemas de coordenadas geográficas, Sistemas de coordenadas rectangulares (también denominados como: proyectados, planos o cartesianos) y Sistemas no coordinados; los cuáles los detallaremos a continuación.
 
 \subsection{Sistema de coordenadas geográficas}
-Los sistemas de coordenadas geográficas se componen de la latitud y la longitud. Las líneas de longitud (también conocidas como meridianos) comienzan en un polo y se propagan hacia afuera hasta que convergen en el polo opuesto. Las líneas de latitud (también conocidas como paralelos) se encuentran en ángulo recto a las líneas de longitud y corren paralelas entre sí, ver Figura \ref{fig:mapaCoordenadasGeograficas} 
+Los sistemas de coordenadas geográficas se componen de la latitud y la longitud. Las líneas de longitud (también conocidas como meridianos) comienzan en un polo y se propagan hacia afuera hasta que convergen en el polo opuesto. Las líneas de latitud (también conocidas como paralelos) se encuentran en ángulo recto a las líneas de longitud y corren paralelas entre sí (ver Figura \ref{fig:latitudLongitud}). 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{CoordenadasGeograficas.png}
     \caption{Representación de coordenadas geográficas [Fuente: ]}
-    \label{fig:mapaCoordenadasGeograficas}
+    \label{fig:latitudLongitud}
 \end{figure}
 
 La elección arbitraria de una línea central de longitud corresponde a la que atraviesa el Observatorio Real en Greenwich, Inglaterra; se conoce como el meridiano de Greenwich o el meridiano principal, y las longitudes
 al este u oeste se especifican como ángulos de giro con respecto al meridiano de Greenwich, variando de -180\grad (oeste) a 180\grad (este). La latitud es la distancia angular entre la línea ecuatorial (el ecuador), y un punto determinado de la Tierra, y las latitudes al sur y al norte varían en un rango de hasta 90\grad.
 
-Las coordenadas geográficas son expresadas, por lo general, en grados, minutos y segundos, pero para su uso en los SIG son transformadas en grados decimales. Algunas formas de representar, por ejemplo, las coordenadas ubicadas en un punto dentro de Asunción son:
+Las coordenadas geográficas son expresadas, por lo general, en grados, minutos y segundos, pero para su uso en los SIG son transformadas en grados decimales. Algunas ejemplos de las formas de representar las coordenadas ubicadas en un punto dentro de Asunción se muestran en el cuadro \ref{table:coordenadasGeograficas}.
 
-latitud: 25\grad 16' 55'' Sur ; 25.2819 Sur ; -25.2819
-
-longitud: 57\grad 38' 6'' Oeste ; 57.635 Oeste ; -57.635
+\begin{table}[H]
+\caption{Representación de coordenadas geográficas (WGS84)}
+\centering
+\begin{tabular}{cccc}
+\hline
+\multirow{2}{*}{Coordenadas} & \multirow{2}{*}{Grados, minutos y segundos} & \multicolumn{2}{c}{Grados decimales} \\ \cline{3-4} 
+                             &                                             & Sin signo          & Con signo       \\ \hline
+Latitud                      & 25\grad 16' 54.84'' Sur                            & 25.2819 Sur        & -25.2819        \\
+Longitud                     & 57\grad 38' 6'' Oeste                                & 57.635 Oeste       & -57.635         \\ \hline
+\end{tabular}
+\label{table:coordenadasGeograficas}
+\end{table}
 
 \subsection{Sistema de coordenadas rectangulares}
-Las proyecciones sirven para representar sobre un plano la superficie esférica de la Tierra con la menor deformación posible. El proceso de transferencia de la Tierra esférica a una superficie bidimensional, definidos normalmente mediante dos ejes perpendiculares \textit{XY} y en el caso de sistemas tridimensionales añadiendo un eje \textit{Z} perpendicular a ambos, introduce errores en los datos espaciales cuyo carácter variará dependiendo del método de proyección elegido. Algunas proyecciones harán que la distancia entre las entidades espaciales se mantenga mientras la dirección está distorsionada. En otros casos, la forma puede conservarse a expensas de estimaciones de área precisas.
+Las proyecciones sirven para representar sobre un plano la superficie esférica de la Tierra con la menor deformación posible. El proceso de transferencia de la Tierra esférica a una superficie bidimensional, definidos normalmente mediante dos ejes perpendiculares \textit{XY} y en el caso de sistemas tridimensionales añadiendo un eje \textit{Z} perpendicular a ambos, introduce errores en los datos espaciales cuyo carácter variará dependiendo del método de proyección elegido. 
+
+% Algunas proyecciones harán que la distancia entre las entidades espaciales se mantenga mientras la dirección está distorsionada. En otros casos, la forma puede conservarse a expensas de estimaciones de área precisas.
 
 Las proyecciones podemos agrupar en tres sistemas básicos según el tipo de plano auxiliar utilizado para proyectar la superficie terrestre: cilíndrica, acimutal y cónica (Ver Figura \ref{fig:capasGis}).
 
@@ -95,19 +106,25 @@ Las proyecciones podemos agrupar en tres sistemas básicos según el tipo de pla
     \label{fig:mapaCoordenadasGeograficas}
 \end{figure}
 
-El proceso consiste en proyectar de un sistema de coordenadas geodésicas o geográficos, por ejemplo WGS84, a algún otro sistema de coordenadas cartesiano, por ejemplo el sistema de cuadrícula plana de \textit{Universal Transverse Mercator} (UTM). Este sistema utiliza la proyección transversal de Mercator y divide la Tierra en 60 zonas verticales que tienen 6 grados de longitud, evitando los polos. El sistema se expresa en metros, facilitando cálculos de distancia y superficie.
+Las proyecciones más sofisticadas permiten la preservación de representaciones precisas de áreas, de distancias, de ángulos o de otras características, pero no todas ellas pueden conservarse en una misma proyección. De hecho, por lo general solo se puede mantener la  precisión de una sola característica y las demás se presentan distorsionadas con respecto a la realidad.
+
+En Paraguay, cartógrafos y otros trabajadores en el área han adoptado el sistema de cuadrícula plana de \textit{Universal Transverse Mercator} (UTM), la cual corresponde a la proyección de tipo cilíndrica. Este sistema utiliza la proyección transversal de Mercator y divide la Tierra en 60 zonas verticales que tienen 6 grados de longitud, evitando los polos. El sistema se expresa en metros, facilitando así los cálculos de distancia y superficie.
 
 En los SIG, los SRC están asociados a un identificador estándar único, denominados Identificador de Referencia Espacial (SRID, \textit{Spatial Reference System Identifier}), también conocidos como códigos EPSG (\textit{European Petroleum Survey Group}) ya que existen varios SRID que han sido definidos por el EPSG. Como ejemplos tenemos el código EPSG 4326 que corresponde a WGS84 en coordenadas geográficas y el EPSG 32721 que es para la zona 21 Sur en coordenadas UTM, y así es como cada SRC tiene asociado un código único EPSG/SRID.
 
-Las coordenadas planas de la zona 21 Sur UTM/WGS84 que ubica un punto dentro de Asunción tiene el siguiente formato:
+En el marco \ref{table:coordenadasPlanas} se muestran las coordenadas planas de la zona 21 Sur ó 21J - UTM/WGS84 que ubica un punto dentro de Asunción.
 
-21S 436068 7203687; indicando lo siguiente:
-
-\begin{itemize}
-    \item Zona: 21J ó 21 S (Sur)
-    \item Coordenada x: 436068 Este
-    \item Coordenada y: 7203687 Norte
-\end{itemize}
+\begin{table}[H]
+\caption{Representación de coordenadas planas (UTM)}
+\centering
+\begin{tabular}{cccc}
+\hline
+Coordenadas & UTM     & Zona & Hemisferio \\ \hline
+X           & 436068  & 21 J & Sur        \\
+Y           & 7203687 & 21 J & Sur        \\ \hline
+\end{tabular}
+\label{table:coordenadasPlanas}
+\end{table}
 
 \subsection{Sistema sin coordenadas}
 Los sistemas sin coordenadas proporcionan referencias espaciales utilizando un código descriptivo en lugar de una coordenada. Los códigos postales, ampliamente utilizados en todo el mundo, son un ejemplo. Algunos códigos postales son totalmente numéricos, como los códigos postales estadounidenses, mientras que otros son alfanuméricos, como en el caso del código postal del Reino Unido.
@@ -116,22 +133,22 @@ Ejemplo de código postal en el Reino Unido: E1 6PX.
 
 \section{Representación de los datos}
 
-Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y áreas, ver Figura \ref{fig:entidadesPuntoLineaPoligono}. Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas respectivamente.
+Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y áreas (Ver Figura \ref{fig:entidadesPuntoLineaPoligono}). Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas respectivamente.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{entidadesGeometricas.png}
-    \caption{Entidades espaciales: (a) Punto (b) Línea (c) áreas. [Fuente: ]}
+    \caption{Entidades espaciales: (a) Puntos (b) Líneas (c) Áreas. [Fuente: ]}
     \label{fig:entidadesPuntoLineaPoligono}
 \end{figure}
 
 Las características de un mapa a su vez pueden ser estructuradas mediante el uso de vectores y mediante el uso de matrices. Antes de detallar cada uno de estos sistemas, cabe mencionar que ambos se diferencian fundamentalmente en la estructura de los datos espaciales, en las relaciones topológicas, en el volumen físico de la información y en los métodos de análisis.
 
-El concepto de Topología geoespacial es muy importante en los SIG y se lo define como ''el estudio de las relaciones espaciales entre las entidades espaciales y su posición en el mapa". Las relaciones topológicas, en relación a los datos, constan de tres elementos claves: adyacencia, contención y conectividad. En los sistemas matriciales las relaciones se producen entre celdas como análisis, generalmente, de vecindad; en los sistemas vectoriales se suelen basar en la relación arco-nodo que viene definida por la direccionalidad, la conectividad y la proximidad entre vectores.
+El concepto de Topología geoespacial es muy importante en los SIG y se lo define como ''el estudio de las relaciones espaciales entre las entidades espaciales y su posición en el mapa". Las relaciones topológicas, en relación a los datos, constan de tres elementos claves: adyacencia, contención y conectividad. En los sistemas matriciales las relaciones se producen entre celdas como análisis de vecindad generalmente; en los sistemas vectoriales se suelen basar en la relación arco-nodo que viene definida por la direccionalidad, la conectividad y la proximidad entre vectores.
 
 \subsection{Sistema vectorial}
 
-En un sistema vectorial el territorio se representa a partir de vectores, ubicados en el espacio mediante pares de coordenadas coincidentes con su origen y destino, donde cada par representa un punto. En el mundo vectorial, el punto es el bloque de construcción básico a partir del cual se construyen todas las entidades espaciales. Las entidades de línea y área se construyen conectando una serie de puntos (ver Figura \ref{fig:modeloVectorial}).
+En un sistema vectorial el territorio se representa a partir de vectores, ubicados en el espacio mediante pares de coordenadas coincidentes con su origen y destino, donde cada par representa un punto. En el mundo vectorial, el punto es el bloque de construcción básico a partir del cual se construyen todas las entidades espaciales. Las entidades de línea y área se construyen conectando una serie de puntos (Ver Figura \ref{fig:modeloVectorial}).
 
 \begin{figure}[H]
     \centering
@@ -142,13 +159,13 @@ En un sistema vectorial el territorio se representa a partir de vectores, ubicad
 
 Utilizando entidades de puntos se pueden representar cestos de basura residenciales, semáforos, árboles, alumbrados públicos. También a menor escala, es decir, en mapas más alejados y con menos detalle, puede utilizarse para indicar la ubicación de ciudades capitales. Las líneas se utilizan, mayormente, para representar calles, caminos, tendidos eléctricos, etc. Las áreas o polígonos corresponden a cuadras manzaneras, lotes, lagunas, países.
 
-En el modelo vectorial, la representación de redes y superficies es una extensión del enfoque utilizado para almacenar entidades de línea y área. Sin embargo, el método es más complejo y está estrechamente relacionado con la forma en que se estructuran los datos para la codificación por computadora.
+En el modelo vectorial, la representación de redes y superficies es una extensión del enfoque utilizado para almacenar entidades de línea y área respectivamente. Sin embargo, el método es más complejo y está estrechamente relacionado con la forma en que se estructuran los datos para la codificación por computadora.
 
 Las líneas de contorno y las redes irregulares de triángulos (TIN; \textit{Triangulated Irregular Network}) se utilizan para representar la altitud u otros valores en continua evolución. Los TIN son registros de valores en un punto localizado, que están conectados por líneas para formar una malla irregular de triángulos. La cara de los triángulos representan, por ejemplo, la superficie del terreno.
 
 \subsection{Sistema ráster}
 
-En un sistema ráster, se ubica una cuadrícula imaginaria sobre el mapa. Cada celda de la cuadrícula, conocida como elemento de imagen o píxel, se examina para ver qué característica cae dentro de ella. El resultado final de este proceso es una cuadrícula o una serie de cuadrículas de números que representan las características en el mapa. (ver Figura \ref{fig:modeloRaster}).
+En un sistema ráster, se ubica una cuadrícula imaginaria sobre el mapa. Cada celda de la cuadrícula, conocida como elemento de imagen o píxel, se examina para ver qué característica cae dentro de ella. El resultado final de este proceso es una cuadrícula o una serie de cuadrículas de números que representan las características en el mapa. (Ver Figura \ref{fig:modeloRaster}).
 
 \begin{figure}[H]
     \centering
@@ -182,7 +199,7 @@ Las capas también pueden ser almacenadas en base de datos relacionales y no rel
 
 Las bases de datos espaciales se utilizan para almacenar datos espaciales. Por lo general, estas bases de datos simplemente agregan capacidades extras para manejar dicha información. Estas capacidades incluyen, por lo general, estructuración de datos espaciales, índices y funciones para la manipulación y análisis de la información.
 
-El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos SW. Se requiere que los SW tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. Existen diferentes bases de datos No-SQL según su orientación: orientados a documentos, a grafos, a columnas, entre otros.
+El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos SW. Se requiere que los SW tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. Existen diferentes bases de datos No-SQL según su orientación: orientadas a documentos, a grafos, a columnas, entre otros.
 
 Las bases de datos (BD) espaciales relacionales, sin embargo, siguen y seguirán siendo muy utilizadas, por las ventajas que ofrecen sobre las demás en ciertos aspectos. A continuación, se mencionan características que difieren en ambas, pero que pueden variar con el paso del tiempo:
 
