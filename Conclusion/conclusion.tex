@@ -21,8 +21,6 @@
 
 % La Dirección de Servicios Urbanos podrá contar con una aplicación que garantice que todos los ciudadanos que residen e ingresan diariamente a la ciudad reciban el servicio de recolección de basura. Se evidencia que aunque se mantenga el procedimiento de recolección, la distancia del recorrido es mejorada y se observa que mediante el uso de la aplicación es posible reducir el número de veces que se pasa por los mismos segmentos de calles, además se garantiza que todos los segmentos serán cubiertos por la recolección.
 
-
-
 En este trabajo se analizaron varias propuestas de solución del estado del arte con respecto a la recolección de residuos sólidos domiciliarios, la metodología de trabajo en la DSU se ajusta al problema del cartero rural abierto, por lo que se utiliza la solución propuesta por \citet{Braier2017AnArgentina}, cuya salida representa los datos de entrada a la solución de secuenciación que finalmente se despliega en la aplicación GIS.
 
 Se encontró que entre los factores que más influyen en la selección del camino a seguir son las reglas de circulación de la red de rutas, que sufren constantes cambios con el fin de disminuir la congestión del tráfico actual, como por ejemplo: cambio de sentido, prohibición de giro a la izquierda, giro en U, contramano. Así como también si una calle es clausurada por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
@@ -33,14 +31,14 @@ Por otra parte, se presenta una comparación entre las rutas resultantes de la a
 
 Cabe resaltar que la DSU podrá contar con una aplicación que garantice que todos los ciudadanos que residen e ingresan diariamente a la ciudad reciban el servicio de recolección de basura. Se evidencia que aunque se mantenga el procedimiento de recolección, la distancia del recorrido es mejorada y se observa que mediante el uso de la aplicación es posible reducir el número de veces que se pasa por los mismos segmentos de calles, además se garantiza que todos los segmentos serán cubiertos por la recolección.
 
-
 \section {Trabajos Futuros}
 
 \begin{itemize}
+    \item Considerar el relieve del camino como un factor en la generación de ruta \cite{Sulemana2018OptimalMethods}, y compararla con el modelo implementado en este trabajo, teniendo en cuenta que el centro de la ciudad de Asunción y alrededores está levantada sobre 7 (siete) colinas.
     \item Crear una mesa de trabajo con la DSU para obtener los datos relacionados a los kilogramos de residuos domiciliarios recolectados diariamente y estudiar la conveniencia de reorganizar las zonas y turnos de trabajo.
     \item Aprovechar la escalabilidad de la arquitectura implementada para agregar la optimización de las rutas para recolección de los residuos de grandes generadores, los llamados residuos de manejo especial, generados en los procesos productivos e instalaciones industriales y comerciales.
     \item Sincronizar la base de datos con los datos de OSM cuando fuese necesario.
-    \item Agregar fecha de inicio y fecha fin a las restricciones agregadas a la red de ruta, así también a las calles que son inhabilitadas.
+    \item Programar restricciones en base a un rango de fechas, por ejemplo si una calle será clausurada una semana configurar en el sistema las fechas de clausura y re-apertura.
 \end{itemize}
 
 

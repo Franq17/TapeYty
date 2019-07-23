@@ -107,6 +107,10 @@
 \renewcommand{\algorithmicensure}{\textbf{Salida:}}
 \renewcommand{\algorithmicreturn}{\textbf{Retornar:}}
 
+\usepackage{listings}% http://ctan.org/pkg/listings
+\renewcommand{\lstlistingname}{Algoritmo}% Listing -> Algorithm
+\renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}%
+
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage[scriptsize]{subfigure}
@@ -149,7 +153,7 @@
 
 %MEJORA DE CONTRASTE BASADA EN SMPSO-CLAHE MULTIOBJETIVA ROBUSTA
 \authors     {Andrea Elizabeth Benítez García \\ Francisco Javier Quiñónez Rolandi}
-\university  {Universidad Nacional De Asunción\\ Facultad Politécnica\\ Ingeniería en Informática}
+\university  {Universidad Nacional de Asunción\\ Facultad Politécnica\\ Ingeniería en Informática}
                
 \addresses   {Proyecto de grado presentado en conformidad a los requisitos para obtener el grado de Ingeniero/a en Informática.}
 \fecha {San Lorenzo - Paraguay \\ \today}

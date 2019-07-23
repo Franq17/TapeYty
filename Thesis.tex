@@ -34,6 +34,9 @@
 \usepackage{color}
 \usepackage{multirow}
 \usepackage{enumitem}
+\usepackage{listings}
+\usepackage{rotating}
+\usepackage{pdflscape}
 \definecolor{mylightblue}{RGB}{059,131,189}
 \definecolor{mygreen}{RGB}{040,114,051}
 \definecolor{myblue}{RGB}{062,095,138}
@@ -155,6 +158,16 @@
 \renewcommand\chaptername{Capítulo}%título "Capítulo"
 \input{Chapter1/chapter1} % Introduction
 
+\textbf{
+    {\huge
+        \begin{center}
+        \part[Marco Teórico]{
+            Marco Teórico \\ 
+            \huge{}}
+        \end{center}
+    }
+}
+
 \clearpage
 \lhead{\emph{Gestión de residuos sólidos}} 
 \renewcommand\chaptername{Capítulo}%título "Capítulo"
@@ -166,19 +179,34 @@
 \input{Chapter3/chapter3} % Optimización PSO
 
 \clearpage
-\lhead{\emph{Optimización}} 
+\lhead{\emph{Problemas de rutas}} 
 \renewcommand\chaptername{Capítulo}%título "Capítulo"
-\input{Chapter4/chapter4} % Métricas de evaluación
+\input{Chapter4/chapter4}
+
+\textbf{
+    {\huge
+        \begin{center}
+        \part[Trabajo propuesto]{
+            Trabajo propuesto \\ 
+            \huge{}}
+        \end{center}
+    }
+}
 
 \clearpage
-\lhead{\emph{Propuesta}} 
+\lhead{\emph{Modelado del problema}} 
 \renewcommand\chaptername{Capítulo}%título "Capítulo"
-\input{Chapter5/chapter5} % Propuesta
+\input{Chapter5/chapter5} % Planteamiento del problema
+
+\clearpage
+\lhead{\emph{Aplicación TapeYty}} 
+\renewcommand\chaptername{Capítulo}%título "Capítulo"
+\input{Chapter6/chapter6} % Solución propuesta
 
 \clearpage
 \lhead{\emph{Resultados y Discusión}} 
 \renewcommand\chaptername{Capítulo}%título "Capítulo"
-\input{Chapter6/chapter6} % Resultados y Discusión
+\input{Chapter7/chapter7} % Resultados y Discusión
 
 \clearpage
 \lhead{\emph{Conclusión}} 

@@ -2,54 +2,89 @@
 \chapter*{Lista de Símbolos\hfill}
 
 \begin{abbreviations}
-    % cap2
-    \item[$(i,j)$] Coordenadas espaciales de una imagen.
-    \item[$F(i,j)$] Imagen definida como función de dos dimensiones.
-    \item[$f(i,j)$] Imagen digital.
-    \item[$f'(i,j)$] Imagen modificada al aplicar una técnica de mejora de contraste.
-    \item[$M$ x $N$] Dimensiones de una matriz (M números de filas, N números de columnas.
-    \item[$(c,l)$] Índices de M y N.
-    \item[$p$] Píxel de una imagen.
-    \item[$\mathcal{H}$] Histograma de una imagen.
-    \item[$L$] Cantidad total de niveles de gris disponibles en una imagen.
-    \item[$L-1$] Nivel máximo de gris en una imagen.
-    \item[$k$] Nivel de gris o k-ésimo nivel de gris.
-    \item[$k'$] Nuevo nivel de gris mapeado por la ecualización del histograma.
-    \item[$n_k$] Número de ocurrencia de la intensidad k en la imagen.
-    \item[$Z$] Cantidad total de píxeles de una imagen.
-    \item[$\mathcal{R}$] Region contextual de una imagen.
-    \item[$(\mathcal{R}_i,\mathcal{R}_j)$] Tamaño de una Region contextual de una imagen.
-    \item[$\mathscr{C}$] Clip Limit usado por el Algoritmo $CLAHE$.
+
+    % cap4
+    \item[$x$] Vector de variables.
+    \item[$f$] Función objetivo de un problema de optimización.
+    \item[$c_{i}$] Vector de restricciones.
+    \item[$I$] Conjunto de índices.
+    \item[$E$] Conjunto de índices.
+    \item[$i$] Índices de E e I.
+    \item[$\mathbb{R}$] Conjunto de números reales.
+    \item[$A$] Matriz.
+    \item[$m$ x $n$] Dimensiones de la matriz A (m números de filas, n números de columnas.
     
-    % cap3
-    \item[$P^*$] Conjunto Pareto Óptimo.
-    \item[$FP^*$] Frontera Pareto.
-    \item[$\Omega$] Región de soluciones factibles para el conjunto Pareto Óptimo.
-    \item[$\rho$] Una partícula del enjambre.
-    \item[$\chi _i$] Vector que almacena la posición actual de cada partícula.
-    \item[$\rho{Best_i}$] Vector que almacena la posición de la mejor solución encontrada por la partícula $i$ hasta el momento.
-    \item[$v_i$] Vector que almacena la velocidad actual de cada partícula.
-    \item[$t$] Número de iteraciones del algoritmo $PSO$.
-    \item[$v^{t}_i$] Velocidad de la partícula $i$ en la iteración $t$.
-    \item[$\omega$] Coeficiente de inercia del $PSO$.
-    \item[$\varphi_1$] Máximo valor que puede alcanzar el coeficiente cognitivo del $PSO$.
-    \item[$\varphi_2$] Máximo valor que puede alcanzar el coeficiente social del $PSO$.
-    \item[$\chi^{t}_i$] Posición actual de la partícula $i$ en la iteración $t$.
-    \item[$g_i$] Posición de la partícula con el mejor $fitness_{\rho{Best_i}}$ del entorno de $\rho_i$ o de todo el enjambre.
-    \item[$\kappa$] Coeficiente de restricción aplicado a $v^{t}_i$.
+    % cap5
+    \item[$H$] Grafo mixto.
+    \item[$G$] Grafo dirigido.
+    \item[$V$] Conjunto de vértices del grafo G.
+    \item[$A$] Conjunto de arcos de la grafo G.
+    \item[$E$] Subconjunto de A. Representan segmentos de calles de dos vías que pueden ser recorridos en cualquier sentido .
+    \item[$(i,j)$] Representa un arco de A (segmentos de calle).
+    \item[$AM$] Subconjunto de A. Segmentos de calles que deben recorrerse únicamente en el sentido especificado.
+    \item[$w$] Función de peso que asocia un peso a cada arco de A.
+    \item[$I$] Subconjunto de V. Posibles puntos iniciales de una ruta.
+    \item[$S$] Subconjunto de V.
+    \item[$V \backslash S$] Subconjunto de V que no pertenecen a S.
+    \item[$\delta^+ (S)$] Subconjunto de A que van desde vértices en S a vértices en $V \backslash S$.
+    \item[$x_{i j}$] Número de veces que un arco de A es atravesado en una ruta.
+    \item[$s_i$] Especifica si un vértice en I es el primer nodo en una ruta.
+    \item[$t_j$] Especifica si un vértice en V es el último nodo en una ruta.
+    \item[$M$] Modelo relajado utilizado en la solución propuesta.
+    \item[$MG$] Multigrafo dirigido.
+    \item[$O$] Notación O grande.
+    \item[$N$] número de vértices en MG
+    \item[$M$] número arcos en MG
     
     
-    %cap4
-    \item[$\mathcal{P}_k$] Probabilidad de ocurrencias del nivel de gris $k$ en el histograma utilizado para el cálculo de $\mathscr{H}$.
-    \item[$\nu_{ij}$]   Representa una vecindad de una imagen.
-    \item[$\mathscr{H}$] Entropía.
-    \item[$\mathscr E$] Entropía Local.
+    % % cap2
+    % \item[$(i,j)$] Coordenadas espaciales de una imagen.
+    % \item[$F(i,j)$] Imagen definida como función de dos dimensiones.
+    % \item[$f(i,j)$] Imagen digital.
+    % \item[$f'(i,j)$] Imagen modificada al aplicar una técnica de mejora de contraste.
+    % \item[$M$ x $N$] Dimensiones de una matriz (M números de filas, N números de columnas.
+    % \item[$(c,l)$] Índices de M y N.
+    % \item[$p$] Píxel de una imagen.
+    % \item[$\mathcal{H}$] Histograma de una imagen.
+    % \item[$L$] Cantidad total de niveles de gris disponibles en una imagen.
+    % \item[$L-1$] Nivel máximo de gris en una imagen.
+    % \item[$k$] Nivel de gris o k-ésimo nivel de gris.
+    % \item[$k'$] Nuevo nivel de gris mapeado por la ecualización del histograma.
+    % \item[$n_k$] Número de ocurrencia de la intensidad k en la imagen.
+    % \item[$Z$] Cantidad total de píxeles de una imagen.
+    % \item[$\mathcal{R}$] Region contextual de una imagen.
+    % \item[$(\mathcal{R}_i,\mathcal{R}_j)$] Tamaño de una Region contextual de una imagen.
+    % \item[$\mathscr{C}$] Clip Limit usado por el Algoritmo $CLAHE$.
     
-     % cap5
-     \item[$\gamma$] Coeficiente de correlación.
-     \item[$I_f$ y $S_f$] Funciones objetivos de la propuesta.
+    % % cap3
+    % \item[$P^*$] Conjunto Pareto Óptimo.
+    % \item[$FP^*$] Frontera Pareto.
+    % \item[$\Omega$] Región de soluciones factibles para el conjunto Pareto Óptimo.
+    % \item[$\rho$] Una partícula del enjambre.
+    % \item[$\chi _i$] Vector que almacena la posición actual de cada partícula.
+    % \item[$\rho{Best_i}$] Vector que almacena la posición de la mejor solución encontrada por la partícula $i$ hasta el momento.
+    % \item[$v_i$] Vector que almacena la velocidad actual de cada partícula.
+    % \item[$t$] Número de iteraciones del algoritmo $PSO$.
+    % \item[$v^{t}_i$] Velocidad de la partícula $i$ en la iteración $t$.
+    % \item[$\omega$] Coeficiente de inercia del $PSO$.
+    % \item[$\varphi_1$] Máximo valor que puede alcanzar el coeficiente cognitivo del $PSO$.
+    % \item[$\varphi_2$] Máximo valor que puede alcanzar el coeficiente social del $PSO$.
+    % \item[$\chi^{t}_i$] Posición actual de la partícula $i$ en la iteración $t$.
+    % \item[$g_i$] Posición de la partícula con el mejor $fitness_{\rho{Best_i}}$ del entorno de $\rho_i$ o de todo el enjambre.
+    % \item[$\kappa$] Coeficiente de restricción aplicado a $v^{t}_i$.
+    
+    
+    % %cap4
+    % \item[$\mathcal{P}_k$] Probabilidad de ocurrencias del nivel de gris $k$ en el histograma utilizado para el cálculo de $\mathscr{H}$.
+    % \item[$\nu_{ij}$]   Representa una vecindad de una imagen.
+    % \item[$\mathscr{H}$] Entropía.
+    % \item[$\mathscr E$] Entropía Local.
+    
+    %  % cap5
+    %  \item[$\gamma$] Coeficiente de correlación.
+    %  \item[$I_f$ y $S_f$] Funciones objetivos de la propuesta.
      
-    \item[$\overrightarrow{x}$] Vector que almacena los valores de [$\mathcal{R}_i$, $\mathcal{R}_j$, $\mathscr{C}$].
+    % \item[$\overrightarrow{x}$] Vector que almacena los valores de [$\mathcal{R}_i$, $\mathcal{R}_j$, $\mathscr{C}$].
     % \item[$\Re$] Frente Pareto Robusto.
     % \item [$\mathscr X$] Conjunto de soluciones no dominadas.
     % \item[$\Gamma$] Frente Pareto.
