@@ -6,7 +6,7 @@
   \graphicspath{{Chapter6/Chapter6Figs/EPS/}{Chapter6/Chapter6Figs/}}
 \fi
 
-\markboth{\hfill \thechapter. Aplicación TapeYty}{\hfill \thechapter. Aplicación \textit{Yty}}
+\markboth{\hfill \thechapter. Aplicación \textit{TapeYty}}{\hfill \thechapter. Aplicación \textit{TapeYty}}
 
 En la actualidad, la DSU no cuenta con un \textit{software} que apoye a la toma de decisiones en lo que respecta a la gestión de residuos sólidos urbanos, más específicamente en el área de recolección. Por lo tanto, se propone la implementación de una herramienta GIS que contribuya con la elección de mejores caminos a seguir por los vehículos recolectores, y de esta manera generar mayores beneficios en cuanto a tiempo y distancia, además de garantizar que el servicio sea brindado a todos los domicilios.
 %además de contribuir con el cuidado del medio ambiente.
@@ -40,9 +40,9 @@ Una de las librerías incorporadas al proyecto cliente (\textit{frontend}) más 
 
 El lado servidor presenta mayor complejidad ya que concentra varios componentes que además deben interactuar unos con otros.
 
-Como parte de la solución, se utiliza el gestor de base de datos relacional PostgreSQL (versión 10.8) con su extensión PostGIS (version 2.4), donde están almacenadas las distintas informaciones obtenidas, geográficas o no, excepto los datos (\textit{shapes}) que provienen de la Dirección Nacional de Catastro de Paraguay.
+Como parte de la solución, se utiliza el gestor de base de datos relacional PostgreSQL (versión 10.8) con su extensión PostGIS (version 2.4), donde están almacenadas las distintas informaciones obtenidas, geográficas o no, excepto los datos (\textit{shapes}) que provienen del SNC de Paraguay.
 
-Los mapas bases de Departamentos y Distritos del Catastro Nacional son almacenados en el servidor de mapas Geoserver que se muestra en la Figura \ref{fig:disenhoArquitectura}. También se crea una conexión con la base de datos para poner a disposición las capas o mapas de calles y zonas, en modo lectura, donde el servidor ofrece servicios web de mapas \textit{TMS}, servicio que maneja estrategias de caché de cuadros de imágenes para mostrar los mapas con mayor velocidad dando un mejor rendimiento a la aplicación.
+Los mapas bases de Departamentos y Distritos del SNC son almacenados en el servidor de mapas Geoserver que se muestra en la Figura \ref{fig:disenhoArquitectura}. También se crea una conexión con la base de datos para poner a disposición las capas o mapas de calles y zonas, en modo lectura, donde el servidor ofrece servicios web de mapas TMS (\textit{Tile Map Service}), servicio que maneja estrategias de caché de cuadros de imágenes para mostrar los mapas con mayor velocidad dando un mejor rendimiento a la aplicación.
 
 % El servidor de mapas GeoServer consiste en un servidor de código abierto escrito en Java que permite a los usuarios compartir y editar datos espaciales. En este servidor se almacenan los mapas bases de Departamentos y Distritos del Catastro Nacional. Además, se crea una conexión con la base de datos para poner a disposición las capas o mapas de calles y zonas, en modo lectura, donde el servidor ofrece servicios web de mapas como por ejemplo \textit{TMS} (\textit{Tile Map Service}), servicio que maneja estrategias de caché de cuadros de imágenes para mostrar los mapas con mayor velocidad dando un mejor rendimiento a la aplicación.
 
@@ -52,7 +52,7 @@ Para el desarrollo propio de una aplicación web una de las preocupaciones más 
 
 La librería Docplex de Python resulta en una sencilla integración con nuestro \textit{framework}, también permite formular el modelo de forma clara y directa en comparación con las interfaces de CPLEX, resultando muy similar a la formulación con el lenguaje OPL (Ver Algoritmo \ref{codigoDocplex}).
 
-
+\hfill
 \begin{lstlisting}[language=Python,caption={Fragmento de código en docplex.},label={codigoDocplex}]
 from docplex.mp.model import Model
 
@@ -88,7 +88,7 @@ Con esto la aplicación está prácticamente lista, queda preparar el ambiente d
 
 \section{Aplicación}
 
-En esta sección se detallarán las principales funcionalidades que constituyen la aplicación \textit{TapeYty}. En el ANEXO \ref{XX} se encuentra disponible el manual de usuario donde se detalla la totalidad de las funcionalidades del sistema.
+En esta sección se detallarán las principales funcionalidades que constituyen la aplicación \textit{TapeYty}. En el Apéndice \ref{sec:manual-usuario} se encuentra disponible el manual de usuario donde se detalla la totalidad de las funcionalidades del sistema.
 
 \subsection{Modelo de datos}
 
@@ -106,20 +106,20 @@ La Figura \ref{fig:DERTapeYty} muestra el modelado de datos a partir de un Diagr
 % \usepackage{multirow}
 % \usepackage{graphicx}
 \begin{table}[]
-\caption{Descripción del modelo de datos de TapeYty}
+\caption{Descripción del modelo de datos de \textit{TapeYty}.}
 \label{tab:descripcionDER}
 \resizebox{\textwidth}{!}{%
 \begin{tabular}{lll}
 \hline
 Uso                                                                                              & Nombre de tabla            & Descripción                                                                                                                                                        \\ \hline
-\begin{tabular}[c]{@{}l@{}}Autenticación y \\ auditoría\end{tabular}                             & auth\_user                 & \begin{tabular}[c]{@{}l@{}}creada por Django, es referenciada en todas las tablas que \\ pueden ser editadas por el usuario en la aplicación TapeYty.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Autenticación y \\ auditoría\end{tabular}                             & auth\_user                 & \begin{tabular}[c]{@{}l@{}}Creada por Django, es referenciada en todas las tablas que \\ pueden ser editadas por el usuario en la aplicación \textit{TapeYty}.\end{tabular} \\ \hline
 \multirow{3}{*}{Capas}                                                                           & gis\_nodo                  & \begin{tabular}[c]{@{}l@{}}Representan puntos en el mapa. Los datos iniciales son \\ cargados desde OSM.\end{tabular}                                              \\
                                                                                                  & gis\_segmento\_calle       & \begin{tabular}[c]{@{}l@{}}Representan segmentos de calle en el mapa. Los datos \\ iniciales son cargados desde OSM.\end{tabular}                                  \\
                                                                                                  & gis\_zona                  & \begin{tabular}[c]{@{}l@{}}Representan las zonas de trabajo del departamento de\\ recolección de la DSU.\end{tabular}                                              \\ \hline
 \multirow{3}{*}{\begin{tabular}[c]{@{}l@{}}Lógica de recolección\\ DSU\end{tabular}}             & zona\_calle\_opcional      & \begin{tabular}[c]{@{}l@{}}Representan las calles dentro o en el límite de una zona \\ que pueden no ser recorridos por el vehículo recolector.\end{tabular}       \\
                                                                                                  & zona\_punto\_incial        & \begin{tabular}[c]{@{}l@{}}Representan puntos en el límite de una zona en donde \\ se puede empezar el reccorrido.\end{tabular}                                    \\
                                                                                                  & restriccion                & Representan prohibiciones de giro y contramano.                                                                                                                    \\ \hline
-\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Representación del \\ grafo $G$\end{tabular}} & nodo\_expandido            & Representa el conjunto $V$ del modelado.                                                                                                                             \\
+\multirow{2}{*}{\begin{tabular}[c]{@{}l@{}}Representación del \\ grafo $G'$\end{tabular}} & nodo\_expandido            & Representa el conjunto $V$ del modelado.                                                                                                                             \\
                                                                                                  & arco\_expandido            & Representa el conjunto $A$ del modelado.                                                                                                                             \\ \hline
 \multirow{4}{*}{Recorrido}                                                                       & vehiculo                   & Representa un vehículo de la DSU.                                                                                                                                  \\
                                                                                                  & recorrido                  & El recorrido es asociado a un vehículo y turno de la DSU.                                                                                                          \\
@@ -135,7 +135,7 @@ Uso                                                                             
 
 El sistema permite modificar propiedades (no geométricas) de los segmentos de calles. En la Figura \ref{fig:edicionCalles} se selecciona un segmento de la calle General Bernardino Caballero indicado con un color amarillo y con sus puntos extremos pintados.
 
-En el panel derecho de la aplicación se muestra el sentido del segmento, el punto de color rosa claro representa en el mapa el origen del trayecto a seguir mientras que el punto lila indica su destino. Además, se observa que el segmento de calle se encuentra habilitado para su circulación. El usuario puede modificar el sentido del segmento invirtiendo el origen y destino, convertir el segmento a uno de doble sentido y deshabilitar el segmento de calle para su circulación. Los segmento de calles deshabilitados no forman parte de las rutas generadas.
+En el panel derecho de la aplicación se muestra el sentido del segmento, el punto de color rosa claro representa en el mapa el origen del trayecto a seguir mientras que el punto lila indica su destino. Además, se observa que el segmento de calle se encuentra habilitado para su circulación. El usuario puede modificar el sentido del segmento invirtiendo el origen y destino, convertir el segmento a uno de doble sentido y deshabilitar el segmento de calle para su circulación. Los segmentos de calles deshabilitados no forman parte de las rutas generadas.
  
 Es importante mencionar que un cambio en las propiedades de un segmento puede generar inconsistencias en la red de calles, y consecuentemente, produzca un resultado infactible en la generación de la ruta optimizada. Por ejemplo, si un segmento de calle sin salida habilitado se establece como de único sentido, no se podrá acceder o salir del mismo impidiéndose que se cumplan las restricciones de conservación de flujo del modelo.
 
@@ -148,7 +148,7 @@ Es importante mencionar que un cambio en las propiedades de un segmento puede ge
 \subsubsection{Agregar calles opcionales para el recorrido de una zona}
 
 % Para poder establecer si las calles que se encuentran en el límite de una zona pertenecen o no a la zona en cuestión en el sistema se definen las calles opcionales de una zona. 
-En la Figura \ref{fig:callesOpcionales} se observan que los segmentos de las Avenidas Kubitschek, Mariscal López y General Santos que limitan la zona seleccionada se encuentran resaltadas con color verde, indicándose como opcionales, es decir, en el modelo se establece que estos segmentos no requieren ser atravesados para su respectiva recolección.
+En la Figura \ref{fig:callesOpcionales} se observan que los segmentos de las Avenidas Kubitschek, Mariscal López y General Santos que limitan la zona seleccionada se encuentran resaltadas en color verde, indicándose como opcionales, es decir, en el modelo se establece que estos segmentos no requieren ser atravesados para su respectiva recolección.
 
 Una vez que el usuario selecciona la opción de agregar o eliminar los segmentos de calle opcionales de una zona, se despliegan los segmentos de calles que se encuentran cubiertos por la zona seleccionada utilizando la función \textit{coveredby} de Django que es equivalente a la función \textit{ST\_CoveredBy} en PostGIS.
 
@@ -160,7 +160,7 @@ Una vez que el usuario selecciona la opción de agregar o eliminar los segmentos
 
 \subsubsection{Agregar posibles puntos iniciales para el recorrido de una zona}
 
-El conductor del camión recolector en el inicio de su recorrido dentro de una zona deberá atravesar primeramente alguna de las calles que conforman el límite de dicha zona. Los nodos o puntos extremos de los segmentos que forman parte de estos límites, por ende, conforman los posibles puntos iniciales del recorrido y a su vez corresponden a los datos de entrada del modelo. 
+El conductor del camión recolector en el inicio de su recorrido dentro de una zona deberá atravesar primeramente una de las calles que conforman el límite de dicha zona. Los nodos o puntos extremos de los segmentos que forman parte de estos límites, por ende, conforman los posibles puntos iniciales del recorrido y a su vez corresponden a los datos de entrada del modelo. 
 
 En la mayoría de los casos, es probable que el camión ingrese por alguno de los puntos más cercanos de hacia donde viene dirigido el conductor y no precisamente del otro extremo de la zona. Esto deriva en la necesidad de seleccionar no todos, sino más bien unos pocos puntos del borde de la zona como posibles inicio de la ruta óptima.
 
@@ -174,21 +174,21 @@ En la Figura \ref{fig:puntosIniciales} se observa en el mapa en color verde los 
 
 \subsubsection{Agregar restricciones de red de ruta}
 
-Para poder manejar correctamente las restricciones de la red de calles, el sistema permite agregar agregar y eliminar restricciones que existan entre dos segmentos de calles que tengan un punto en común. 
+Para poder manejar correctamente las restricciones de la red de calles, el sistema permite agregar y eliminar restricciones que existan entre dos segmentos de calles que tengan un punto en común. 
 
-En la Figura \ref{fig:restriccion} en el panel a la derecha de la aplicación se listan todas las restricciones que se dibujan en el mapa, desde el listado se puede eliminar una restricción o se puede seleccionarla, al seleccionarle se resaltanda la prohibición de giro a la derecha desde la calle 25 de Mayo hacia la calle 33 Orientales.
+En la Figura \ref{fig:restriccion} en el panel a la derecha de la aplicación se listan todas las restricciones que se dibujan en el mapa, desde el listado se puede eliminar una restricción o se puede seleccionarla. Al seleccionarla se resalta la prohibición de giro a la derecha desde la calle 25 de Mayo hacia la calle 33 Orientales.
 
 En el mapa de la Figura \ref{fig:restriccion} se observa en color verde las restricciones que existen sobre los segmentos de calles que pertenecen a la zona seleccionada, y además sobre las que se encuentran hasta 220 metros alrededor de la zona en cuestión, ya que para generar la ruta de recolección se tienen en cuenta las calles dentro de una zona como las que se encuentran en una una banda perimetral de 220 metros representadas como segmentos opcionales.
 
 \begin{figure}[H]
 \centerline{\includegraphics[width=\textwidth]{restricciones.png}}
-\caption{Agregar o eliminar restricciones de giro y contramano \textit{TapeYty}.}
+\caption{Agregar o eliminar restricciones de giro y contramano en \textit{TapeYty}.}
 \label{fig:restriccion}
 \end{figure}
 
 \subsubsection{Desplegar y descargar la ruta optimizada}
 
-La figura \ref{fig:generacionRuta} muestra finalmente como se despliega en el mapa la ruta óptima generada por el sistema. Se indican de forma clara los puntos inicial (color verde) y final (color rojo) del recorrido. Los segmentos contienen etiquetas que representan la secuencia en que deben ser visitados cada uno de ellos. Un segmento contiene una etiqueta con valores entre comas en el caso en que se pase más de una vez por el mismo segmento. Algunos valores de secuencia pueden no ser visibles a cierta escala evitando así la superposición de etiquetas en segmentos contiguos. Para visualizarlos se debe realizar un acercamiento en el mapa desde la aplicación.
+La Figura \ref{fig:generacionRuta} muestra finalmente como se despliega en el mapa la ruta óptima generada por el sistema. Se indican de forma clara los puntos inicial (color verde) y final (color rojo) del recorrido. Los segmentos contienen etiquetas que representan la secuencia en que deben ser visitados cada uno de ellos. Un segmento contiene una etiqueta con valores entre comas en el caso en que se pase más de una vez por el mismo segmento. Algunos valores de secuencia pueden no ser visibles a cierta escala por el simple hecho de evitar la superposición de etiquetas en segmentos contiguos. Para visualizarlos se debe realizar un acercamiento en el mapa desde la aplicación.
 
 Es posible acceder al histórico de recorridos generados en una zona, buscarlos por alguna propiedad como nota o fecha para volver a desplegar uno de ellos en un momento dado. Se brinda además la opción de exportar el resultado y descargarlo como imagen en formato PNG y como archivo en formato GPX. El archivo GPX permite la navegación, por ejemplo, desde cualquier dispositivo GPS o a través de una aplicación del teléfono apropiada para ello como lo es ``Mi Ruta'' \citep{MiRuta}.
 

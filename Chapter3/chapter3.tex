@@ -8,7 +8,7 @@
 
 \markboth{\hfill \thechapter. Sistemas de Información Geográfica}{\hfill \thechapter. Sistemas de Información Geográfica}
 
-Los sistemas de información geográfica (SIG, GIS en inglés; \textit{Geographical Information System}) han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
+Los SIG o GIS han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
 
 El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y aprovechado. Por ejemplo, \citet{OsorioDominguez2018AnalisisParaguay} realizaron un análisis multitemporal de la pérdida del hábitat y distribución espacial del mono capuchino (sapajus cay) en la ecorregión selva central, Paraguay. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para el abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
 
@@ -16,7 +16,7 @@ Ya que el número de terminologías entorno a estos sistemas es muy grande, en e
 
 \section{Origen de los datos espaciales}
 
-Hoy en día, las informaciones que son recolectadas en censos, encuestas o sistemas informáticos (\textit{software}) van acompañadas de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
+Hoy en día, las informaciones que son recolectadas en censos, encuestas o sistemas informáticos van acompañadas de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
 
 Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS, \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra. Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia (RFID, \textit{Radio Frequency Identification}), entre otros (Ver Figura \ref{fig:interioresTech}).
 
@@ -110,12 +110,12 @@ Las proyecciones más sofisticadas permiten la preservación de representaciones
 
 En Paraguay, cartógrafos y otros trabajadores en el área han adoptado el sistema de cuadrícula plana de \textit{Universal Transverse Mercator} (UTM), la cual corresponde a la proyección de tipo cilíndrica. Este sistema utiliza la proyección transversal de Mercator y divide la Tierra en 60 zonas verticales que tienen 6 grados de longitud, evitando los polos. El sistema se expresa en metros, facilitando así los cálculos de distancia y superficie.
 
-En los SIG, los SRC están asociados a un identificador estándar único, denominados Identificador de Referencia Espacial (SRID, \textit{Spatial Reference System Identifier}), también conocidos como códigos EPSG (\textit{European Petroleum Survey Group}) ya que existen varios SRID que han sido definidos por el EPSG. Como ejemplos tenemos el código EPSG 4326 que corresponde a WGS84 en coordenadas geográficas y el EPSG 32721 que es para la zona 21 Sur en coordenadas UTM, y así es como cada SRC tiene asociado un código único EPSG/SRID.
+En los SIG, los SRC están asociados a un identificador estándar único, denominados Identificador de Referencia Espacial (SRID, \textit{Spatial Reference System Identifier}), también son conocidos como códigos EPSG (\textit{European Petroleum Survey Group}) ya que existen varios SRID que han sido definidos por el EPSG. Como ejemplos tenemos el código EPSG 4326 que corresponde a WGS84 en coordenadas geográficas y el EPSG 32721 que es para la zona 21 Sur en coordenadas UTM, y así es como cada SRC tiene asociado un código único EPSG/SRID.
 
 En la Tabla \ref{table:coordenadasPlanas} se muestran las coordenadas planas de la zona 21 Sur ó 21J de UTM/WGS84 que ubica un punto dentro de Asunción.
 
 \begin{table}[H]
-\caption{Representación de coordenadas planas (UTM)}
+\caption{Representación de coordenadas planas (UTM).}
 \centering
 \begin{tabular}{cccc}
 \hline
@@ -170,7 +170,7 @@ En un sistema ráster, se ubica una cuadrícula imaginaria sobre el mapa. Cada c
 \begin{figure}[H]
     \centering
     \includegraphics[width=7.5cm]{modeloRaster.png}
-    \caption{Representación de puntos, líneas y áreas en el sistema ráster. [Fuente:\citet{Heywood2006AnSystems}]}
+    \caption{Representación de puntos, líneas y áreas en el sistema ráster. [Fuente: \citet{Heywood2006AnSystems}]}
     \label{fig:modeloRaster}
 \end{figure}
 
@@ -312,7 +312,7 @@ Las bases de datos (BD) espaciales relacionales, sin embargo, siguen y seguirán
     \item Los SIG más utilizados para análisis espaciales complejos soportan conexiones con bases de datos relacionales, mientras que con No-SQL aún no son muy comunes dichos servicios.
 \end{itemize}
 
-Las bases de datos relacionales Postgres y Oracle agregan extensiones para soporte SIG que son PostGis y Oracle Spatial and Graph, respectivamente. En el caso de PostGis, al agregarse como extensión a una base de datos en Postgres, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID), y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
+Las bases de datos relacionales Postgres y Oracle agregan extensiones para soporte SIG que son PostGIS y Oracle Spatial and Graph, respectivamente. En el caso de PostGIS, al agregarse como extensión a una base de datos en Postgres, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID) y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
 
 Actualmente existen estándares que definen este conjunto de tipos de datos y funciones espaciales mínimas para una base de datos SIG. El Open Geospatial Consortium (OGC) es un consorcio internacional de la industria cuyo objetivo es tratar de estandarizar la forma en que los datos geométricos y espaciales son accedidos y distribuidos. OGC cuenta con numerosas especificaciones que definen el acceso a los datos geoespaciales, servicios web para consulta y manipulación de datos, formatos de datos geoespaciales y consulta de datos geoespaciales.
 
@@ -326,4 +326,4 @@ Otro proyecto de mapa del mundo con una larga trayectoria es Google Maps. Google
 
 Proyectos como éstos ofrecen un listado de funcionalidades gratuitas y pagas. Algunas funcionalidades de ejemplo suelen ser obtener información del tráfico, camino más corto entre un punto de inicio y otro de llegada, ubicación de lugares por nombre, ubicación de calles, entre otros.
 
-Del mismo modo, existen herramientas que permiten alojar nuestros propios mapas en un servidor y brindar servicios de mapa. Uno de ellos es GeoServer, el cual consiste en un servidor de código abierto escrito en Java que permite a los usuarios compartir y editar datos geoespaciales. Está diseñado para la interoperabilidad, publica datos de cualquier fuente de datos espaciales usando estándares abiertos. GeoServer es una implementación compatible con OGC de una serie de estándares abiertos, como el \textit{Web Feature Service} (WFS), el \textit{Web Map Service} (WMS), el \textit{Web Map Tile Service} (WTMS) y el \textit{Web Coverage Service} (WCS).
+Del mismo modo, existen herramientas que permiten alojar nuestros propios mapas en un servidor y brindar servicios de mapa. Uno de ellos es GeoServer, el cual consiste en un servidor de código abierto escrito en Java que permite a los usuarios compartir y editar datos geoespaciales. Está diseñado para la interoperabilidad, publica datos de cualquier fuente de datos espaciales usando estándares abiertos. GeoServer es una implementación compatible con OGC de una serie de estándares abiertos, como el \textit{Web Feature Service} (WFS), el \textit{Web Map Service} (WMS), el \textit{Web Map Tile Service} (WMTS) y el \textit{Web Coverage Service} (WCS).

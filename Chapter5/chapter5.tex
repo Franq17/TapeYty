@@ -51,7 +51,7 @@ Primeramente, se necesitó exportar los datos de Asunción desde OSM, debido a q
     \item Se utiliza la herramienta \textit{osm2pgsql} para importar los datos de OSM a la base de datos, en el sistema de referencia geográfico WGS84 (SRID 4326). 
     \item Se utilizan las funciones de PostGIS para convertir los valores de latitud y longitud al tipo de dato geométrico \textit{Point}. 
     \item Las calles de OSM están representadas por líneas, que a su vez contienen una serie de nodos (puntos). Se excluyen los puntos que no pertenecen a calles de la ciudad, además de puntos superpuestos.
-    \item Para un mejor manejo de la red de rutas se crea un proceso de segmentación de las calles, donde cada segmento de calle está formado por pares de nodos consecutivos, se define el sentido del segmento, longitud y si corresponde a un callejón sin salida.
+    \item Para un mejor manejo de la red de rutas se crea un proceso de segmentación de las calles, donde cada segmento de calle está formado por pares de nodos consecutivos, se define el sentido del segmento, longitud y si corresponde o no a un callejón sin salida.
     \item Por último, se realizan las transformaciones correspondientes para almacenar las restricciones de giro y contramano, desde los datos registrados en OSM.
 \end{enumerate}
 
@@ -64,7 +64,7 @@ Para almacenar la información de red de calles se definen las siguientes tablas
 
 Al importar los datos desde OSM se detectaron algunos datos incorrectos que generarían inconvenientes para la obtención del recorrido para la recolección de residuos. OSM identifica las calles sin salida por medio del atributo \textit{no\_exit}. Si su valor es \textit{true} representa una calle sin salida, sin embargo muchas calles sin salida lo tienen como \textit{false}. Otra inconsistencia encontrada es con el valor del atributo \textit{one\_way}, donde muchas calles sin salida tienen su valor en \textit{true} indicando que es de único sentido cuando realmente deben ser doble sentido.
 
-Los problemas de datos mencionados se solucionan con sentencias SQL. Para identificar las calles sin salida se realiza una consulta donde se obtengan la unión de: ``todos los segmentos que tengan un nodo inicial que no sea nodo final ni inicial de algún otro segmento'' y ``todos los segmentos que tengan un nodo final que no sea inicial o final de otro segmento''. Se obtiene como resultado la lista de todos los ID (identificadores) de los segmentos sin salida y se almacena en una tabla temporal. Se actualizan los campos de sin salida y sentido de todos aquellos segmentos cuyos ID se encuentran en la tabla temporal.
+Los problemas de datos mencionados se solucionan con sentencias SQL. Para identificar las calles sin salida se realiza una consulta donde se obtenga la unión de: ``todos los segmentos que tengan un nodo inicial que no sea nodo final ni inicial de algún otro segmento'' y ``todos los segmentos que tengan un nodo final que no sea inicial o final de otro segmento''. Se obtiene como resultado la lista de todos los ID (identificadores) de los segmentos sin salida y se almacena en una tabla temporal. Se actualizan los campos de sin salida y sentido de todos aquellos segmentos cuyos ID se encuentran en la tabla temporal.
 
 La delimitación de las zonas de recolección fue proveída por la DSU a través de un archivo \textit{shape} del tipo de dato geométrico \textit{Polygon}. Se realizan los siguientes procedimientos para la limpieza y corrección de los datos geográficos sobre dicha capa:
 
@@ -78,13 +78,13 @@ La delimitación de las zonas de recolección fue proveída por la DSU a través
 
 Para actualizar la superficie se utiliza la función geométrica de área de polígonos. Para actualizar la cantidad de lotes y distrito se utiliza la función de intersección. No se cuentan con datos de densidad poblacional de todas las zonas de recolección.
 
-Los mapas bases de Departamentos y Distritos son proveídos a la aplicación por el Sistema Nacional de Catastro a través de su portal de datos abiertos.
+Los mapas bases de Departamentos y Distritos son proveídos a la aplicación por el Servicio Nacional de Catastro (SNC) a través de su portal de datos abiertos.
 
 La DSU cuenta en algunos vehículos de su flota con un sistema de monitoreo mediante GPS: 
 
 \begin{itemize}
     \item Se accede a los datos a través de archivos en formato de plantilla.
-    \item Esta información será utilizada para el análisis y comparación de los resultados.
+    \item Esta información es utilizada para el análisis y comparación de los resultados.
 \end{itemize}
 
 \section{Modelo matemático}
@@ -110,7 +110,7 @@ Los siguientes supuestos son establecidos:
 
 Cada zona de recolección de la ciudad de Asunción es representada por un grafo mixto $H$ \citep{Braier2017AnArgentina}, cuyos nodos representan las esquinas de las calles en la zona, y los arcos son los segmentos de calles que corren entre dos intersecciones consecutivas. Las calles de un único sentido están representadas por arcos dirigidos y las calles finas de doble sentido por arcos no dirigidos, ya que ambos lados de la calle pueden ser servidos en un solo viaje. En el caso de calles anchas de doble sentido, como las avenidas, cada lado debe ser servido de forma separada, por lo que estas calles se representan con dos arcos dirigidos, una en cada sentido.
 
-Para incorporar las restricciones de regulación de tráfico se construye un grafo dirigido $G$ desde el grafo $H$. El grafo $H$ es expandido dividiendo cada nodo en varios nuevos nodos representando todas las formas en las que se puede llegar y salir de la esquina en cuestión. En la Figura \ref{fig:grafo_expandido}(a) se puede observar un nodo en el grafo original $H$ antes de su expansión y en la Figura \ref{fig:grafo_expandido}(b) el nodo que ha sido expandido en seis nuevos nodos, representando cada posible entrada y salida del nodo. Los arcos auxiliares dirigidos son agregados y conectan los nuevos nodos, representando así las transiciones permitidas de una esquina a otra.
+Para incorporar las restricciones de regulación de tráfico se construye un grafo dirigido $G'$ desde el grafo $H$. El grafo $H$ es expandido dividiendo cada nodo en varios nuevos nodos representando todas las formas en las que se puede llegar y salir de la esquina en cuestión. En la Figura \ref{fig:grafo_expandido}(a) se puede observar un nodo en el grafo original $H$ antes de su expansión y en la Figura \ref{fig:grafo_expandido}(b) el nodo que ha sido expandido en seis nuevos nodos, representando cada posible entrada y salida del nodo. Los arcos auxiliares dirigidos son agregados y conectan los nuevos nodos, representando así las transiciones permitidas de una esquina a otra.
 
 El modelo de programación entera propuesto por \citet{Braier2017AnArgentina} está definido de la siguiente manera:
 
@@ -118,7 +118,7 @@ El modelo de programación entera propuesto por \citet{Braier2017AnArgentina} es
 \label{sec:conjunto-parametros}
 
 \begin{itemize}
-\item $G(V, A)$: Grafo dirigido en el que los nodos V corresponden a todas las alternativas posibles para llegar a las esquinas de las intersecciones y A está compuesto por arcos que se pueden atravesar en una sola dirección específica.
+\item $G'(V, A)$: Grafo dirigido en el que los nodos V corresponden a todas las alternativas posibles para llegar a las esquinas de las intersecciones y A está compuesto por arcos que se pueden atravesar en una sola dirección específica.
 
 \item $E \subseteq \{ \{i, j\}: i \in V, j \in V, i \neq j\}$: Representan segmentos de calles de dos vías que pueden ser recorridos en cualquier sentido.
 
@@ -128,14 +128,14 @@ El modelo de programación entera propuesto por \citet{Braier2017AnArgentina} es
 
 \item $I \subseteq V $: Nodos que especifican los puntos de inicio permitidos para la ruta.
 
-\item $S \subseteq V$: Se define $\delta^+ (S) = \{i j \in A: i \in S , j \notin S \}$ , que representa un conjunto de arcos que van desde nodos en $S$ a nodos en $V \backslash S$.
+\item $\mathcal{S} \subseteq V$: Se define $\delta^+ (\mathcal{S}) = \{i j \in A: i \in S , j \notin \mathcal{S} \}$ , que representa un conjunto de arcos que van desde nodos en $\mathcal{\mathcal{S}}$ a nodos en $V \backslash \mathcal{S}$.
 \end{itemize}
 
 El problema de ruteo es una versión particular del problema del cartero rural abierto dirigido generalizado, ya que el arco $i j \in E $ determina el grupo de arcos $L_{i j} = \{i j, j i\}$, en el que al menos uno de ellos debe ser atravesado en la solución final y además se busca un camino cuyo nodo inicial y final no se especifican.
 
 \begin{figure}[tbp]
 \centerline{\includegraphics[width=9.5cm]{expanded_graph.png}}
-\caption{Expansión de un cruce entre una calle de sentido único y una calle de doble sentido. (a) Grafo mixto original $H$. (b) Grafo dirigido $G$ luego de la expansión, los arcos auxiliares están representados por líneas discontinuas. [Fuente: \citet{Braier2017AnArgentina}]}
+\caption{Expansión de un cruce entre una calle de sentido único y una calle de doble sentido. (a) Grafo mixto original $H$. (b) Grafo dirigido $G'$ luego de la expansión, los arcos auxiliares están representados por líneas discontinuas. [Fuente: \citet{Braier2017AnArgentina}]}
 \label{fig:grafo_expandido}
 \end{figure}
 
@@ -150,7 +150,7 @@ El problema de ruteo es una versión particular del problema del cartero rural a
 
 \subsection{Definición del programa entero}
 \label{sec:programa-entero}
-\begin{equation*}
+\begin{equation*} \tag{0} \label{eq0}
 \min \sum_{i j \in A} w_{i j} x_{i j}  \\
 \end{equation*} 
 \hbox{}
@@ -201,8 +201,8 @@ s_i + \sum_{j: j i \in A} x_{j i} = \sum_{j: i j \in A} x_{i j} + t_i \\
 
 \begin{equation} \tag{6} \label{eq6}
 \begin{gathered}
-    \sum_{i j \in \delta + (S)} x_{i j} \geq 1 \\
-    \forall S \subseteq V
+    \sum_{i j \in \delta + (\mathcal{S})} x_{i j} \geq 1 \\
+    \forall \mathcal{S} \subseteq V
 \end{gathered}
 \end{equation}
 \hbox{}
@@ -230,7 +230,7 @@ s_i + \sum_{j: j i \in A} x_{j i} = \sum_{j: i j \in A} x_{i j} + t_i \\
 \end{gathered}
 \end{equation}
 
-La función objetivo busca minimizar el costo total de la ruta de recolección de residuos. El costo en este trabajo se refiere a la distancia recorrida por el vehículo recolector. La restricción (\ref{eq1}) impone que todos los arcos de único sentido deben ser visitados al menos una vez, la (\ref{eq2}) requiere que los arcos no dirigidos sean atravesados al menos una vez en cualquier sentido. Las restricciones (\ref{eq3a}) y (\ref{eq3b}) aseguran que la solución encontrada es realmente un camino agregando la condición de conservación de flujo estándar a cada nodo. Las restricciones (\ref{eq4}) y (\ref{eq5}) garantizan que el nodo inicial y final sean únicos. Las restricciones (\ref{eq1})-(\ref{eq5}) permiten la formación de subtours, la restricción (\ref{eq6}) es el estándar de eliminación de subtours. Las restricciones (\ref{eq7})-(\ref{eq9}) especifican los valores posibles para las variables del modelo.
+La función objetivo (\ref{eq0}) busca minimizar el costo total de la ruta de recolección de residuos. El costo en este trabajo se refiere a la distancia recorrida por el vehículo recolector. La restricción (\ref{eq1}) impone que todos los arcos de único sentido deben ser visitados al menos una vez, la (\ref{eq2}) requiere que los arcos no dirigidos sean atravesados al menos una vez en cualquier sentido. Las restricciones (\ref{eq3a}) y (\ref{eq3b}) aseguran que la solución encontrada es realmente un camino agregando la condición de conservación de flujo estándar a cada nodo. Las restricciones (\ref{eq4}) y (\ref{eq5}) garantizan que el nodo inicial y final sean únicos. Las restricciones (\ref{eq1})-(\ref{eq5}) permiten la formación de subtours, la restricción (\ref{eq6}) es el estándar de eliminación de subtours. Las restricciones (\ref{eq7})-(\ref{eq9}) especifican los valores posibles para las variables del modelo.
 
 \subsection{Algoritmo de solución}
 \label{algoritmo-solucion}
@@ -241,15 +241,15 @@ En el modelo dado en la sección \ref{sec:programa-entero} se puede observar la 
 Los siguientes pasos detallan la estrategia:
 
 \begin{enumerate}
-\item Crear el modelo relajado $M: = (\ref{eq1}) - (\ref{eq5})$ y $(\ref{eq7}) - (\ref{eq9})$.
-\item Resolver $M$.
-\item Si no se puede encontrar ninguna solución para $M$, retornar ``infactible'' y parar.
-\item Si la mejor solución encontrada para $M$ no tiene subtours, retornar esta solución y parar.
+\item Crear el modelo relajado $R: = (\ref{eq1}) - (\ref{eq5})$ y $(\ref{eq7}) - (\ref{eq9})$.
+\item Resolver $R$.
+\item Si no se puede encontrar ninguna solución para $R$, retornar ``infactible'' y parar.
+\item Si la mejor solución encontrada para $R$ no tiene subtours, retornar esta solución y parar.
 \item Si los subtours pueden ser mezclados con el tour que contiene el nodo inicial y final, entonces mezclarlos, retornar la solución obtenida y parar.
-\item De lo contrario, agregar a $M$ la restricción de eliminación de subtour estándar (\ref{eq6}) por cada subtour en la solución y regresar al Paso 2.
+\item De lo contrario, agregar a $R$ la restricción de eliminación de subtour estándar (\ref{eq6}) por cada subtour en la solución y regresar al Paso 2.
 \end{enumerate}
 
-El procedimiento de mezcla de subtours descrito por \citet{Braier2017AnArgentina}, utilizado en el paso 5, consiste en que dado un subtour \textit{S} y el camino principal \textit{P}, es decir el camino que empieza en el único vértice $i \in I$ con $s_i = 1$, y termina respectivamente en $t_i = 1$, se intenta intercambiar los arcos auxiliares para mezclar \textit{S} y \textit{P}. Se puede presentar una de las siguientes tres configuraciones:
+El procedimiento de mezcla de subtours descrito por \citet{Braier2017AnArgentina}, utilizado en el paso 5, consiste en que dado un subtour \textit{T} y el camino principal \textit{P}, es decir el camino que empieza en el único vértice $i \in I$ con $s_i = 1$, y termina respectivamente en $t_i = 1$, se intenta intercambiar los arcos auxiliares para mezclar \textit{T} y \textit{P}. Se puede presentar una de las siguientes tres configuraciones:
 
 \begin{itemize}
     \item Configuración A: Si el camino principal y el subtour se encuentran en algún nodo intermedio, como en la Figura \ref{fig:procedimiento_mezcla_subtours}(a), entonces son unidos como en la Figura \ref{fig:procedimiento_mezcla_subtours}(b)
@@ -259,13 +259,13 @@ El procedimiento de mezcla de subtours descrito por \citet{Braier2017AnArgentina
 
 \begin{figure}[tbp]
 \centerline{\includegraphics[width=\textwidth]{mezcla_subtours.png}}
-\caption{Posibles configuraciones en el procedimiento de la mezcla de subtours. Si \textit{P} y \textit{S} tienen la configuración (a), (b) o (c), entonces la solución es modificada de acuerdo a lo especificado en (b), (d) o (f) respectivamente. [Fuente: \citet{Braier2017AnArgentina}]}
+\caption{Posibles configuraciones en el procedimiento de la mezcla de subtours. Si \textit{P} y \textit{T} tienen la configuración (a), (b) o (c), entonces la solución es modificada de acuerdo a lo especificado en (b), (d) o (f) respectivamente. [Fuente: \citet{Braier2017AnArgentina}]}
 \label{fig:procedimiento_mezcla_subtours}
 \end{figure}
 
 Este procedimiento es aplicado para cada subtour en la solución hasta que todos sean mezclados al camino principal, dado que el costo de todos los arcos auxiliares que unen los nodos de las esquinas es el mismo, la ruta modificada permanece óptima, por lo que el algoritmo se detiene y devuelve la solución obtenida en este caso.
 
-Dado que no siempre los subtours pueden ser mezclados con la técnica recién mencionada, el algoritmo principal descrito agrega una restricción estándar de eliminación de subtoures al modelo M, tal y como se especifica en el Paso 6.
+Dado que no siempre los subtours pueden ser mezclados con la técnica recién mencionada, el algoritmo principal descrito agrega una restricción estándar de eliminación de subtoures al modelo $R$, tal y como se especifica en el Paso 6.
 
 Finalmente, en caso que el modelo matemático encuentre una solución factible, el resultado del modelo indica la distancia total, los arcos que son atravesados y el número de veces que estos son atravesados. Sin embargo, para conocer el camino a seguir es necesario encontrar la secuencia del mismo. 
 
@@ -284,7 +284,7 @@ Finalmente, en caso que el modelo matemático encuentre una solución factible, 
 % \item Sino, tomar uno de los nodos sucesores del nodo actual en $N$, donde el arco formado por el nodo actual y el nodo sucesor aún no haya sido tenido en cuenta, asignar como nodo actual el nodo sucesor y volver al paso 4.
 % \end{enumerate}
 
-En este trabajo se utiliza el algoritmo implementado en \cite{RiveraHazim2015APath} que encuentra el camino euleriano de un multigrafo dirigido para obtener la secuencia a seguir. Se genera un multigrafo dirigido $MG$ a partir del resultado del problema descrito en la sección anterior, creando arcos dirigidos según la cantidad de veces que se atraviesa por cada arco del grafo $G$. 
+En este trabajo se utiliza el algoritmo implementado en \cite{RiveraHazim2015APath} que encuentra el camino euleriano de un multigrafo dirigido para obtener la secuencia a seguir. Se genera un multigrafo dirigido $MG$ a partir del resultado del problema descrito en la sección anterior, creando arcos dirigidos según la cantidad de veces que se atraviesa por cada arco del grafo $G'$ . 
 
 El algoritmo recibe como parámetros de entrada el nodo inicial, nodo final y $MG$. Devuelve como resultado, la secuencia de arcos del recorrido solución. Los siguientes pasos detallan el algoritmo de secuenciación:
 

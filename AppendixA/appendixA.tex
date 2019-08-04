@@ -1,11 +1,14 @@
-% \chapter\bigskip
-% \ifpdf
-%   \graphicspath{{AppendixA/AppendixAFigs/PNG/}{AppendixA/AppendixAFigs/PDF/}{AppendixA/AppendixAFigs/}}
-% \else
-%   \graphicspath{{AppendixA/AppendixAFigs/EPS/}{AppendixA/AppendixAFigs/}}
-% \fi
-
-% \section{Valores de las métricas seleccionadas en las imágenes de referencias.}
+\chapter\bigskip
+\ifpdf
+  \graphicspath{{AppendixA/AppendixAFigs/PNG/}{AppendixA/AppendixAFigs/PDF/}{AppendixA/AppendixAFigs/}}
+\else
+  \graphicspath{{AppendixA/AppendixAFigs/EPS/}{AppendixA/AppendixAFigs/}}
+\fi
+% \setboolean{@twoside}{false}
+% doublepages
+\section{Manual de Usuario de \textit{TapeYty}}
+\label{sec:manual-usuario}
+\includepdf[pages=-, pagecommand={}, nup=1x2, width=\textwidth, offset=32mm -5mm]{AppendixA/AppendixPdf/Manual_de_usuario.pdf}
 % \begin{figure}[H]
 %     \begin{center}
 %         \subfigure[][\label{fig:img1} $SSIM = 1$ \newline $LTG = 1 $ \newline $\mathscr{H} = 7.4428$ \newline $\mathscr E =3.4754$]

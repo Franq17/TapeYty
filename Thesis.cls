@@ -145,7 +145,7 @@
 \newcommand*{\subject}[1]{\def\subjectname{#1}}
 \newcommand*{\keywords}[1]{\def\keywordnames{#1}}
 \newcommand*{\fecha}[1]{\def\datename{#1}}
-\supervisor  {\textbf{Asesores:}\\ M.Sc. Ing. María Elena García Vazquez \\  Lic. Jorge N. Meza}
+\supervisor  {\textbf{Asesores:}\\ M.Sc. Ing. María Elena García Díaz \\  Lic. Jorge N. Meza}
 %             D.Sc. Ing. Diego P. Pinto-Roa}
 %\examiner    {}
 % \degree {OPTIMIZACIÓN DEL RECORRIDO DE VEHÍCULOS RECOLECTORES DE BASURA BASADO EN EL MODELO DEL CARTERO CHINO - TAPEYTY}

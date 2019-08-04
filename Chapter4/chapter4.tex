@@ -10,7 +10,7 @@
 
 Los problemas de rutas son todos aquellos de optimización que se plantean cuando existen unos clientes que demandan un servicio y se debe encontrar la mejor ruta para satisfacerles. Algunos ejemplos típicos son el reparto de correo, la recogida de basura o el transporte escolar, también sirve para modelar otras situaciones como la producción de circuitos electrónicos integrados o la secuenciación de tareas \citep{CalvinoM2011CooperacionPanoramica}. En este capítulo se presentan conceptos básicos de los problemas de rutas y de optimización.
 
-Los problemas de rutas se modelan en un grafo G = (V, E), donde existe un coste no negativo asociado a los arcos y aristas del grafo. Estos problemas se dividen en dos clases: los problemas de rutas por nodos y los problemas de rutas por arcos, que se muestran en el Tabla \ref{table:calsifiacionProblemasRutas}. En el primero de los casos, la ruta óptima a determinar debe visitar todos los nodos, mientras que en el segundo, se deben recorrer todos los arcos del grafo que define el problema. En otras palabras, en los problemas sobre los nodos se entiende que cada cliente está representado por un nodo mientras que en los problemas sobre los arcos se entiende que los arcos son calles que deben ser visitadas \citep{CalvinoM2011CooperacionPanoramica}.
+Los problemas de rutas se modelan en un grafo G = (V, A), donde existe un coste no negativo asociado a los arcos y aristas del grafo. Estos problemas se dividen en dos clases: los problemas de rutas por nodos y los problemas de rutas por arcos, que se muestran en el Tabla \ref{table:calsifiacionProblemasRutas}. En el primero de los casos, la ruta óptima a determinar debe visitar todos los nodos, mientras que en el segundo, se deben recorrer todos los arcos del grafo que define el problema. En otras palabras, en los problemas sobre los nodos se entiende que cada cliente está representado por un nodo mientras que en los problemas sobre los arcos se entiende que los arcos son calles que deben ser visitadas \citep{CalvinoM2011CooperacionPanoramica}.
 
 \begin{table}[H]
 \caption{Clasificación de problemas de ruta. [Fuente: \cite{CalvinoM2011CooperacionPanoramica}] }
@@ -21,7 +21,7 @@ Demanda                & \begin{tabular}[c]{@{}c@{}}Restricciones\\ de capacidad
 \multirow{2}{*}{Nodos} & NO                                                                   & \begin{tabular}[c]{@{}c@{}}Problema del Vendedor Viajante\\ TSP\end{tabular}                          &                       \\ \cline{2-3}
                       & SÍ                                                                   & \begin{tabular}[c]{@{}c@{}}Problema de rutas de vehículos\\ VRP\end{tabular}                          & Recogida/distribución \\ \hline
 \multirow{3}{*}{Arcos} & \multirow{2}{*}{NO}                                                  & \begin{tabular}[c]{@{}c@{}}Una componente conexa\\ (Problema del Cartero Chino CPP)\end{tabular}      & Ventanas de tiempo    \\ \cline{3-3}
-                      &                                                                      & \begin{tabular}[c]{@{}c@{}}Varias componentes conexas\\ (Problema del Cartero rural RPP)\end{tabular} & Otras                 \\ \cline{2-3}
+                      &                                                                      & \begin{tabular}[c]{@{}c@{}}Varias componentes conexas\\ (Problema del Cartero Rural RPP)\end{tabular} & Otras                 \\ \cline{2-3}
                       & SÍ                                                                   & \begin{tabular}[c]{@{}c@{}}Problema de rutas con capacidades\\ CARP\end{tabular}                      &                       \\ \hline
 \end{tabular}
 \label{table:calsifiacionProblemasRutas}
@@ -74,7 +74,7 @@ En general se trata de un problema NP-duro, sin embargo si es un grafo estrictam
 
 \subsection{Problema de Rutas por Arcos con Capacidades (CARP)}
 
-En el CARP a cada arco del grafo se le asocia una cantidad no negativa $q_{ij}$, que representa la demanda de cada uno de los clientes. Una flota m de vehículos con capacidad Q debe visitar todos los arcos repartiendo (o recogiendo) las cantidades correspondientes sin exceder nunca la cantidad Q \citep{YordaPerez2014ElChino}.
+En el CARP a cada arco del grafo se le asocia una cantidad no negativa $q_{ij}$, que representa la demanda de cada uno de los clientes. Una flota de vehículos con capacidad Q debe visitar todos los arcos repartiendo (o recogiendo) las cantidades correspondientes sin exceder nunca la cantidad Q \citep{YordaPerez2014ElChino}.
 % \section{Modelado de redes}
 
 % Cualquier estructura de red puede describirse utilizando dos tipos de objetos, ver ``Fig.~\ref{fig:arcos_y_nodos}'':
@@ -136,12 +136,12 @@ sujeto a
 
 \begin{equation} \label{sujeto}
 \begin{aligned}
-    c_{i}(x) = 0, i \in E \\
-    c_{i}(x) \geq 0, i \in I
+    c_{i}(x) = 0, i \in \xi \\
+    c_{i}(x) \geq 0, i \in \mathcal{I}
     \end{aligned}
 \end{equation}
 
-Aquí $f$ y cada $c_{i}$ son funciones de valores escalares de las variables $x$. $I$ y $E$ son conjuntos de índices.
+Aquí $f$ y cada $c_{i}$ son funciones de valores escalares de las variables $x$. $\mathcal{I}$ y $\xi$ son conjuntos de índices.
 
 En (\ref{min}) y (\ref{sujeto}) se utiliza la siguiente notación:
 
@@ -166,41 +166,34 @@ Los tipos de programas enteros pueden clasificarse en:
     \item Programas enteros 0-1: $x_i \in \{0,1\}$ para cada $i$.
 \end{itemize}
 
-La Figura \ref{fig:milp} muestra el espacio solución factible en el área $S$ de un MILP, donde la variable de decisión $x$ corresponde a un valor entero mientras que la variable de decisión $y$ representa una variable continua. Por otra parte, en la Figura \ref{fig:pil} se representan mediante puntos a los posibles valores solución en el área $S$, donde ambas variables $x_1$ y $x_2$ corresponden a valores enteros.
+La Figura \ref{fig:milp} muestra el espacio de solución factible en el área $S$ de un MILP, donde la variable de decisión $x$ corresponde a un valor entero mientras que la variable de decisión $y$ representa una variable continua. Por otra parte, en la Figura \ref{fig:pil} se representan mediante puntos a los posibles valores solución en el área $S$, donde ambas variables $x_1$ y $x_2$ corresponden a valores enteros.
 
-% \begin{figure}[H]
-% \centerline{\includegraphics[width=12cm]{milp_pil.png}}
-% \caption{Conjunto lineal de enteros mixto y un conjunto lineal entero puro. [Fuente: \cite{ConfortiIntegerProgramming}]}
-% \label{fig:milp_ip}
-% \end{figure}
-
-\begin{figure}
-    \captionsetup[figure]{labelformat=empy}
-    \centering
-    \subfloat[]{%
-      \includegraphics[width=0.45\textwidth]{milp.png}
-      \label{fig:milp}
-     }
-     \qquad
-     \subfloat[]{%
-      \includegraphics[width=0.45\textwidth]{pil.png}
-      \label{fig:pil}
-     }
-  \caption{Conjunto lineal de enteros mixto y un conjunto lineal entero puro. [Fuente: \cite{ConfortiIntegerProgramming}]}
-  \label{fig:milp_ip}
+\begin{figure}[H]
+   \captionsetup[figure]{labelformat=empty}
+   \centering
+       \subfigure[][]{
+            \includegraphics[width=0.45\textwidth]{milp.png}
+            \label{fig:milp}
+        }
+        \subfigure[][]{
+            \includegraphics[width=0.45\textwidth]{pil.png}
+            \label{fig:pil}
+        }
+   \caption{Espacion de solución factible. (a) Conjunto lineal de enteros mixto. (b) Conjunto lineal entero puro. [Fuente: \cite{Conforti2014IntegerProgramming}]}
+   \label{fig:milp_ip}
 \end{figure}
 
 Una programación lineal entera pura es un problema de la forma:
 
 \begin{equation} \label{programacion_entera}
 \begin{aligned}
-             \max\: & cx \\ 
+             \max\: & \mu x \\ 
         sujeto\:a\: & Ax \leq b \\
                     &\: x \geq 0\: entero
 \end{aligned}
 \end{equation}
 
-donde los datos, generalmente racionales, son el vector fila $c = (c_1,...,c_n)$, la matriz $mxn$ $A=(a_{ij})$, y el vector columna $b=(b_1,..., b_n)$. El vector columna $x=(x_1,...,x_n)$ contiene las variables a ser optimizadas. Se dice que un $n$-vector $x$ es entero cuando $x \in \mathbb{Z}^n$. El conjunto de soluciones factibles $S := \{x \in \mathbb{Z}^n_+ : Ax \leq b\}$ a (\ref{programacion_entera}) es llamado el conjunto lineal entero puro \citep{ConfortiIntegerProgramming}.
+donde los datos, generalmente racionales, son el vector fila $\mu = (\mu_1,...,\mu_n)$, la matriz $mxn$ $A=(a_{ij})$, y el vector columna $b=(b_1,..., b_m)$. El vector columna $x=(x_1,...,x_n)$ contiene las variables a ser optimizadas. Se dice que un $n$-vector $x$ es entero cuando $x \in \mathbb{Z}^n$. El conjunto de soluciones factibles $S := \{x \in \mathbb{Z}^n_+ : Ax \leq b\}$ a (\ref{programacion_entera}) es llamado el conjunto lineal entero puro \citep{Conforti2014IntegerProgramming}.
 
 \subsection{Métodos para resolver la programación entera}
 
