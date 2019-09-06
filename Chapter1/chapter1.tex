@@ -30,7 +30,7 @@ La Municipalidad de Asunción, de ahora en adelante MDA, cuenta con un conjunto 
 
 \section{Antecedentes}
 
-Cuando se habla de la problemática de la gestión de residuos sólidos, es sabido que existen numerosos estudios y trabajos científicos que se han realizado al respecto con el propósito de resolver usando objetivos económicos y ambientales como criterios para la toma de decisiones. Hasta la fecha, se siguen estudiando distintas técnicas que puedan permitir mejorar el proceso y como mencionan \citet{Tchobanoglous1993IntegratedIssues}, no existe un conjunto universal de reglas que puedan aplicarse a todas las situaciones.
+Cuando se habla de la problemática de la gestión de residuos sólidos, existen numerosos estudios y trabajos científicos que se han realizado al respecto con el propósito de resolver usando objetivos económicos y ambientales como criterios para la toma de decisiones. Hasta la fecha, se siguen estudiando distintas técnicas que puedan permitir mejorar el proceso y como mencionan \citet{Tchobanoglous1993IntegratedIssues}, no existe un conjunto universal de reglas que puedan aplicarse a todas las situaciones.
 
 % En la literatura, las soluciones al ruteo de la recolección de residuos sólidos urbanos se han planteado como distintos tipos de problemas, y están principalmente definidos en dos categorías: a) Problema de Enrutamiento de Vehículo Capacitado (CVRP, \textit{Capacitated Vehicle Routing Problem}), en donde se define una serie de nodos con demanda positiva cuyo objetivo es encontrar el mejor recorrido que cubra la totalidad de los nodos y; por otro lado, b) Problema de Enrutamiento de Arco Capacitado (CARP, \textit{Capacitated Arc Routing Problem}), en donde existe una serie de arcos predefinidos con demanda positiva o nula y el objetivo consiste en encontrar los mejores recorridos cubriendo todos los arcos requeridos \citep{Tirkolaee2018ATime}.
 
@@ -90,7 +90,11 @@ En \citet{Tirkolaee2018ATime} se presentó un interesane MILP para el problema d
 % CPP, RPP, DRPP rural abierto.
 Otro de los grandes problemas de arcos es el conocido como Problema del Cartero Rural (RPP, \textit{Rural Postman Problem}), que consiste en determinar el camino de mínima distancia que recorre solo algunos de los arcos del grafo y representa un problema \textit{NP-hard}, a no ser que el subgrafo formado por los arcos requeridos sea un grafo completamente conexo, en cuyo caso el RPP se reduce al Problema del Cartero Chino (CPP, \textit{Chinese Postman Problem}), para el cual se han definido algoritmos que lo resuelven en un tiempo polinómico \citep{CalvinoM2011CooperacionPanoramica}.
 
-En \citet{Braier2017AnArgentina} se plantea un caso particular del RPP abierto Generalizado Dirigido (GDRPP, \textit{Generalized Directed Rural Postman Problem}). Desarrollaron un modelo de Programación de Enteros (IP, \textit{Integer Programming}) con un procedimiento de resolución basado en un algoritmo de mezcla de subtours y la adición dinámica de restricciones de eliminación de subtours. Este modelo sirvió de base para la implementación presentada en este trabajo.
+En \citet{Braier2017AnArgentina} se plantea un caso particular del RPP abierto Generalizado Dirigido (GDRPP, \textit{Generalized Directed Rural Postman Problem}). Desarrollaron un modelo de Programación de Enteros (IP, \textit{Integer Programming}) con un procedimiento de resolución basado en un algoritmo de mezcla de subtours y la adición dinámica de restricciones de eliminación de subtours. Este modelo es la base sobre la cual se desarrolla la propuesta de este trabajo.
+
+% Este modelo sirvió de base para la implementación presentada en este trabajo.
+
+
 % La herramienta ArcGIS Network Analytics (NA) es utilizada ampliamente en la búsqueda por minimizar la distancia y el tiempo de las rutas actuales de los camiones recolectores de residuos sólidos \citep{Kallel2016UsingTunisia, Malakahmad2014SolidMalaysia}. Existen además implementaciones comerciales similares a la solución que se propone, entre ellas se encuentran \textit{MapInfo Software}, \textit{RouteSmart}, \textit{Waste Route Software}, \textit{RouteViewPro}.
 % % Agregar las implementacion libres.
 % En este trabajo se propone el desarrollo de una herramienta, que optimice el camino seguido por los vehículos de recolección de basura de la ciudad de Asunción mediante técnicas de programación matemáticas, y consecuentemente, genere beneficios principalmente en los aspectos económicos y ambientales. Esta herramienta denominada de ahora en más \textit{TapeYty}, proveniente de dos palabras del idioma guaraní, \textit{Tape} que significa camino y \textit{Yty} que significa basura.
@@ -102,13 +106,15 @@ Si bien los sistemas mencionados cumplen con el objetivo de optimizar los recorr
 En este trabajo se propone el desarrollo de una herramienta sobre una arquitectura modular e interoperable, que optimice el camino a seguir por los vehículos de recolección de basura domiciliaria de la ciudad de Asunción mediante técnicas de programación matemáticas, y consecuentemente, genere beneficios principalmente en los aspectos económicos con la disminución de la distancia recorrida y en consecuencia el consumo de combustible; y ambientales con la disminución de la emisión de gases que dejan a su paso los camiones debido al menor tiempo de actividad \citep{Vu2018ParameterModel}. La herramienta denominada de ahora en adelante \textit{TapeYty}, proviene de dos palabras del idioma guaraní, \textit{Tape} que significa camino y \textit{Yty} que significa basura.
 
 \section{Justificación}
- En la actualidad, los choferes de los vehículos recolectores de basura de la ciudad de Asunción trazan los caminos a seguir en base a su experiencia, razón por la cual es necesario optimizar el recorrido realizado para la recolección de residuos, reduciendo el costo y el tiempo de cada recorrido. Se propone desarrollar una aplicación que permita a la MDA gestionar de manera eficiente esos recorridos al poder actualizar el sentido de las calles, inhabilitar calles, agregar restricciones de giro o de contramano. La MDA podrá contar con una aplicación que garantice que todos los ciudadanos reciban el servicio de recolección domiciliaria.
+ En la actualidad, los choferes de los vehículos recolectores de basura de la ciudad de Asunción trazan los caminos a seguir en base a su experiencia, razón por la cual es necesario optimizar el recorrido realizado para la recolección de residuos, reduciendo el costo y el tiempo de cada recorrido. Se propone desarrollar una aplicación que permita a la MDA gestionar de manera eficiente esos recorridos mediante la posibilidad de actualizar el sentido de las calles, inhabilitar calles, agregar restricciones de giro o de contramano. La MDA podrá contar con una aplicación que garantice que todos los ciudadanos reciban el servicio de recolección domiciliaria.
 
-El ingreso promedio de personas en ómnibus del transporte público y vehículos privados de los municipios aledaños, es alrededor de 1.320.000 a diario \citep{DiarioABCColor2016PorColor}, es así que no sólo los ciudadanos que residen en la ciudad de Asunción serán beneficiados con un servicio más eficiente, sino las miles de personas que ingresan diariamente a la ciudad, ya que al reducir el tiempo en tránsito del vehículo recolector se reducen los problemas de contaminación por los líquidos y gases que dejan a su paso.
+El ingreso promedio de personas en ómnibus del transporte público y vehículos privados de los municipios aledaños, es alrededor de 1.320.000 a diario \citep{DiarioABCColor2016PorColor}, es así que no sólo los ciudadanos que residen en la ciudad de Asunción serán beneficiados con un servicio más eficiente, sino las miles de personas que ingresan diariamente a la ciudad, ya que al reducir el tiempo en tránsito del vehículo recolector se reduciría la contaminación por los líquidos y gases que dejan a su paso.
 
-Este proceso permitirá al personal encargado de la recolección de residuos agilizar su trabajo ya que pasarán menos tiempo en el vehículo recolector, mejorando así su calidad de vida.
+% Este proceso permitirá al personal encargado de la recolección de residuos agilizar su trabajo ya que pasarán menos tiempo en el vehículo recolector, mejorando así su calidad de vida.
  
-Por todo lo expuesto, se considera plenamente justificada la investigación y propuesta de solución de este trabajo de fin de carrera, pues nos permitirá como ciudadanos retribuir en parte al Estado los beneficios y conocimientos que hemos adquirido a través de nuestra carrera en la Universidad.
+Por todo lo expuesto, se considera plenamente justificada la investigación y elaboración de este trabajo de fin de carrera, pues nos permitirá aplicar los conocimientos adquiridos y contribuir con la sociedad mediante una propuesta aplicada al problema de la recolección de residuos.
+
+% retribuir en parte al Estado los beneficios y conocimientos que hemos adquirido a través de nuestra carrera en la Universidad.
 
 \section{Objetivo General}
 El objetivo general de este trabajo de investigación es el de proponer una solución que optimice el recorrido de los vehículos de recolección de basura domiciliaria de la Dirección Servicios Urbanos (DSU) de la MDA.
@@ -130,10 +136,10 @@ Los objetivos específicos que se han trazado en este trabajo son los siguientes
 La organización del presente trabajo se completa de la siguiente manera:
 
 \begin{itemize}
-    \item En el \textbf{capítulo 2} se presentan los conceptos básicos que describen la gestión de residuos sólidos municipales y el caso de estudio, la ciudad de Asunción.
+    \item En el \textbf{capítulo 2} se describe la gestión de residuos sólidos municipales y el caso de estudio, la ciudad de Asunción.
     \item En el \textbf{capítulo 3} se presentan conceptos básicos sobre Sistemas de Información Geográfica y bases de datos espaciales.
-    \item En el \textbf{capítulo 4} se presentan planteamientos de problemas de rutas por arcos y conceptos básicos de optimización.
-    \item En el \textbf{capítulo 5} se plantea de manera formal el problema que se intenta resolver y se explican las formulaciones utilizadas.
+    \item En el \textbf{capítulo 4} se presentan los problemas de rutas por arcos y se define la optimización.
+    \item En el \textbf{capítulo 5} se plantea de manera formal el problema a resolver y se explican las formulaciones utilizadas.
     \item En el \textbf{capítulo 6} se explica detalladamente la implementación de la herramienta \textit{TapeYty}. 
     \item En el \textbf{capítulo 7} se visualizan y se discuten los resultados obtenidos.
     \item En el \textbf{capítulo 8} se finaliza el trabajo de investigación presentando las conclusiones generales, así como los aportes, aprendizajes y trabajos futuros continuando esta línea de investigación.

@@ -11,7 +11,7 @@
 \section{Planteamiento del problema}
 % \label{cap:planteamiento}
 
-La fase de recolección de residuos sólidos cumple un rol importante en los aspectos socio-económicos y ambientales de una ciudad. Justamente, según la literatura, gran parte del presupuesto de un municipio va destinada a dicha fase. En consecuencia, se genera la necesidad de una búsqueda permanente por disminuir costos en sus procesos sin afectar la calidad del servicio. 
+La fase de recolección de residuos sólidos cumple un rol importante en los aspectos socio-económicos y ambientales de una ciudad. Según la literatura, gran parte del presupuesto de un municipio va destinada a dicha fase. En consecuencia, se genera la necesidad de una búsqueda permanente por disminuir costos en sus procesos sin afectar la calidad del servicio. 
 
 Hoy en día, la selección de la ruta de recolección se basa en la propia intuición y experiencia de los conductores. En algunas ocasiones esto conlleva a dejar sin servicio algunos puntos de la ciudad por desconocimiento de un nuevo conductor asignado a la zona, que a su vez genera que la comuna asuncena realice quejas acerca de la falta de servicio de recolección en tiempo y forma. También es posible el paso en repetidas veces de forma innecesaria por la misma calle dando lugar a mayores gastos de combustible, como se indica en los círculos rojos de la Figura \ref{fig:trayectoRecoleccion}.
 
@@ -22,7 +22,7 @@ Hoy en día, la selección de la ruta de recolección se basa en la propia intui
     \label{fig:trayectoRecoleccion}
 \end{figure}
 
-Otra situación muy común es el continuo cambio de circulación en las calles buscando disminuir la congestión del tráfico actual, por ejemplo: cambio de sentido, prohibición de giro a la izquierda, prohibición de giro en U, contramano. También se presentan situaciones donde las calles quedan clausuradas para su uso por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
+Otra situación muy común es el frecuente cambio de circulación en las calles buscando disminuir la congestión del tráfico actual, por ejemplo: cambio de sentido, prohibición de giro a la izquierda, prohibición de giro en U, contramano. También se presentan situaciones donde las calles quedan clausuradas para su uso por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
 
 Por ello se evidencia la necesidad de una herramienta de soporte de decisión que aborde el problema del enrutamiento de los vehículos recolectores teniendo en cuenta el procedimiento actual llevado a cabo para la recolección de residuos domiciliarios de la DSU.
 
@@ -58,8 +58,8 @@ Primeramente, se necesitó exportar los datos de Asunción desde OSM, debido a q
 Para almacenar la información de red de calles se definen las siguientes tablas en la base de datos GIS:
 
 \begin{itemize}
-    \item Nodo: En esta tabla se almacenan los puntos que se utilizan como extremos de los segmentos de calle. Se almacena la latitud y la longitud.
-    \item Segmento: Contiene líneas de calle formada a partir de dos nodos consecutivos. Se almacena el nombre, el nodo origen, el nodo destino, si es de único de sentido y si es sin salida. Si el segmento es de único sentido, entonces el nodo origen y destino definen el sentido del mismo.
+    \item \textbf{Nodo:} En esta tabla se almacenan los puntos que se utilizan como extremos de los segmentos de calle. Se almacena la latitud y la longitud.
+    \item \textbf{Segmento:} Contiene líneas de calle formada a partir de dos nodos consecutivos. Se almacena el nombre, el nodo origen, el nodo destino, si es de único de sentido y si es sin salida. Si el segmento es de único sentido, entonces el nodo origen y destino definen el sentido del mismo.
 \end{itemize}
 
 Al importar los datos desde OSM se detectaron algunos datos incorrectos que generarían inconvenientes para la obtención del recorrido para la recolección de residuos. OSM identifica las calles sin salida por medio del atributo \textit{no\_exit}. Si su valor es \textit{true} representa una calle sin salida, sin embargo muchas calles sin salida lo tienen como \textit{false}. Otra inconsistencia encontrada es con el valor del atributo \textit{one\_way}, donde muchas calles sin salida tienen su valor en \textit{true} indicando que es de único sentido cuando realmente deben ser doble sentido.

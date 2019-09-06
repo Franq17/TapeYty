@@ -9,6 +9,7 @@
 \markboth{\hfill \thechapter. Resultados y Discusión}{\hfill \thechapter. Resultados y Discusión}
 
 \section{Ambiente de Ejecución}
+\label{sec:ambiente_ejecucion}
 
 Las pruebas para la obtención de los resultados se ejecutaron en una computadora personal con la siguiente configuración:
 \begin{itemize}
@@ -24,7 +25,8 @@ Las pruebas para la obtención de los resultados se ejecutaron en una computador
 %     \item 
 % \end{enumerate}
 
-\section{Resultados Obtenidos}
+% \section{Resultados Obtenidos}
+\section{Resultados de Rutas}
 
 % En esta sección se presenta un análisis de los resultados obtenidos con \textit{TapeYty}. 
 
@@ -161,6 +163,8 @@ Existen varias definiciones para el concepto de Calidad de Software y la mayorí
 
 Entre los atributos de la Calidad del Software tenemos: seguridad, fiabilidad, flexibilidad, robustez, comprensibilidad, testeabilidad, adaptabilidad, modularidad, complejidad, portababilidad, usabilidad, reusabilidad, eficiencia y facilidad.
 
+\subsection{Calidad de código fuente}
+
 A continuación se muestra un reporte con las métricas de algunos atributos de calidad en los proyectos \textit{backend} y \textit{frontend} de la aplicación. Las incidencias encontradas en ambos proyectos se fueron solucionando y corrigiendo. Se utilizaron las reglas por defecto proporcionadas por la herramienta utilizada SonarQube. (Ver Figuras \ref{fig:QAbackend}, \ref{fig:QAfrontend})
 
 SonarQube define tres tipos de problemas:
@@ -177,22 +181,135 @@ Cada problema corresponde a una de las cinco severidades:
     \item \textit{Blocker}: Error con una alta probabilidad de afectar el comportamiento de la aplicación en producción: pérdida de memoria, conexión JDBC no cerrada, etc. El código debe ser arreglado de inmediato.
     \item \textit{Critical}: Ya sea un error con poca probabilidad de afectar el comportamiento de la aplicación en producción o un problema que representa un defecto de seguridad: bloque de captura vacío, inyección de SQL, etc. El código debe revisarse de inmediato.
     \item \textit{Major}: Defecto de calidad que puede tener un gran impacto en la productividad del desarrollador: pieza de código descubierta, bloques duplicados, parámetros no utilizados.
-    \item \textit{Minor}: Defecto de calidad que puede afectar ligeramente la productividad del desarrollador: las líneas no deben ser demasiado largas, las declaraciones de "cambio" deben tener al menos 3 casos, entre otros.
+    \item \textit{Minor}: Defecto de calidad que puede afectar ligeramente la productividad del desarrollador: las líneas no deben ser demasiado largas, las declaraciones de ``cambio'' deben tener al menos 3 casos, entre otros.
     \item \textit{Info}: Ni un error ni un defecto de calidad, solo un hallazgo.
 \end{itemize}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{reporteQA_BE.png}
     \caption{Reporte de inspección de código con SonarQube del \textit{Backend}.}
     \label{fig:QAbackend}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{reporteQA_FE2.png}
     \caption{Reporte de inspección de código con SonarQube del \textit{Frontend}.}
     \label{fig:QAfrontend}
+\end{figure}
+
+\subsection{Pruebas de rendimiento}
+
+Las pruebas de rendimiento generalmente se realizan para ayudar a identificar cuellos de botella en un sistema, establecer una línea de base para pruebas futuras, respaldar un esfuerzo de ajuste del rendimiento, determinar el cumplimiento de los objetivos y requisitos de rendimiento y/o recopilar otros datos relacionados con el rendimiento para ayudar a las partes interesadas a tomar decisiones informadas relacionadas a la calidad general de la aplicación que se está probando \citep{Corporation2007PerformanceApplications}.
+
+% Las pruebas de rendimiento consisten en simular carga en el sistema bajo pruebas para analizar el desempeño del mismo durante la ejecución de la prueba, pudiendo encontrar cuellos de botella y oportunidades de mejora. La forma en la que estaremos aportando calidad es principalmente buscando fallos. La idea es encontrar la mayor cantidad de fallos que más calidad le aporten al producto \citep{ToledoRodriguez2014IntroduccionInformacion}.
+
+Se preparó un plan de pruebas de rendimiento siguiendo las actividades presentadas en \citet{Corporation2007PerformanceApplications}:
+
+\begin{enumerate}
+    \item \textbf{Identificar el entorno de prueba:}
+        Como servidor de aplicación se utiliza el ambiente de ejecución mencionado más arriba \ref{sec:ambiente_ejecucion}. En la misma red del servidor se cuenta con otra estación de trabajo, donde se instala la herramienta Jmeter \citep{ApacheJMeter} para analizar y medir el desempeño de la aplicación.
+    \item \textbf{Identificar los criterios de aceptación del rendimiento:}
+        La DSU cuenta con dos administradores del sistema encargados de la gestión de rutas de recolección. Además, teniendo en cuenta la cantidad de zonas y turnos de trabajos un máximo de 23 conductores se conectarán en simultáneo para descargar su ruta asignada. El usuario espera obtener una nueva ruta en menos de 120 segundos.
+    \item \textbf{Pruebas de planificación y diseño:}
+        En esta actividad se decide emplear dos tipos de pruebas de rendimiento: de carga y de estrés. Las pruebas de carga consisten en simular la realidad a la que estará expuesto el sistema cuando esté en producción y las pruebas de estrés son pruebas para encontrar el volumen de datos o de tiempo en que la aplicación comienza a fallar o es incapaz de responder a las peticiones.
+        Se plantean dos escenarios: A) Uno en el que los usuarios generan una nuevo ruta; y B) en el que los usuarios visualizan una ruta ya generada previamente.
+    \item \textbf{Configurar el entorno de prueba:}
+        Se prepara el entorno de prueba, las herramientas y los recursos necesarios para ejecutar cada estrategia. Se realizan ajustes en los servidores web y de aplicación en el servidor para aprovechar las características de su procesador y mejorar así el rendimiento. Se instala en Jmeter el plugin SSHMon \citep{Jmeter-sshmon} para obtener resultados de monitoreo de CPU y uso de disco del servidor.
+    \item \textbf{Implementar el diseño de prueba:}
+        Se implementa la planificación y diseño de las pruebas.
+    % \item Ejecute la prueba:
+    % \item Analizar resultados, informar y volver a probar:
+\end{enumerate}
+
+A continuación, se detallan los resultados de la ejecución de las pruebas y un análisis de los mismos, que corresponden a las últimas actividades del plan de pruebas de rendimiento \citep{Corporation2007PerformanceApplications}.
+
+Para el escenario A los usuarios realizan peticiones a los siguientes servicios del sistema:
+\begin{itemize}
+    \item Seleccionar una zona.
+    \item Listar históricos de rutas para una zona seleccionada.
+    \item Ver un camino.
+    \item Exportar una ruta a GPX.
+\end{itemize}
+% \label{prueba:escA} 
+
+Para el escenario B los usuarios realizan peticiones al servicio de:
+\begin{itemize}
+    \item Generar nueva ruta.
+\end{itemize}
+% \label{prueba:escB} 
+
+\subsubsection{Resultados de pruebas de carga}
+\label{ref:resultadosPruebaCarga}
+
+Los resultados de rendimiento de pruebas de carga del escenario A se visualizan en la Figura \ref{fig:25UsuariosCargaA}, donde se observa que la cantidad de peticiones por unidad de tiempo (\textit{Throughput}) para cada etiqueta (\textit{label}) es aceptable. La desviación estándar (\textit{Std. Dev}) presenta valores pequeños con respecto al promedio (\textit{Average}) de cada etiqueta, concluyendo en que los tiempos de respuesta no son dispersos. En la Figura \ref{fig:25UsuariosCPUA} se observa el porcentaje de utilización de CPU y el número total de transferencias por segundo del disco (I/O) durante el tiempo de ejecución de las pruebas. Al iniciar el lanzamiento de las peticiones concurrentes la CPU es utilizada en un 80 \%, pero en unos pocos segundos va liberando recursos y luego se mantiene constante.
+
+% Esto muestra el conjunto de casos excepcionales que se estaban desviando del valor promedio del tiempo de respuesta de la muestra. Cuanto menor es este valor, más coherentes son los datos. La desviación estándar debe ser menor o igual a la mitad del tiempo promedio para una etiqueta.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{25_usuarios_editado.png}
+    \caption{Reporte de rendimiento de carga con 25 usuarios concurrentes.}
+    \label{fig:25UsuariosCargaA}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{25_usuarios_cpu_io_editado.png}
+    \caption{Reporte de utilización de recursos en el servidor con una carga de 25 usuarios concurrentes.}
+    \label{fig:25UsuariosCPUA}
+\end{figure}
+
+Para el escenario B se pueden observar los resultados en las Figuras \ref{fig:5UsuariosCargaB} y \ref{fig:5UsuariosCPUB}. Se observa que la desviación estándar es aceptable y que la cantidad de peticiones por minuto que puede manejar el servidor es mucho menor a las peticiones del escenario A. En la Figura \ref{fig:5UsuariosCargaB}, como era de esperarse, se muestra que generar nuevas rutas es el proceso más costoso del sistema requiriendo más recursos de CPU en el servidor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{Chapter7/Chapter7Figs/5_usuarios_doc_editado.png}
+    \caption{Reporte de rendimiento de carga con 5 usuarios concurrentes.}
+    \label{fig:5UsuariosCargaB}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{5_usuarios_doc_cpu_io_editado.png}
+    \caption{Reporte de utilización de recursos en el servidor con una carga de 5 usuarios concurrentes.}
+    \label{fig:5UsuariosCPUB}
+\end{figure}
+
+\subsubsection{Resultados de pruebas de estrés}
+\label{ref:resultadosPruebaEstres}
+
+El escenario de prueba A se ejecutó sin errores con 100 y 500 usuarios concurrentemente como se puede ver las Figuras \ref{fig:100UsuariosEstresA} y \ref{fig:500UsuariosEstresA} respectivamente. Recién cuando se ejecutó con 510 usuarios se observa que hubo un total de 1.18 porciento, ver Figura \ref{fig:510UsuariosEstresA}. El motivo de fallo es que se configuro el servido de tal manera a que acepte 500 sesiones concurrentes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{100_usuarios_sin_optimizacion_editado.png}
+    \caption{Reporte de pruebas de estrés con 100 usuarios concurrentes.}
+    \label{fig:100UsuariosEstresA}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{500_usuarios_sin_optimizacion_editado.png}
+    \caption{Reporte de pruebas de estrés con 500 usuarios concurrentes.}
+    \label{fig:500UsuariosEstresA}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{510_usuarios_sin_optimizacion_editado.png}
+    \caption{Reporte de pruebas de estrés con 510 usuarios concurrentes.}
+    \label{fig:510UsuariosEstresA}
+\end{figure}
+
+El escenario de prueba B ...
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{510_usuarios_sin_optimizacion_editado.png}
+    \caption{Reporte de pruebas de estrés con 510 usuarios concurrentes.}
+    \label{fig:510UsuariosEstresA}
 \end{figure}
 
 % \subsection{Usabilidad}

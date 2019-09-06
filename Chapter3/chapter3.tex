@@ -10,21 +10,23 @@
 
 Los SIG o GIS han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
 
-El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y aprovechado. Por ejemplo, \citet{OsorioDominguez2018AnalisisParaguay} realizaron un análisis multitemporal de la pérdida del hábitat y distribución espacial del mono capuchino (sapajus cay) en la ecorregión selva central, Paraguay. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para el abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
+El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y aprovechado. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para el abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
 
-Ya que el número de terminologías entorno a estos sistemas es muy grande, en este capítulo se explicarán los conceptos básicos que servirán de apoyo para una clara interpretación de los siguientes capítulos donde han sido aplicados.
+% Por ejemplo, \citet{OsorioDominguez2018AnalisisParaguay} realizaron un análisis multitemporal de la pérdida del hábitat y distribución espacial del mono capuchino (sapajus cay) en la ecorregión selva central, Paraguay.
+
+Ya que el número de terminologías en torno a estos sistemas es muy grande, en este capítulo se explicarán los conceptos básicos que servirán de apoyo para una clara interpretación de los siguientes capítulos donde han sido aplicados.
 
 \section{Origen de los datos espaciales}
 
-Hoy en día, las informaciones que son recolectadas en censos, encuestas o sistemas informáticos van acompañadas de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
+Hoy en día, los datos que son recolectados en censos, encuestas o sistemas informáticos van acompañados de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
 
-Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS, \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra. Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia (RFID, \textit{Radio Frequency Identification}), entre otros (Ver Figura \ref{fig:interioresTech}).
+Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS, \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra. Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia (RFID, \textit{Radio Frequency Identification}), entre otros (Ver Figura \ref{fig:gps}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=14.5cm]{Indoor_tech.jpg}
-    \caption{Tecnologías para localización en interiores. [Fuente: infsoft.com]}
-    \label{fig:interioresTech}
+    \includegraphics[width=11.5cm]{gps.jpg}
+    \caption{Ilustración de los tres principales componentes del GPS. [Fuente: \citet{Hinch2010OutdoorGps}]}
+    \label{fig:gps}
 \end{figure}
 
 Otra fuente principal de extracción de datos geográficos provienen de las imágenes orto-rectificadas. Las imágenes orto-rectificadas son el resultado del tratamiento de un conjunto de fotografías tanto de satélite como aéreas, donde son corregidas para representar una proyección ortogonal sin efectos de perspectiva, y en la que, por lo tanto, es posible realizar mediciones exactas. Esta fuente es una de las más utilizadas para generar nuevos datos geográficos.
@@ -62,7 +64,7 @@ Los tipos de Datums se clasifican en:
     Datums que describen los sistemas verticales y horizontales. Algunos, como el \textit{World Geodetic System 1984} (WGS84), también describen otros parámetros, como la velocidad de rotación de la Tierra y diversas constantes físicas, como la velocidad angular y la constante gravitacional de la Tierra.
 \end{itemize}
 
-Por otro lado, los sistemas de referencia espacial se agrupan por lo general en tres categorías: Sistemas de coordenadas geográficas, Sistemas de coordenadas rectangulares (también denominados como: proyectados, planos o cartesianos) y Sistemas no coordinados; los cuáles los detallaremos a continuación.
+Por otro lado, los sistemas de referencia espacial se agrupan principalmente en: Sistemas de coordenadas geográficas y Sistemas de coordenadas rectangulares (también denominados como: proyectados, planos o cartesianos); los cuáles los detallaremos a continuación.
 
 \subsection{Sistema de coordenadas geográficas}
 Los sistemas de coordenadas geográficas se componen de la latitud y la longitud. Las líneas de longitud (también conocidas como meridianos) comienzan en un polo y se propagan hacia afuera hasta que convergen en el polo opuesto. Las líneas de latitud (también conocidas como paralelos) se encuentran en ángulo recto a las líneas de longitud y corren paralelas entre sí (Ver Figura \ref{fig:latitudLongitud}). 
@@ -126,14 +128,14 @@ Y           & 7203687 & 21 J & Sur        \\ \hline
 \label{table:coordenadasPlanas}
 \end{table}
 
-\subsection{Sistema sin coordenadas}
-Los sistemas sin coordenadas proporcionan referencias espaciales utilizando un código descriptivo en lugar de una coordenada. Los códigos postales ampliamente utilizados en todo el mundo son un ejemplo. Algunos códigos postales son totalmente numéricos, como los códigos postales estadounidenses, mientras que otros son alfanuméricos, como en el caso del código postal del Reino Unido.
+% \subsection{Sistema sin coordenadas}
+% Los sistemas sin coordenadas proporcionan referencias espaciales utilizando un código descriptivo en lugar de una coordenada. Los códigos postales ampliamente utilizados en todo el mundo son un ejemplo. Algunos códigos postales son totalmente numéricos, como los códigos postales estadounidenses, mientras que otros son alfanuméricos, como en el caso del código postal del Reino Unido.
 
-Ejemplo de código postal en el Reino Unido: E1 6PX.
+% Ejemplo de código postal en el Reino Unido: E1 6PX.
 
 \section{Representación de los datos}
 
-Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y áreas (Ver Figura \ref{fig:entidadesPuntoLineaPoligono}). Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas respectivamente.
+Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y polígonos (Ver Figura \ref{fig:entidadesPuntoLineaPoligono}). Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas respectivamente.
 
 \begin{figure}[H]
     \centering
@@ -148,7 +150,7 @@ El concepto de Topología geoespacial es muy importante en los SIG y se lo defin
 
 \subsection{Sistema vectorial}
 
-En el mundo vectorial, el punto es el bloque de construcción básico a partir del cual se construyen todas las entidades espaciales. El punto está representado por un único par de coordenadas (x,y). Las entidades de línea y área se construyen conectando una serie de puntos (Ver Figura \ref{fig:modeloVectorial}).
+En el modelo vectorial, el punto es el bloque de construcción básico a partir del cual se construyen todas las entidades espaciales. El punto está representado por un único par de coordenadas (x,y). Las entidades de línea y área se construyen conectando una serie de puntos (Ver Figura \ref{fig:modeloVectorial}).
 
 \begin{figure}[H]
     \centering
@@ -209,7 +211,7 @@ Los \textit{buffer} en torno a entidades poligonales se extienden normalmente ha
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=4cm]{point_buffer.png}
+    \includegraphics[width=5.5cm]{point_buffer.png}
     \caption{Representación de \textit{buffer} en puntos en el sistema vectorial. [Fuente: Documentación de QGis]}
     \label{fig:pointBuffer}
 \end{figure}
@@ -217,14 +219,14 @@ Los \textit{buffer} en torno a entidades poligonales se extienden normalmente ha
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=4cm]{variable_line_buffer.png}
+    \includegraphics[width=5.5cm]{variable_line_buffer.png}
     \caption{Representación de \textit{buffer} variable en líneas en el sistema vectorial. [Fuente: Documentación de QGis]}
     \label{fig:lineBuffer}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=4cm]{polygon_buffer.png}
+    \includegraphics[width=5.5cm]{polygon_buffer.png}
     \caption{Representación de \textit{buffer} en áreas en el sistema vectorial. [Fuente: Documentación de QGis]}
     \label{fig:polygonBuffer}
 \end{figure}
@@ -245,22 +247,22 @@ Ejemplos típicos de superposición espacial son:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=8.5cm]{overlay_operations.png}
+    \includegraphics[width=10.5cm]{overlay_operations.png}
     \caption{La superposición espacial con dos capas de entrada vectoriales. La capa vectorial resultante se muestra en verde. [Fuente: Documentación de QGis]}
     \label{fig:overlay}
 \end{figure}
 
-\subsection{Disolución}
+% \subsection{Disolución}
 
-Esta operación recibe este nombre debido a que une polígonos con atributos comunes y disuelve las fronteras existentes entre ellos en una única entidad. No es necesario que exista una frontera entre los polígonos (es decir, que sean contiguos) ya que pueden almacenarse en una capa vectorial entidades compuestas por varios polígonos disjuntos. Esto se puede hacer con cualquier tipo de geometría: puntos, líneas o polígonos.
-% \ref Víctor Olaya
+% Esta operación recibe este nombre debido a que une polígonos con atributos comunes y disuelve las fronteras existentes entre ellos en una única entidad. No es necesario que exista una frontera entre los polígonos (es decir, que sean contiguos) ya que pueden almacenarse en una capa vectorial entidades compuestas por varios polígonos disjuntos. Esto se puede hacer con cualquier tipo de geometría: puntos, líneas o polígonos.
+% % \ref Víctor Olaya
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=8.5cm]{disolucion_vectorial.png}
-    \caption{Operación de disolución o generalización. [Fuente: Algebra de Mapa. Diplomado]}
-    \label{fig:disolution}
-\end{figure}
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=10.5cm]{disolucion_vectorial.png}
+%     \caption{Operación de disolución o generalización. [Fuente: Algebra de Mapa. Diplomado]}
+%     \label{fig:disolution}
+% \end{figure}
 
 \section{Almacenamiento espacial}
 
@@ -300,11 +302,11 @@ Las capas también pueden ser almacenadas en base de datos relacionales y no rel
 
 \subsection{Base de datos espaciales}
 
-Las bases de datos espaciales se utilizan para almacenar datos espaciales. Por lo general, estas bases de datos agregan capacidades extras para manejar dicha información. Estas capacidades incluyen, por lo general, estructuración de datos espaciales, índices y funciones para la manipulación y análisis de la información.
+Las bases de datos espaciales se utilizan para almacenar datos espaciales. Por lo general, los Sistemas de Gestión de Base de Datos (SGBD) agregan capacidades extras para manejar dicha información. Estas capacidades incluyen, por lo general, estructuración de datos espaciales, índices y funciones para la manipulación y análisis de la información.
 
-El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos \textit{software}. Se requiere que los \textit{software} tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. Existen diferentes bases de datos No-SQL según su orientación: orientadas a documentos, a grafos, a columnas, entre otros.
+El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos \textit{software}. Se requiere que los \textit{software} tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos (BD) no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. Existen diferentes bases de datos No-SQL según su orientación: orientadas a documentos, a grafos, a columnas, entre otros.
 
-Las bases de datos (BD) espaciales relacionales, sin embargo, siguen y seguirán siendo muy utilizadas por las ventajas que ofrecen sobre las demás en ciertos aspectos. A continuación, se mencionan características que difieren en ambas, pero que pueden variar con el paso del tiempo:
+Las bases de datos (conocidas con el acrónimo BD y también utilizadas como sinónimo de SGBD) espaciales relacionales siguen y seguirán siendo muy utilizadas por las ventajas que ofrecen sobre las demás en ciertos aspectos. A continuación, se mencionan características que difieren en ambas, pero que pueden variar con el paso del tiempo:
 
 \begin{itemize}
     \item Las BD relacionales mantienen un formato único estructurado interno para almacenar la información geográfica, mientras que las No-SQL no lo tienen.
@@ -312,7 +314,7 @@ Las bases de datos (BD) espaciales relacionales, sin embargo, siguen y seguirán
     \item Los SIG más utilizados para análisis espaciales complejos soportan conexiones con bases de datos relacionales, mientras que con No-SQL aún no son muy comunes dichos servicios.
 \end{itemize}
 
-Las bases de datos relacionales Postgres y Oracle agregan extensiones para soporte SIG que son PostGIS y Oracle Spatial and Graph, respectivamente. En el caso de PostGIS, al agregarse como extensión a una base de datos en Postgres, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID) y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
+Las bases de datos relacionales PostgreSQL y Oracle agregan extensiones para soporte SIG que son PostGIS y Oracle Spatial and Graph, respectivamente. En el caso de PostGIS, al agregarse como extensión a una base de datos en Postgres, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID) y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
 
 Actualmente existen estándares que definen este conjunto de tipos de datos y funciones espaciales mínimas para una base de datos SIG. El Open Geospatial Consortium (OGC) es un consorcio internacional de la industria cuyo objetivo es tratar de estandarizar la forma en que los datos geométricos y espaciales son accedidos y distribuidos. OGC cuenta con numerosas especificaciones que definen el acceso a los datos geoespaciales, servicios web para consulta y manipulación de datos, formatos de datos geoespaciales y consulta de datos geoespaciales.
 

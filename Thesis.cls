@@ -145,7 +145,7 @@
 \newcommand*{\subject}[1]{\def\subjectname{#1}}
 \newcommand*{\keywords}[1]{\def\keywordnames{#1}}
 \newcommand*{\fecha}[1]{\def\datename{#1}}
-\supervisor  {\textbf{Asesores:}\\ M.Sc. Ing. María Elena García-Díaz \\  Lic. Jorge N. Meza \\ D.Sc. Ing. Diego P. Pinto-Roa}
+\supervisor  {\textbf{Tutores:}\\ M.Sc. Ing. María Elena García-Díaz \\  Lic. Jorge N. Meza \\ D.Sc. Ing. Diego P. Pinto-Roa}
 %\examiner    {}
 % \degree {OPTIMIZACIÓN DEL RECORRIDO DE VEHÍCULOS RECOLECTORES DE BASURA BASADO EN EL MODELO DEL CARTERO CHINO - TAPEYTY}
 \degree {TAPEYTY - SOFTWARE FOR ROUTING MANAGEMENT OF URBAN WASTE COLLECTION USING GIS MODELLING}
@@ -155,7 +155,7 @@
 \university  {Universidad Nacional de Asunción\\ Facultad Politécnica\\ Ingeniería en Informática}
                
 \addresses   {Proyecto de grado presentado en conformidad a los requisitos para obtener el grado de Ingeniero/a en Informática.}
-\fecha {San Lorenzo - Paraguay \\ \today}
+\fecha {Asunción - Paraguay \\ \today}
 \subject     {}
 \keywords    {}
 \renewcommand\maketitle{
