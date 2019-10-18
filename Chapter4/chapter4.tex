@@ -193,7 +193,7 @@ Una programación lineal entera pura es un problema de la forma:
 \end{aligned}
 \end{equation}
 
-donde los datos, generalmente racionales, son el vector fila $\mu = (\mu_1,...,\mu_n)$, la matriz $mxn$ $A=(a_{ij})$, y el vector columna $b=(b_1,..., b_m)$. El vector columna $x=(x_1,...,x_n)$ contiene las variables a ser optimizadas. Se dice que un $n$-vector $x$ es entero cuando $x \in \mathbb{Z}^n$. El conjunto de soluciones factibles $S := \{x \in \mathbb{Z}^n_+ : Ax \leq b\}$ a (\ref{programacion_entera}) es llamado el conjunto lineal entero puro \citep{Conforti2014IntegerProgramming}.
+donde los datos, generalmente racionales, son el vector fila $\mu = (\mu_1,...,\mu_n)$, la matriz $mxn$ $A=(a_{ij})$, y el vector columna $b=(b_1,..., b_m)$. El vector columna $x=(x_1,...,x_n)$ contiene las variables a ser optimizadas. Se dice que un $n$-vector $x$ es entero cuando $x \in \mathbb{Z}^n$. El conjunto $S := \{x \in \mathbb{Z}^n_+ : Ax \leq b\}$ de soluciones factibles de (\ref{programacion_entera}) es llamado el conjunto lineal entero puro \citep{Conforti2014IntegerProgramming}.
 
 \subsection{Métodos para resolver la programación entera}
 
@@ -214,6 +214,8 @@ Existen dos métodos ampliamente utilizados para generar restricciones especiale
 \end{enumerate}
 
 En ambos métodos, la restricción agregada eliminará partes del espacio de solución relajada, pero nunca ninguno de los puntos enteros factibles. No se puede afirmar que ninguno de los dos métodos sea uniformemente más efectivo para resolver los IP. Sin embargo, los métodos de \textit{branch and bound} son mucho más exitosos computacionalmente que los métodos de plano de corte. Por este motivo, la mayoría de los códigos comerciales se basan en el uso del procedimiento de \textit{branch and bound}.
+
+%definir modelo relajado
 
 % \subsubsection{Algoritmos de Ramificación y Acotación (\textit{branch and bound})}
 

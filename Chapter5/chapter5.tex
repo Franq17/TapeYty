@@ -34,7 +34,7 @@ Por ello se evidencia la necesidad de una herramienta de soporte de decisión qu
 
 En la Figura \ref{fig:metodologia} se muestra la metodología seguida en este trabajo: la recolección de datos, selección de un modelo matemático adecuado para resolver el problema de ruteo, la implementación de la herramienta \textit{TapeYty}, el despliegue de la ruta óptima y por último el análisis de los resultados.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
 \centerline{\includegraphics[width=\textwidth]{DiagramaDeMetodologia.png}}
 \caption{Vista general de los procesos de la metodología aplicada.}
 \label{fig:metodologia}
@@ -44,9 +44,9 @@ En la Figura \ref{fig:metodologia} se muestra la metodología seguida en este tr
 
 \section{Colección de Datos}
 
-A modo de desplegar las rutas de recolección en el mapa de la aplicación se debe contar necesariamente con un mapa de calles y otro de zonas definidas por la DSU de recolección. Tanto el mapa de zonas como el de calles deben estar almacenados en la base de datos GIS para ser posteriormente utilizados durante el procesamiento de \textit{TapeYty}. Se crea una base de datos espacial utilizando el gestor de base de datos de código abierto PostgreSQL en su versión 10.8 \citep{PostgreSQL}, junto con su extensión PostGIS en su versión 2.4 \citep{PostGIS}, la cual brinda soporte para objetos geográficos.
+Para visualizar y analizar las rutas de recolección es necesario contar con un mapa de calles y otro de zonas de recolección definidas por la DSU. Tanto el mapa de zonas como el de calles deben estar almacenados en la base de datos GIS para ser posteriormente utilizados durante el procesamiento de \textit{TapeYty}. Se crea una base de datos espacial utilizando el gestor de base de datos de código abierto PostgreSQL en su versión 10.8 \citep{PostgreSQL}, junto con su extensión PostGIS en su versión 2.4 \citep{PostGIS}, la cual brinda soporte para objetos geográficos.
 
-Primeramente, se necesitó exportar los datos de Asunción desde OSM, debido a que no se tuvo conocimiento de alguna institución que proveyera de mapas de calles de la ciudad con sus sentidos. A continuación se detallan los pasos seguidos para obtener la red de rutas utilizada: 
+Primeramente, se obtuvieron los datos de calles de la ciudad de Asunción usando como fuente OpenStreetMap (OSM), debido a que no se identificó una fuente institucional que proveyera de mapas de calles de la ciudad con sus sentidos. A continuación se detallan los pasos seguidos para obtener la red de rutas utilizada: 
 \begin{enumerate}
     \item Se utiliza la herramienta \textit{osm2pgsql} para importar los datos de OSM a la base de datos, en el sistema de referencia geográfico WGS84 (SRID 4326). 
     \item Se utilizan las funciones de PostGIS para convertir los valores de latitud y longitud al tipo de dato geométrico \textit{Point}. 
@@ -64,7 +64,7 @@ Para almacenar la información de red de calles se definen las siguientes tablas
 
 Al importar los datos desde OSM se detectaron algunos datos incorrectos que generarían inconvenientes para la obtención del recorrido para la recolección de residuos. OSM identifica las calles sin salida por medio del atributo \textit{no\_exit}. Si su valor es \textit{true} representa una calle sin salida, sin embargo muchas calles sin salida lo tienen como \textit{false}. Otra inconsistencia encontrada es con el valor del atributo \textit{one\_way}, donde muchas calles sin salida tienen su valor en \textit{true} indicando que es de único sentido cuando realmente deben ser doble sentido.
 
-Los problemas de datos mencionados se solucionan con sentencias SQL. Para identificar las calles sin salida se realiza una consulta donde se obtenga la unión de: ``todos los segmentos que tengan un nodo inicial que no sea nodo final ni inicial de algún otro segmento'' y ``todos los segmentos que tengan un nodo final que no sea inicial o final de otro segmento''. Se obtiene como resultado la lista de todos los ID (identificadores) de los segmentos sin salida y se almacena en una tabla temporal. Se actualizan los campos de sin salida y sentido de todos aquellos segmentos cuyos ID se encuentran en la tabla temporal.
+Los problemas de datos mencionados fueron solucionados con sentencias SQL. Para identificar las calles sin salida se realizó una consulta donde se obtenga la unión de: ``todos los segmentos que tengan un nodo inicial que no sea nodo final ni inicial de algún otro segmento'' y ``todos los segmentos que tengan un nodo final que no sea inicial o final de otro segmento''. Se obtuvo como resultado la lista de todos los ID (identificadores) de los segmentos sin salida y se almacena en una tabla temporal. Se actualizan los campos de sin salida y sentido de todos aquellos segmentos cuyos ID se encuentran en la tabla temporal.
 
 La delimitación de las zonas de recolección fue proveída por la DSU a través de un archivo \textit{shape} del tipo de dato geométrico \textit{Polygon}. Se realizan los siguientes procedimientos para la limpieza y corrección de los datos geográficos sobre dicha capa:
 
@@ -124,7 +124,7 @@ El modelo de programación entera propuesto por \citet{Braier2017AnArgentina} es
 
 \item $AM \subseteq A $: Arcos obligatorios que representan segmentos que deben recorrerse únicamente en el sentido especificado.
 
-\item $w : A \rightarrow \mathbb{R} $: Función de peso que asocia un peso a cada arco, en este caso la distancia del segmento de calle. Los arcos auxiliares entre nodos que representan esquinas tienen un mismo valor ínfimo.
+\item $w : A \rightarrow \mathbb{R} $: Función de peso que asocia un peso a cada arco, en este caso la longitud del segmento de calle. Los arcos auxiliares entre nodos que representan esquinas tienen un mismo valor ínfimo.
 
 \item $I \subseteq V $: Nodos que especifican los puntos de inicio permitidos para la ruta.
 
@@ -230,7 +230,7 @@ s_i + \sum_{j: j i \in A} x_{j i} = \sum_{j: i j \in A} x_{i j} + t_i \\
 \end{gathered}
 \end{equation}
 
-La función objetivo (\ref{eq0}) busca minimizar el costo total de la ruta de recolección de residuos. El costo en este trabajo se refiere a la distancia recorrida por el vehículo recolector. La restricción (\ref{eq1}) impone que todos los arcos de único sentido deben ser visitados al menos una vez, la (\ref{eq2}) requiere que los arcos no dirigidos sean atravesados al menos una vez en cualquier sentido. Las restricciones (\ref{eq3a}) y (\ref{eq3b}) aseguran que la solución encontrada es realmente un camino agregando la condición de conservación de flujo estándar a cada nodo. Las restricciones (\ref{eq4}) y (\ref{eq5}) garantizan que el nodo inicial y final sean únicos. Las restricciones (\ref{eq1})-(\ref{eq5}) permiten la formación de subtours, la restricción (\ref{eq6}) es el estándar de eliminación de subtours. Las restricciones (\ref{eq7})-(\ref{eq9}) especifican los valores posibles para las variables del modelo.
+La función objetivo (\ref{eq0}) busca minimizar el costo total de la ruta de recolección de residuos en una zona. El costo en este trabajo se refiere a la distancia recorrida por el vehículo recolector. La restricción (\ref{eq1}) impone que todos los arcos de único sentido deben ser visitados al menos una vez, la (\ref{eq2}) requiere que los arcos no dirigidos sean atravesados al menos una vez en cualquier sentido. Las restricciones (\ref{eq3a}) y (\ref{eq3b}) aseguran que la solución encontrada es realmente un camino agregando la condición de conservación de flujo estándar a cada nodo. Las restricciones (\ref{eq4}) y (\ref{eq5}) garantizan que el nodo inicial y final sean únicos. Las restricciones (\ref{eq1})-(\ref{eq5}) permiten la formación de subtours, la restricción (\ref{eq6}) es el estándar de eliminación de subtours. Las restricciones (\ref{eq7})-(\ref{eq9}) especifican los valores posibles para las variables del modelo.
 
 \subsection{Algoritmo de solución}
 \label{algoritmo-solucion}
@@ -265,7 +265,7 @@ El procedimiento de mezcla de subtours descrito por \citet{Braier2017AnArgentina
 
 Este procedimiento es aplicado para cada subtour en la solución hasta que todos sean mezclados al camino principal, dado que el costo de todos los arcos auxiliares que unen los nodos de las esquinas es el mismo, la ruta modificada permanece óptima, por lo que el algoritmo se detiene y devuelve la solución obtenida en este caso.
 
-Dado que no siempre los subtours pueden ser mezclados con la técnica recién mencionada, el algoritmo principal descrito agrega una restricción estándar de eliminación de subtoures al modelo $R$, tal y como se especifica en el Paso 6.
+Dado que no siempre los subtours pueden ser mezclados con la técnica recién mencionada, el algoritmo principal descrito agrega una restricción estándar de eliminación de subtours al modelo $R$, tal y como se especifica en el Paso 6.
 
 Finalmente, en caso que el modelo matemático encuentre una solución factible, el resultado del modelo indica la distancia total, los arcos que son atravesados y el número de veces que estos son atravesados. Sin embargo, para conocer el camino a seguir es necesario encontrar la secuencia del mismo. 
 
@@ -290,7 +290,7 @@ El algoritmo recibe como parámetros de entrada el nodo inicial, nodo final y $M
 
 \begin{enumerate}
     \item Comience con una pila vacía y un camino (euleriano) vacío. 
-    \item Se haya el multigrafo reverso de $MG$ y se trabajo con el mismo. El reverso es un grafo con los mismos nodos y bordes pero con las direcciones de los arcos invertidas.
+    \item Se halla el multigrafo reverso de $MG$ y se trabajo con el mismo. El reverso es un grafo con los mismos nodos y bordes pero con las direcciones de los arcos invertidas.
     \item Se elige el vértice que representa el nodo final.
     \item Si el vértice actual no tiene arcos salientes (es decir, vecinos): agréguelo al camino, elimine el último vértice de la pila y configúrelo como el actual. De lo contrario (en caso de que tenga arcos salientes, es decir, vecinos): agregue el vértice a la pila, tome cualquiera de sus vecinos, elimine el arco entre ese vértice y el vecino seleccionado, y establezca ese vecino como el vértice actual.
     \item Repita el Paso 4 hasta que el vértice actual no tenga más arcos salientes (vecinos) y la pila esté vacía.

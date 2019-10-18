@@ -209,12 +209,11 @@ Se preparó un plan de pruebas de rendimiento siguiendo las actividades presenta
 
 \begin{enumerate}
     \item \textbf{Identificar el entorno de prueba:}
-        Como servidor de aplicación se utiliza el ambiente de ejecución mencionado más arriba \ref{sec:ambiente_ejecucion}. En la misma red del servidor se cuenta con otra estación de trabajo, donde se instala la herramienta Jmeter \citep{ApacheJMeter} para analizar y medir el desempeño de la aplicación.
+        Como servidor de aplicación se utiliza el ambiente de ejecución mencionado más arriba en la sección \ref{sec:ambiente_ejecucion}. En la misma red del servidor se cuenta con otra estación de trabajo, donde se instala la herramienta Jmeter \citep{ApacheJMeter} para analizar y medir el desempeño de la aplicación.
     \item \textbf{Identificar los criterios de aceptación del rendimiento:}
         La DSU cuenta con dos administradores del sistema encargados de la gestión de rutas de recolección. Además, teniendo en cuenta la cantidad de zonas y turnos de trabajos un máximo de 23 conductores se conectarán en simultáneo para descargar su ruta asignada. El usuario espera obtener una nueva ruta en menos de 120 segundos.
-    \item \textbf{Pruebas de planificación y diseño:}
-        En esta actividad se decide emplear dos tipos de pruebas de rendimiento: de carga y de estrés. Las pruebas de carga consisten en simular la realidad a la que estará expuesto el sistema cuando esté en producción y las pruebas de estrés son pruebas para encontrar el volumen de datos o de tiempo en que la aplicación comienza a fallar o es incapaz de responder a las peticiones.
-        Se plantean dos escenarios: A) Uno en el que los usuarios generan una nuevo ruta; y B) en el que los usuarios visualizan una ruta ya generada previamente.
+    \item \textbf{Planificación y diseño de pruebas:}
+        En esta actividad se decide emplear dos tipos de pruebas de rendimiento: de carga y de estrés. Las pruebas de carga consisten en simular la realidad a la que estará expuesto el sistema cuando esté en producción y las pruebas de estrés son pruebas para encontrar el volumen de datos o de tiempo en que la aplicación comienza a fallar o es incapaz de responder a las peticiones \citep{ToledoRodriguez2014IntroduccionInformacion}. Se plantean dos escenarios: A) Uno en el que los usuarios visualizan una ruta ya generada previamente; y B) en el que los usuarios generan una nueva ruta.
     \item \textbf{Configurar el entorno de prueba:}
         Se prepara el entorno de prueba, las herramientas y los recursos necesarios para ejecutar cada estrategia. Se realizan ajustes en los servidores web y de aplicación en el servidor para aprovechar las características de su procesador y mejorar así el rendimiento. Se instala en Jmeter el plugin SSHMon \citep{Jmeter-sshmon} para obtener resultados de monitoreo de CPU y uso de disco del servidor.
     \item \textbf{Implementar el diseño de prueba:}
@@ -243,21 +242,21 @@ Para el escenario B los usuarios realizan peticiones al servicio de:
 \subsubsection{Resultados de pruebas de carga}
 \label{ref:resultadosPruebaCarga}
 
-Los resultados de rendimiento de pruebas de carga del escenario A se visualizan en la Figura \ref{fig:25UsuariosCargaA}, donde se observa que la cantidad de peticiones por unidad de tiempo (\textit{Throughput}) para cada etiqueta (\textit{label}) es aceptable. La desviación estándar (\textit{Std. Dev}) presenta valores pequeños con respecto al promedio (\textit{Average}) de cada etiqueta, concluyendo en que los tiempos de respuesta no son dispersos. En la Figura \ref{fig:25UsuariosCPUA} se observa el porcentaje de utilización de CPU y el número total de transferencias por segundo del disco (I/O) durante el tiempo de ejecución de las pruebas. Al iniciar el lanzamiento de las peticiones concurrentes la CPU es utilizada en un 80 \%, pero en unos pocos segundos va liberando recursos y luego se mantiene constante.
+Los resultados de rendimiento de carga del escenario A se visualizan en la Figura \ref{fig:25UsuariosCargaA}, donde se observa que la cantidad de peticiones por unidad de tiempo (\textit{Throughput}) para cada etiqueta (\textit{label}) es aceptable. La desviación estándar (\textit{Std. Dev}) presenta valores pequeños con respecto al promedio (\textit{Average}) de cada etiqueta, concluyendo en que los tiempos de respuesta no son dispersos. En la Figura \ref{fig:25UsuariosCPUA} se observa el porcentaje de utilización de CPU y el número total de transferencias por segundo del disco (I/O) durante el tiempo de ejecución de las pruebas. Al iniciar el lanzamiento de las peticiones concurrentes la CPU es utilizada en un 63 \%, pero en unos pocos segundos va liberando recursos utilizando menos del 20\%.
 
 % Esto muestra el conjunto de casos excepcionales que se estaban desviando del valor promedio del tiempo de respuesta de la muestra. Cuanto menor es este valor, más coherentes son los datos. La desviación estándar debe ser menor o igual a la mitad del tiempo promedio para una etiqueta.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{25_usuarios_editado.png}
-    \caption{Reporte de rendimiento de carga con 25 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{25_usuarios_editado_.png}
+    \caption{Reporte de rendimiento de carga con 25 usuarios concurrentes ejecutando el escenario A.}
     \label{fig:25UsuariosCargaA}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{25_usuarios_cpu_io_editado.png}
-    \caption{Reporte de utilización de recursos en el servidor con una carga de 25 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{25_usuarios_plan_a_cpu.png}
+    \caption{Reporte de utilización de recursos en el servidor con una carga de 25 usuarios concurrentes ejecutando el escenario A.}
     \label{fig:25UsuariosCPUA}
 \end{figure}
 
@@ -265,51 +264,161 @@ Para el escenario B se pueden observar los resultados en las Figuras \ref{fig:5U
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{Chapter7/Chapter7Figs/5_usuarios_doc_editado.png}
-    \caption{Reporte de rendimiento de carga con 5 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{Chapter7/Chapter7Figs/5_usuarios_doc_editado_.png}
+    \caption{Reporte de rendimiento de carga con 5 usuarios concurrentes ejecutando el escenario B.}
     \label{fig:5UsuariosCargaB}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{5_usuarios_doc_cpu_io_editado.png}
-    \caption{Reporte de utilización de recursos en el servidor con una carga de 5 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{5_usuarios_plan_b_cpu_.png}
+    \caption{Reporte de utilización de recursos en el servidor con una carga de 5 usuarios concurrentes ejecutando el escenario B.}
     \label{fig:5UsuariosCPUB}
 \end{figure}
 
 \subsubsection{Resultados de pruebas de estrés}
 \label{ref:resultadosPruebaEstres}
 
-El escenario de prueba A se ejecutó sin errores con 100 y 500 usuarios concurrentemente como se puede ver las Figuras \ref{fig:100UsuariosEstresA} y \ref{fig:500UsuariosEstresA} respectivamente. Recién cuando se ejecutó con 510 usuarios se observa que hubo un total de 1.18 porciento, ver Figura \ref{fig:510UsuariosEstresA}. El motivo de fallo es que se configuro el servido de tal manera a que acepte 500 sesiones concurrentes.
+El escenario de prueba A se ejecutó sin errores con 100 y 500 usuarios concurrentemente como se puede ver en las Figuras \ref{fig:100UsuariosEstresA} y \ref{fig:500UsuariosEstresA} respectivamente. Recién cuando se ejecutó con 510 usuarios se observa que hubo un promedio total de 0.39 \% de error (ver Figura \ref{fig:510UsuariosEstresA}). El motivo de fallo es que el servidor se configuró hasta un límite de 500 sesiones concurrentes.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{100_usuarios_sin_optimizacion_editado.png}
-    \caption{Reporte de pruebas de estrés con 100 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{100_usuarios_sin_optimizacion_editado_.png}
+    \caption{Reporte de pruebas de estrés con 100 usuarios concurrentes ejecutando el escenario A.}
     \label{fig:100UsuariosEstresA}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{500_usuarios_sin_optimizacion_editado.png}
-    \caption{Reporte de pruebas de estrés con 500 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{500_usuarios_sin_optimizacion_editado_.png}
+    \caption{Reporte de pruebas de estrés con 500 usuarios concurrentes ejecutando el escenario A.}
     \label{fig:500UsuariosEstresA}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{510_usuarios_sin_optimizacion_editado.png}
-    \caption{Reporte de pruebas de estrés con 510 usuarios concurrentes.}
+    \includegraphics[width=\textwidth]{510_usuarios_sin_optimizacion_editado_.png}
+    \caption{Reporte de pruebas de estrés con 510 usuarios concurrentes ejecutando el escenario A}
     \label{fig:510UsuariosEstresA}
 \end{figure}
 
-El escenario de prueba B ...
+El escenario de prueba B se ejecutó sin errores con 25 usuarios concurrentemente como se puede ver en la Figura \ref{fig:25UsuariosEstresB}. Cuando se ejecutó con 40 usuarios se observa un 35\% de errores, todos ellos debido a \textit{Timeout} a consecuencia de que el servidor se configuró con un tiempo máximo de respuesta de 300 segundos (5 minutos).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{510_usuarios_sin_optimizacion_editado.png}
-    \caption{Reporte de pruebas de estrés con 510 usuarios concurrentes.}
-    \label{fig:510UsuariosEstresA}
+    \includegraphics[width=\textwidth]{25_usuarios_generar_ruta.png}
+    \caption{Reporte de pruebas de estrés con 25 usuarios concurrentes ejecutando el escenario B.}
+    \label{fig:25UsuariosEstresB}
 \end{figure}
 
-% \subsection{Usabilidad}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{40_usuarios_plan_b_.png}
+    \caption{Reporte de pruebas de estrés con 40 usuarios concurrentes ejecutando el escenario B.}
+    \label{fig:40UsuariosEstresB}
+\end{figure}
+
+Con la finalización de las pruebas se concluye que un servidor con las características y configuraciones aplicadas en el ambiente de prueba es más que suficiente para cumplir con los requerimientos relevados en la DSU indicados en el plan de pruebas. Es importante destacar que generar rutas es un proceso que requiere de un alto consumo de recursos computacionales, es por ello que se recomienda que el motor de optimización esté implantado en un servidor dedicado. Otra alternativa a considerar en caso de que el número de usuarios concurrentes aumente considerablemente es utilizar una heurística para resolver el problema de ruta.
+
+\subsection{Usabilidad}
+
+% El objetivo de la evaluación de usabilidad de este trabajo es conocer la percepción subjetiva de los usuarios acerca de la usabilidad general del sistema \textit{TapeYty}.
+% Para ello se utilizó la métrica de “Actitud o satisfacción del usuario”
+
+% The ISO 9241-11 standard defines usability as “the extent to which a product can be used by specified users to achieve specified goals with effectiveness, efficiency and satisfaction in a specified context of use”
+%  dice que la usabilidad se refiere al alcance en el que un producto puede ser utilizado por usuarios específicos para alcanzar metas específicas con efectividad, eficiencia y satisfacción en un contexto específico de uso. 
+
+El estándar ISO 9241-11 define la usabilidad como ``la medida en que un producto puede ser utilizado por usuarios específicos para lograr objetivos específicos con efectividad, eficiencia y satisfacción en un contexto de uso específico''
+
+La norma ISO/IEC 9126-4 recomienda que las métricas de usabilidad incluyan:
+
+\begin{itemize}
+    \item Efectividad: la precisión e integridad con la que los usuarios logran objetivos específicos.
+    \item Eficiencia: los recursos gastados en relación con la precisión y la integridad con la que los usuarios alcanzan los objetivos.
+    \item Satisfacción: la comodidad y la aceptabilidad del uso.
+\end{itemize}
+
+% Si la medición de la satisfacción del usuario es importante pero no hay un gran presupuesto asignado, entonces se debe usar SUS.
+Dado que la satisfacción del usuarios es importante para la validación de este trabajo y no se cuenta con un gran presupuesto para ello, se realiza la medición del mismo utilizando la Escala de Usabilidad del Sistema (SUS, \textit{System Usability Scale}) elaborada por \cite{Brooke1986SUSScale} para obtener una visión global de evaluaciones subjetivas de usabilidad de la interfaz de \textit{TapeYty}.
+
+SUS consiste en solo diez preguntas, un sistema de puntuación de 5 puntos (desde ``Completamente de acuerdo'' hasta ``Completamente en desacuerdo''), y un algoritmo rápido de puntuación. SUS es una escala muy fácil, es simple de administrar a los participantes, por lo que es ideal para usar con tamaños de muestra pequeños. En la literatura se ha encontrado que dan resultados muy precisos y de mucho valor.
+% Los elementos impares redactados positivamente y elementos pares redactados negativamente.
+
+La formulación matemática para obtener el puntaje general de SUS puede ser descrito como sigue:
+
+\begin{equation} \label{eqSus1}
+\begin{gathered}
+y_{i} = x_{i} - 1 \\
+\forall i = {1, 3, 5, 7,9}
+\end{gathered}
+\end{equation} 
+\hbox{}
+
+\begin{equation} \label{eqSus2}
+\begin{gathered}
+y_{i} = 5 - x_{i} \\
+\forall i = {2, 4, 6, 8, 10}
+\end{gathered}
+\end{equation} 
+\hbox{}
+
+\begin{equation} \label{eqSus3}
+\begin{gathered}
+SUS =  \sum_{i=1}^{10} y_{i} \times 2.5 \\
+\end{gathered}
+\end{equation} 
+
+En (\ref{eqSus1}), (\ref{eqSus2}) y (\ref{eqSus3}) se utiliza la siguiente notación: 
+\begin{itemize}
+    \item $i$ representa el número de la pregunta.
+    \item $x$ el valor de la respuesta.
+    \item $y$ el puntaje asignado a la respuesta.
+    \item $SUS$ puntaje general de SUS.
+\end{itemize}
+
+% En el Apendice XX se encuentra el formulario completado por los evaluadores, que fueron las personas que estarán a cargo de la administración de TapeYty.
+
+La subescala de usabilidad se corresponden con los ítem 1, 2, 3, 5, 6, 7, 8, 9 (ecuación \ref{eqSeU}); y la subescala de facilidad de aprendizaje se corresponden con los ítem 4 y 10 (ecuación \ref{eqSeFA}) \citep{Lewis2009TheScale}.
+
+\begin{equation} \label{eqSeU}
+\begin{gathered}
+SeU = (y_{1} + y_{2} + y_{3} + y_{5} + y_{6} + y_{7} + y_{8} + y_{9}) \times 3.125 \\
+\end{gathered}
+\end{equation} 
+\hbox{}
+
+\begin{equation} \label{eqSeFA}
+\begin{gathered}
+SeFA = (y_{4} + y_{10}) \times 12.5 \\
+\end{gathered}
+\end{equation} 
+\hbox{}
+
+En la tabla \ref{tabla:SUSResultado} se presentan los resultados de la evaluación utilizando las ecuaciones \ref{eqSus3}, \ref{eqSeU} y \ref{eqSeFA} respectivamente.
+
+\begin{table}[]
+\caption{Resultados SUS}
+\label{tabla:SUSResultado}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+SUS General & Sub Escala Usabilidad & Facilidad de aprendizaje \\ \hline
+85.83             & 90.63                & 66.67                       \\ \hline
+\end{tabular}
+\end{table}
+
+El puntaje general de SUS fue de 85.83. Teniendo en cuenta el análisis de \cite{Bangor2009DeterminingScale} (ver Figura \ref{fig:susScore}), el rango entre 80 a 89 corresponde a una B, es decir, el sistema es ``Aceptable'', utilizando los adjetivos de calificación de este análisis el sistema es lo ``Mejor Posible''.
+
+Luego el puntaje general de SUS es descompuesto en sus componentes de usabilidad y capacidad de aprendizaje:
+\begin{itemize}
+    \item El resultado de ``Sub-escala de usabilidad'' fue de 90.63, teniendo en cuenta el análisis de \cite{Bangor2009DeterminingScale}, el rango entre 90 a 100 corresponde a una A, es decir, el sistema es ``Aceptable'', utilizando los adjetivos de calificación de este análisis el sistema es lo ``Mejor Posible''.
+    \item El resultado de ``Facilidad de aprendizaje'' fue de 66.67, teniendo en cuenta el análisis de \cite{Bangor2009DeterminingScale}, el rango de 52 hasta 73, el sistema está considerada como ``Buena'', era de esperarse ya que se requiere de conocimientos previos de herramientas GIS para la utilización del sistema, en \citep{Borsci2009OnModels} mostraron que los dos factores (usabilidad y facillidad de aprendizaje) son independientes. 
+\end{itemize}{}
+
+
+\begin{figure}[]
+    \centering
+    \includegraphics[width=\textwidth]{SUS_resultados.png}
+    \caption{Una comparación de las calificaciones de los adjetivos, los puntajes de aceptabilidad y las escalas de calificación escolar, en relación con el puntaje promedio del SUS [Fuente:\citep{Bangor2009DeterminingScale}]}
+    \label{fig:susScore}
+\end{figure}

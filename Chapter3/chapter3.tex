@@ -8,7 +8,7 @@
 
 \markboth{\hfill \thechapter. Sistemas de Información Geográfica}{\hfill \thechapter. Sistemas de Información Geográfica}
 
-Los SIG o GIS han sido definidos por varios especialistas y estudiosos, sin embargo difieren en ciertos términos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
+Los SIG o GIS han sido definidos por varios especialistas y estudiosos. De acuerdo con \citet{Burrough1986PrinciplesAssessment} un SIG es “un conjunto de herramientas para recopilar, almacenar, recuperar a voluntad, transformar y visualizar datos espaciales del mundo real para un conjunto particular de propósitos”. \citet{NCGIA1990IntroductionGIS} lo define como “un sistema de hardware, software y procedimientos diseñado para realizar la captura, almacenamiento, manipulación, análisis, modelización y presentación de datos referenciados espacialmente para la resolución de problemas complejos de planificación y gestión”.
 
 El SIG es una herramienta que favorece el análisis de la información espacial, es por ello que existen miles de trabajos que lo han utilizado y aprovechado. \citet{Cabral2018EstrategiasAsuncion} plantearon una estrategia de planificación que contribuya al mejoramiento del manejo integrado de los RSU con servicios diferenciales mediante tecnología SIG aplicada a la cuenca del Arroyo Ferreira en Asunción. \citet{Acosta2006LevantamientoCaballero} realizaron un levantamiento topográfico y SIG para el abastecimiento de energía eléctrica por vía subterránea línea de 220 kV: tramo Estación Puerto Botánico a Parque Caballero.
 
@@ -20,7 +20,7 @@ Ya que el número de terminologías en torno a estos sistemas es muy grande, en 
 
 Hoy en día, los datos que son recolectados en censos, encuestas o sistemas informáticos van acompañados de coordenadas de ubicación. Estas informaciones pueden provenir de dispositivos especializados, teléfonos móviles, tabletas o cámaras. En otras ocasiones, pueden ser generadas de forma manual a través de operaciones o dibujándolas directamente en sistemas SIG, CAD (\textit{Computer-Aided Design}) u otros sistemas capacitados para ello.
 
-Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS, \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra. Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia (RFID, \textit{Radio Frequency Identification}), entre otros (Ver Figura \ref{fig:gps}).
+Resulta muy común, en la actualidad, que dispositivos electrónicos tengan incorporado internamente un receptor GPS. El Sistema de Posicionamiento Global (GPS, \textit{Global Positioning System}) es un sistema que permite determinar la posición de un objeto en la Tierra (Ver Figura \ref{fig:gps}). Así también, existen otros mecanismos de geolocalización como por ejemplo: las redes inalámbricas, bluetooth, identificación por radiofrecuencia (RFID, \textit{Radio Frequency Identification}), entre otros.
 
 \begin{figure}[H]
     \centering
@@ -135,7 +135,7 @@ Y           & 7203687 & 21 J & Sur        \\ \hline
 
 \section{Representación de los datos}
 
-Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y polígonos (Ver Figura \ref{fig:entidadesPuntoLineaPoligono}). Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas respectivamente.
+Las características de un mapa digital requieren ser representadas, y para ello se utilizan unas simbologías denominadas entidades espaciales cuyos tipos básicos son: puntos, líneas y polígonos (Ver Figura \ref{fig:entidadesPuntoLineaPoligono}). Con estos tres tipos es posible de forma sencilla representar todos los fenómenos geográficos del mundo real a través de un mapa. Adicionalmente, hay otras entidades como las redes y superficies; que son extensiones de las líneas y áreas (o polígonos) respectivamente.
 
 \begin{figure}[H]
     \centering
@@ -167,7 +167,7 @@ Las líneas de contorno y las redes irregulares de triángulos (TIN; \textit{Tri
 
 \subsection{Sistema ráster}
 
-En un sistema ráster, se ubica una cuadrícula imaginaria sobre el mapa. Cada celda de la cuadrícula, conocida como elemento de imagen o píxel, se examina para ver qué característica cae dentro de ella. El resultado final de este proceso es una cuadrícula o una serie de cuadrículas de números que representan las características en el mapa. (Ver Figura \ref{fig:modeloRaster}).
+En un sistema ráster se ubica una cuadrícula imaginaria sobre el mapa. Cada celda de la cuadrícula, conocida como elemento de imagen o píxel, se examina para ver qué característica cae dentro de ella. El resultado final de este proceso es una cuadrícula o una serie de cuadrículas de números que representan las características en el mapa. (Ver Figura \ref{fig:modeloRaster}).
 
 \begin{figure}[H]
     \centering
@@ -296,15 +296,16 @@ Por otro lado, entre los formatos SIG vectoriales más populares están:
     \item MapBox Vector Tiles (MVT)
 \end{itemize}
 
-Las capas también pueden ser almacenadas en base de datos relacionales y no relacionales, introduciendo el concepto de base de datos espaciales.
+Las capas también pueden ser almacenadas en base de datos relacionales y no relacionales, introduciendo el concepto de base de datos espacial.
 
 % Fuente:https://mappinggis.com/2015/12/los-formatos-gis-raster-mas-populares/
 
-\subsection{Base de datos espaciales}
+\subsection{Bases de datos espaciales}
 
 Las bases de datos espaciales se utilizan para almacenar datos espaciales. Por lo general, los Sistemas de Gestión de Base de Datos (SGBD) agregan capacidades extras para manejar dicha información. Estas capacidades incluyen, por lo general, estructuración de datos espaciales, índices y funciones para la manipulación y análisis de la información.
 
-El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos \textit{software}. Se requiere que los \textit{software} tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos (BD) no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. Existen diferentes bases de datos No-SQL según su orientación: orientadas a documentos, a grafos, a columnas, entre otros.
+El incremento del volumen de los datos ha derivado en la búsqueda de soluciones con alta escalabilidad en algunos \textit{software}. Se requiere que los \textit{software} tengan la capacidad de adaptarse y crecer en capacidad de trabajo o tamaño sin comprometer el rendimiento, funcionamiento y la calidad del mismo. Las bases de datos no han sido la excepción en esta búsqueda, y es así como el uso de las bases de datos conocidas como No-SQL se incrementó debido a las buenas prestaciones para el manejo de grandes volúmenes de datos (\textit{big data}) sobre las tradicionales conocidas como relacionales. 
+% Existen diferentes bases de datos No-SQL según su orientación: orientadas a documentos, a grafos, a columnas, entre otros.
 
 Las bases de datos (conocidas con el acrónimo BD y también utilizadas como sinónimo de SGBD) espaciales relacionales siguen y seguirán siendo muy utilizadas por las ventajas que ofrecen sobre las demás en ciertos aspectos. A continuación, se mencionan características que difieren en ambas, pero que pueden variar con el paso del tiempo:
 
@@ -314,7 +315,7 @@ Las bases de datos (conocidas con el acrónimo BD y también utilizadas como sin
     \item Los SIG más utilizados para análisis espaciales complejos soportan conexiones con bases de datos relacionales, mientras que con No-SQL aún no son muy comunes dichos servicios.
 \end{itemize}
 
-Las bases de datos relacionales PostgreSQL y Oracle agregan extensiones para soporte SIG que son PostGIS y Oracle Spatial and Graph, respectivamente. En el caso de PostGIS, al agregarse como extensión a una base de datos en Postgres, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID) y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
+Las bases de datos relacionales PostgreSQL y Oracle agregan extensiones para soporte SIG que son PostGIS y Oracle Spatial and Graph, respectivamente. En el caso de PostGIS, al agregarse como extensión a una base de datos en PostgreSQL, agrega un conjunto de funciones espaciales, tablas (donde almacenan las referencias espaciales SRID) y vistas (tablas lógicas que identifican las columnas geométricas de las diferentes tablas de la instancia de base de datos).
 
 Actualmente existen estándares que definen este conjunto de tipos de datos y funciones espaciales mínimas para una base de datos SIG. El Open Geospatial Consortium (OGC) es un consorcio internacional de la industria cuyo objetivo es tratar de estandarizar la forma en que los datos geométricos y espaciales son accedidos y distribuidos. OGC cuenta con numerosas especificaciones que definen el acceso a los datos geoespaciales, servicios web para consulta y manipulación de datos, formatos de datos geoespaciales y consulta de datos geoespaciales.
 
@@ -322,7 +323,7 @@ Actualmente existen estándares que definen este conjunto de tipos de datos y fu
 
 Miles de páginas Web en internet incorporan mapas en sus sitios con diferentes fines. Estos sitios utilizan simplemente mapas del mundo preexistentes, es decir, no son mapas creados por el sitio, sino que en su mayoría utilizan servicios de mapas que están disponibles para incorporarlos en los diferentes \textit{software}.
 
-Un mapa muy conocido es OpenStreetMap (también conocido como OSM), consiste en un proyecto colaborativo para crear mapas editables y libres. En lugar del mapa en sí, los datos generados por el proyecto se consideran su salida principal. Tanto las imágenes creadas como los datos vectoriales almacenados en su base de datos se distribuye bajo licencia abierta Licencia Abierta de Bases de Datos (ODbL; \textit{Open Database License}).
+Un mapa muy conocido es OpenStreetMap (también conocido como OSM), consiste en un proyecto colaborativo para crear mapas editables y libres. En lugar del mapa en sí, los datos generados por el proyecto se consideran su salida principal. Tanto las imágenes creadas como los datos vectoriales almacenados en su base de datos se distribuye bajo Licencia Abierta de Bases de Datos (ODbL; \textit{Open Database License}).
 
 Otro proyecto de mapa del mundo con una larga trayectoria es Google Maps. Google Maps consiste en un servidor de aplicaciones de mapas en la web que pertenece a Alphabet Inc. Ofrece imágenes de mapas desplazables, así como fotografías por satélite del mundo e incluso la ruta entre diferentes ubicaciones, condiciones de tráfico en tiempo real y un calculador de rutas a pie, en coche, bicicleta y transporte público y un navegador GPS.
 
