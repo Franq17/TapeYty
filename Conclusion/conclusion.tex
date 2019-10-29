@@ -23,7 +23,7 @@
 
 En este trabajo se analizaron varias propuestas de solución del estado del arte con respecto a la recolección de residuos sólidos domiciliarios. La metodología de trabajo en la DSU se ajusta al problema del cartero rural abierto, por lo que se utiliza la solución propuesta por \citet{Braier2017AnArgentina}, cuya salida representa los datos de entrada a la solución de secuenciación que finalmente se despliega en la aplicación GIS.
 
-Se encontró que entre los factores que más influyen en la selección del camino a seguir son las reglas de circulación de la red de rutas, que sufren constantes cambios con el fin de disminuir la congestión del tráfico actual, como por ejemplo: cambio de sentido, prohibición de giro a la izquierda, giro en U, contramano. Así como también si una calle es clausurada por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
+Se encontró que entre los factores que más influyen en la selección del camino a seguir son las reglas de circulación de la red de rutas, que sufren constantes cambios con el fin de disminuir la congestión del tráfico actual, como por ejemplo: cambio de sentido, prohibición de giro a la izquierda, contramano. Así como también si una calle es clausurada por motivo de reparación de la capa asfáltica, trabajos de instalación o reparación de cañería.
 
 En este trabajo se presenta un sistema flexible a estos cambios y que pueda generar la ruta a seguir que contraste con la realidad del momento. Se propone un diseño de aplicación GIS cuyo principal objetivo es brindar el camino óptimo que debe seguirse para la recolección de residuos sólidos en las zonas. La arquitectura propuesta tiene un factor muy relevante que es la escalabilidad al ofrecer componentes desacoplados, ya que se utilizan servicios REST, servicios web de mapas como \textit{TMS}, y \textit{fameworks} MVC.
 
@@ -37,6 +37,7 @@ Cabe resaltar que la DSU podrá contar con una aplicación que garantice que tod
     \item Aprovechar la escalabilidad de la arquitectura implementada para agregar la optimización de las rutas para recolección de los residuos de grandes generadores, los llamados residuos de manejo especial, generados en los procesos productivos e instalaciones industriales y comerciales.
     \item Sincronizar la base de datos con los datos de OSM cuando fuese necesario.
     \item Programar restricciones en base a un rango de fechas, por ejemplo si una calle será clausurada una semana configurar en el sistema las fechas de clausura y re-apertura.
+    \item Integrar al sistema el monitoreo del recorrido y permitir al conductor regenerar una nueva ruta desde el último punto registrado, teniendo en cuenta los tramos de calles ya visitados.
 \end{itemize}
 
 
